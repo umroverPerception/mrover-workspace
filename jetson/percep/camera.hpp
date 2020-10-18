@@ -3,9 +3,9 @@
 #include "perception.hpp"
 
 
-#if OBSTACLE_DETECTION
+//#if OBSTACLE_DETECTION
 #include <pcl/common/common_headers.h>
-#endif
+//#endif
 
 
 class Camera {
@@ -21,7 +21,7 @@ public:
 	cv::Mat depth();
 	
 	
-	#if OBSTACLE_DETECTION
+	//#if OBSTACLE_DETECTION
 	void getDataCloud(pcl::PointCloud<pcl::PointXYZRGB>::Ptr &p_pcl_point_cloud);
 	#endif
 
