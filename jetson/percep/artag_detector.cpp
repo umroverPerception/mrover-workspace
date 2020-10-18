@@ -62,28 +62,24 @@ pair<Tag, Tag> TagDetector::findARTags(Mat &src, Mat &depth_src, Mat &rgb) {  //
     ids.clear();
     corners.clear();
     
-    //Gray Scale Image
+    //GrayScale Image
     Mat gray;
     cvtColor(rgb, gray, cv::COLOR_RGB2GRAY);
     //Apply Custom thresholding in order to detect AR Tags with no outline
-    double min, max;
-    cv::minMaxIdx(rgb, &min, &max);
-    std::cout << "min: " << min << "\n";
-    std::cout << "max: " << max << "\n";
     Mat threshold;
-    const double threshold_val = 20; //If rgb is greater than threshold_val then set to white, otherwise set to black
+    const double threshold_val = 5; //If rgb is greater than threshold_val then set to white, otherwise set to black
     const double threshold_max = 255;
     const int threshold_type = 0; //Binary Thresholding (described above)
     cv::threshold(gray, threshold, threshold_val, threshold_max, threshold_type);
     /// Find tags
     cv::aruco::detectMarkers(threshold, alvarDict, corners, ids, alvarParams);
 #if AR_RECORD
-cv::aruco::drawDetectedMarkers(gray, corners, ids);
+cv::aruco::drawDetectedMarkers(rgb, corners, ids);
 #endif
 #if PERCEPTION_DEBUG
     // Draw detected tags
-    cv::aruco::drawDetectedMarkers(gray, corners, ids);
-    cv::imshow("AR Tags", gray);
+    cv::aruco::drawDetectedMarkers(rgb, corners, ids);
+    cv::imshow("AR Tags", rgb);
 
     // on click debugging for color
     DEPTH = depth_src;
