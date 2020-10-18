@@ -94,6 +94,11 @@ void RANSACSegmentation(pcl::PointCloud<pcl::PointXYZRGB>::Ptr & pt_cloud_ptr, s
 /* --- Copy Point Cloud --- */
 //Converts a point cloud from point XYZRGB to XYZ
 void copyPointCloud(pcl::PointCloud<pcl::PointXYZRGB>::Ptr & from, pcl::PointCloud<pcl::PointXYZ>::Ptr & to){
+    to->width = from->width;
+    to->height = from->height;
+    to->is_dense = from->is_dense;
+    to->resize(from->width*from->height);
+
     auto toit = to->points.begin();
     for( auto fromit : from->points){
         toit->x = fromit.x;
@@ -101,9 +106,7 @@ void copyPointCloud(pcl::PointCloud<pcl::PointXYZRGB>::Ptr & from, pcl::PointClo
         toit->z = fromit.z;
         toit++;
     }
-    to->width = from->width;
-    to->height = from->height;
-    to->is_dense = from->is_dense;
+   
 }
 
 /* --- GPU Euclidian Cluster Extraction --- */
@@ -120,12 +123,14 @@ void GPUEuclidianClusterExtraction(pcl::PointCloud<pcl::PointXYZRGB>::Ptr & pt_c
     pcl::PointCloud<pcl::PointXYZ>::Ptr pt_cloud_ptr (new pcl::PointCloud<pcl::PointXYZ>);
     copyPointCloud(pt_cloud_ptr_in, pt_cloud_ptr);
     pcl::gpu::Octree::PointCloud cloud_device;
+    
     cloud_device.upload(pt_cloud_ptr->points);
 
     pcl::gpu::Octree::Ptr octree_device (new pcl::gpu::Octree);
     octree_device->setCloud(cloud_device);
     octree_device->build();
 
+    
     pcl::gpu::EuclideanClusterExtraction gec;
     gec.setClusterTolerance (0.02); // 2cm
     gec.setMinClusterSize (100);
@@ -526,9 +531,12 @@ obstacle_return pcl_obstacle_detection(pcl::PointCloud<pcl::PointXYZRGB>::Ptr & 
     RANSACSegmentation(pt_cloud_ptr, "remove");
     std::vector<pcl::PointIndices> cluster_indices;
     GPUEuclidianClusterExtraction(pt_cloud_ptr, cluster_indices);
+    
+    //CPUEuclidianClusterExtraction(pt_cloud_ptr, cluster_indices);
     std::vector<std::vector<int>> interest_points(cluster_indices.size(), vector<int> (4));
     FindInterestPoints(cluster_indices, pt_cloud_ptr, interest_points);
     result.bearing = FindClearPath(pt_cloud_ptr, interest_points, viewer, result);  
+    //result.bearing = */
     return result;
 }
 #endif
