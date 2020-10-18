@@ -3,9 +3,9 @@
 #include "perception.hpp"
 
 
-#if OBSTACLE_DETECTION
+//#if OBSTACLE_DETECTION
 #include <pcl/common/common_headers.h>
-#endif
+//#endif
 
 class Camera {
 private:
@@ -23,7 +23,12 @@ public:
 	cv::Mat image();
 	cv::Mat depth();
 	
+<<<<<<< HEAD
 	#if OBSTACLE_DETECTION
+=======
+	
+	//#if OBSTACLE_DETECTION
+>>>>>>> Added GPU PCL build capbailities and implemented GPU Euclidian Cluster Extraction function
 	void getDataCloud(pcl::PointCloud<pcl::PointXYZRGB>::Ptr &p_pcl_point_cloud);
 	#endif
 
