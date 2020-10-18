@@ -255,9 +255,7 @@ int main() {
     #if PERCEPTION_DEBUG && AR_DETECTION
       imshow("depth", src);
       waitKey(1);
-      auto start = std::chrono::high_resolution_clock::now();
-      std::this_thread::sleep_for(0.2s);
-      auto end = std::chrono::high_resolution_clock::now();    
+      std::this_thread::sleep_for(0.2s);    
     #endif
     ++j;
   }
