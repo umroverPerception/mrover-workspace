@@ -62,24 +62,76 @@ pair<Tag, Tag> TagDetector::findARTags(Mat &src, Mat &depth_src, Mat &rgb) {  //
     ids.clear();
     corners.clear();
     
-    //GrayScale Image
-    Mat gray;
-    cvtColor(rgb, gray, cv::COLOR_RGB2GRAY);
+    /*------------------------------------THRESHOLDING CODE (Doesn't Work)-----------------------------------------------------*/
     //Apply Custom thresholding in order to detect AR Tags with no outline
-    Mat threshold;
+    /*Mat threshold;
     const double threshold_val = 5; //If rgb is greater than threshold_val then set to white, otherwise set to black
     const double threshold_max = 255;
     const int threshold_type = 0; //Binary Thresholding (described above)
-    cv::threshold(gray, threshold, threshold_val, threshold_max, threshold_type);
+    cv::threshold(gray, threshold, threshold_val, threshold_max, threshold_type);*/
+    /*------------------------------------THRESHOLDING CODE (Doesn't Work)-----------------------------------------------------*/
+    /*------------------------------------IMAGE SATURATION---------------------------------------------*/
+    Mat sat_image = Mat::zeros(rgb.size(), rgb.type());
+    double alpha = 3; /*< Simple contrast control */
+    int beta = 0;
+
+    for( int y = 0; y < rgb.rows; y++ ) {
+        for( int x = 0; x < rgb.cols; x++ ) {
+            for( int c = 0; c < rgb.channels(); c++ ) {
+                if(rgb.channels() == 0) {cout << "Wack\n";}
+                sat_image.at<Vec3b>(y,x)[c] =
+                    saturate_cast<uchar>( alpha*rgb.at<Vec3b>(y,x)[c] + beta );
+            }
+        }
+    }
+
+    Mat sharp;
+    Mat kernel = (Mat_<double>(3, 3) << -1,-1,-1, -1, 9,-1, -1,-1,-1);
+    filter2D(rgb, sharp, -1 , kernel);
+
+    /*------------------------------------IMAGE SATURATION---------------------------------------------*/
+    /*------------------------------------CONTOURING CODE-----------------------------------------------------*/
+    //GrayScale Image
+    Mat gray;
+    cvtColor(rgb, gray, cv::COLOR_RGB2GRAY);
+    Mat canny_output;
+    std::vector<std::vector<cv::Point>> contours;
+    std::vector<std::vector<cv::Point>> accepted;
+    std::vector<Vec4i> hierarchy;
+    int thresh = 15;
+    Canny(gray, canny_output, thresh, thresh * 3, 3);
+    findContours(canny_output, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0));
+
+    std::vector<std::vector<Point>>poly(contours.size());
+    for (int i = 0; i < contours.size(); ++i) {
+        cv::approxPolyDP(Mat(contours[i]), poly[i], 0.01*arcLength(Mat(contours[i]), true), true);
+        //if (poly[i].size() < 20 && contourArea(contours[i]) > 75) {
+            //accepted.push_back(contours[i]);
+        //}
+
+        if (poly[i].size() == 4){
+            accepted.push_back(contours[i]);
+        }
+    }
+
+    Mat drawing = Mat::zeros(canny_output.size(), CV_8UC3);
+    for (int i = 0; i < accepted.size(); i++) {
+        Scalar color = Scalar(255, 255, 255);
+        drawContours(drawing, accepted, i, color, 2, 8, hierarchy, 0, Point());
+    }
+    /*------------------------------------CONTOURING CODE-----------------------------------------------------*/
     /// Find tags
-    cv::aruco::detectMarkers(threshold, alvarDict, corners, ids, alvarParams);
+    Mat final = rgb + drawing;
+    cv::aruco::detectMarkers(final, alvarDict, corners, ids, alvarParams);
+
+    
 #if AR_RECORD
 cv::aruco::drawDetectedMarkers(rgb, corners, ids);
 #endif
 #if PERCEPTION_DEBUG
     // Draw detected tags
-    cv::aruco::drawDetectedMarkers(rgb, corners, ids);
-    cv::imshow("AR Tags", rgb);
+    cv::aruco::drawDetectedMarkers(final, corners, ids);
+    cv::imshow("AR Tags", final);
 
     // on click debugging for color
     DEPTH = depth_src;
