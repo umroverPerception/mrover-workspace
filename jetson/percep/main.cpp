@@ -108,7 +108,6 @@ int main() {
   int right_tag_buffer = 0;
 
   #if OBSTACLE_DETECTION
-  
 
   //Generate point cloud and put in point cloud object
   //This is a smart pointer so no need to worry ab deleteing it
