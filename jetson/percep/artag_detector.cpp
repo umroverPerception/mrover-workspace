@@ -61,7 +61,7 @@ pair<Tag, Tag> TagDetector::findARTags(Mat &src, Mat &depth_src, Mat &rgb) {  //
     // clear ids and corners vectors for each detection
     ids.clear();
     corners.clear();
-    
+    // howdy
     /*------------------------------------THRESHOLDING CODE (Doesn't Work)-----------------------------------------------------*/
     //Apply Custom thresholding in order to detect AR Tags with no outline
     /*Mat threshold;
