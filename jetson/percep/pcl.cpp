@@ -579,7 +579,7 @@ void PCL::EuclidianClusterExtraction(std::vector<pcl::PointIndices> &cluster_ind
 void PCL::FindInterestPoints(std::vector<pcl::PointIndices> &cluster_indices, std::vector<std::vector<int>> &interest_points){}
 
 //Finds a clear path given the obstacle corners
-bool PCL::FindClearPath(std::vector<std::vector<int>> interest_points,
+double PCL::FindClearPath(std::vector<std::vector<int>> interest_points,
                     shared_ptr<pcl::visualization::PCLVisualizer> viewer){}
 
 //Determines whether the input path is obstructed
