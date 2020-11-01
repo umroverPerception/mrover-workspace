@@ -62,7 +62,7 @@ class PCL {
         void RANSACSegmentation(string type);
         
         //Clusters nearby points into large obstacles
-        void CPUEuclidianClusterExtraction(std::vector<pcl::PointIndices> &cluster_indices);
+        void EuclidianClusterExtraction(std::vector<pcl::PointIndices> &cluster_indices);
         
         //Finds the four corners of the clustered obstacles
         void FindInterestPoints(std::vector<pcl::PointIndices> &cluster_indices, std::vector<std::vector<int>> &interest_points);

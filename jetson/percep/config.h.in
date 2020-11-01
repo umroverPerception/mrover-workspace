@@ -7,5 +7,6 @@
 #mesondefine PERCEPTION_DEBUG
 #mesondefine WRITE_CURR_FRAME_TO_DISK
 #mesondefine DEFAULT_ONLINE_DATA_FOLDER
+#mesondefine GPU
 
 
