@@ -16,6 +16,7 @@
     vm_config
     write_frame
     data_folder
+    gpu
 
 ## Option Descriptions:
 
@@ -46,6 +47,10 @@
 ### write_frame
     [true] will write input frames to a file
     [false] will not write frames to file
+
+### gpu
+    [true] enables pcl gpu features
+    [false] disable pcl gpu features
 
 ### data_folder
     ['<path to folder>'] takes path to folder to write images in
