@@ -501,9 +501,9 @@ obstacle_return PCL::pcl_obstacle_detection(shared_ptr<pcl::visualization::PCLVi
     DownsampleVoxelFilter();
     RANSACSegmentation("remove");
     std::vector<pcl::PointIndices> cluster_indices;
-    GPUEuclidianClusterExtraction(pt_cloud_ptr, cluster_indices);
+    //GPUEuclidianClusterExtraction(pt_cloud_ptr, cluster_indices);
     
-    //CPUEuclidianClusterExtraction(pt_cloud_ptr, cluster_indices);
+    CPUEuclidianClusterExtraction(pt_cloud_ptr, cluster_indices);
     std::vector<std::vector<int>> interest_points(cluster_indices.size(), vector<int> (4));
     FindInterestPoints(cluster_indices, pt_cloud_ptr, interest_points);
     result.bearing = FindClearPath(pt_cloud_ptr, interest_points, viewer, result);  
