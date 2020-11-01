@@ -67,6 +67,7 @@ obs_record = get_option('obs_record')
 perception_debug = get_option('perception_debug')
 write_frame = get_option('write_frame')
 data_folder = get_option('data_folder')
+gpu = get_option('gpu')
 
 conf_data = configuration_data()
 conf_data.set10('AR_DETECTION', ar_detection)
@@ -77,6 +78,7 @@ conf_data.set10('ZED_SDK_PRESENT', with_zed)
 conf_data.set10('PERCEPTION_DEBUG', perception_debug)
 conf_data.set10('WRITE_CURR_FRAME_TO_DISK', write_frame)
 conf_data.set10('VIRTUAL_MACHINE_CONFIG', vm_config)
+conf_data.set10('GPU', gpu)
 conf_data.set_quoted('DEFAULT_ONLINE_DATA_FOLDER', data_folder)
 configure_file(
 	input: 'config.h.in',
