@@ -20,7 +20,7 @@ void PCL::PassThroughFilter() {
     pass.setInputCloud(pt_cloud_ptr);
     pass.setFilterFieldName("z");
     //The z values for depth are in mm
-    pass.setFilterLimits(0.0,9000.0);
+    pass.setFilterLimits(0.0,2000.0);
     pass.filter(*pt_cloud_ptr);
 }
 
@@ -88,6 +88,57 @@ void PCL::RANSACSegmentation(string type) {
         extract.filter(*pt_cloud_ptr);
     }
     
+}
+
+
+/* --- Copy Point Cloud --- */
+//Converts a point cloud from point XYZRGB to XYZ
+void copyPointCloud(pcl::PointCloud<pcl::PointXYZRGB>::Ptr & from, pcl::PointCloud<pcl::PointXYZ>::Ptr & to){
+    to->width = from->width;
+    to->height = from->height;
+    to->is_dense = from->is_dense;
+    to->resize(from->width*from->height);
+
+    auto toit = to->points.begin();
+    for( auto fromit : from->points){
+        toit->x = fromit.x;
+        toit->y = fromit.y;
+        toit->z = fromit.z;
+        toit++;
+    }
+   
+}
+
+/* --- GPU Euclidian Cluster Extraction --- */
+//Creates a KdTree structure from point cloud
+//Use this tree to traverse point cloud and create vector of clusters
+//Return vector of clusters
+//Code based on example from: https://tinyurl.com/y62jxrz8
+//Source: https://rb.gy/qvjati
+void GPUEuclidianClusterExtraction(pcl::PointCloud<pcl::PointXYZRGB>::Ptr & pt_cloud_ptr_in,  
+                                    std::vector<pcl::PointIndices> &cluster_indices) {
+    #if PERCEPTION_DEBUG
+        pcl::ScopeTime t ("GPU Cluster Extraction");
+    #endif
+    pcl::PointCloud<pcl::PointXYZ>::Ptr pt_cloud_ptr (new pcl::PointCloud<pcl::PointXYZ>);
+    copyPointCloud(pt_cloud_ptr_in, pt_cloud_ptr);
+    pcl::gpu::Octree::PointCloud cloud_device;
+    
+    cloud_device.upload(pt_cloud_ptr->points);
+
+    pcl::gpu::Octree::Ptr octree_device (new pcl::gpu::Octree);
+    octree_device->setCloud(cloud_device);
+    octree_device->build();
+
+    
+    pcl::gpu::EuclideanClusterExtraction gec;
+    gec.setClusterTolerance (0.02); // 2cm
+    gec.setMinClusterSize (100);
+    gec.setMaxClusterSize (25000);
+    gec.setSearchMethod (octree_device);
+    gec.setHostCloud( pt_cloud_ptr);
+    gec.extract (cluster_indices);
+
 }
 
 /* --- Euclidian Cluster Extraction --- */
@@ -191,7 +242,7 @@ void PCL::FindInterestPoints(std::vector<pcl::PointIndices> &cluster_indices,
 
 /* --- Find Clear Path --- */
 //Returns the angle to a clear path
-bool PCL::FindClearPath(std::vector<std::vector<int>> interest_points,
+double PCL::FindClearPath(std::vector<std::vector<int>> interest_points,
                         shared_ptr<pcl::visualization::PCLVisualizer> viewer) {
     #if PERCEPTION_DEBUG
         pcl::ScopeTime t ("Find Clear Path");
