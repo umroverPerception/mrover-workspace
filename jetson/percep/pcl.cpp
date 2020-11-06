@@ -1,7 +1,7 @@
 #include "pcl.hpp"
 #include "perception.hpp"
 
-#if OBSTACLE_DETECTION
+//#if OBSTACLE_DETECTION
 /* --- Pass Through Filter --- */
 //Filters out all points with z values that aren't within a threshold
 //Z values are depth values in mm
@@ -11,12 +11,21 @@ void PCL::PassThroughFilter() {
         pcl::ScopeTime t ("PassThroughFilter");
     #endif
 
-    pcl::PassThrough<pcl::PointXYZRGB> pass;
-    pass.setInputCloud(pt_cloud_ptr);
-    pass.setFilterFieldName("z");
+    //z filter
+    pcl::PassThrough<pcl::PointXYZRGB> zpass;
+    zpass.setInputCloud(pt_cloud_ptr);
+    zpass.setFilterFieldName("z");
     //The z values for depth are in mm
-    pass.setFilterLimits(0.0,9000.0);
-    pass.filter(*pt_cloud_ptr);
+    zpass.setFilterLimits(0.0,9000.0);
+    zpass.filter(*pt_cloud_ptr);
+
+    //y filter
+    pcl::PassThrough<pcl::PointXYZRGB> ypass;
+    ypass.setInputCloud(pt_cloud_ptr);
+    ypass.setFilterFieldName("y");
+    //The z values for depth are in mm
+    ypass.setFilterLimits(0.0,5000.0);
+    ypass.filter(*pt_cloud_ptr);
 }
 
 /* --- Voxel Filter --- */
