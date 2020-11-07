@@ -1,7 +1,7 @@
 #include "pcl.hpp"
 #include "perception.hpp"
 
-//#if OBSTACLE_DETECTION
+#if OBSTACLE_DETECTION
 /* --- Pass Through Filter --- */
 //Filters out all points with z values that aren't within a threshold
 //Z values are depth values in mm

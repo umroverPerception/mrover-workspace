@@ -2,6 +2,7 @@
 #include "rover_msgs/Target.hpp"
 #include "rover_msgs/TargetList.hpp"
 #include <unistd.h>
+#include <chrono>
 
 using namespace cv;
 using namespace std;
@@ -95,7 +96,11 @@ int main() {
 
   #endif
   
+  std::chrono::steady_clock::time_point start, end;
+  double fps;
   while (true) {
+    //start = chrono::steady_clock::now();
+
     if (!cam_grab_succeed(cam, counter_fail)) break;
 
     #if AR_DETECTION
@@ -205,6 +210,10 @@ int main() {
       std::this_thread::sleep_for(0.2s);   
     #endif
     ++iterations;
+
+    end = chrono::steady_clock::now();
+    cout << "TIME FOR ITERATION: " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << endl;
+    fps = 1 / chrono::duration_cast<chrono::seconds>(end - start).count();
   }
   #if OBSTACLE_DETECTION && PERCEPTION_DEBUG
   viewer->close();
