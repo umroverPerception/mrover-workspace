@@ -96,10 +96,10 @@ int main() {
 
   #endif
   
-  std::chrono::steady_clock::time_point start, end;
+  //std::chrono::high_resolution_clock::time_point start, end, time_diff;
   double fps;
   while (true) {
-    //start = chrono::steady_clock::now();
+    auto start = std::chrono::high_resolution_clock::now();
 
     if (!cam_grab_succeed(cam, counter_fail)) break;
 
@@ -211,9 +211,13 @@ int main() {
     #endif
     ++iterations;
 
-    end = chrono::steady_clock::now();
-    cout << "TIME FOR ITERATION: " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << endl;
-    fps = 1 / chrono::duration_cast<chrono::seconds>(end - start).count();
+    auto end = std::chrono::high_resolution_clock::now();
+    auto time_diff = end - start;
+    cout << "TIME FOR ITERATION: " << std::chrono::duration<double, std::milli>(time_diff).count() << " ms" << endl;
+    fps = 1 / std::chrono::duration<double>(time_diff).count();
+    cout << "FPS: " << fps << " fps"<< endl;
+
+    
   }
   #if OBSTACLE_DETECTION && PERCEPTION_DEBUG
   viewer->close();
