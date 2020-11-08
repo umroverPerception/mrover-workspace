@@ -32,7 +32,7 @@ int main() {
   int iterations = 0;
   int counter_fail = 0;
   #if PERCEPTION_DEBUG
-    namedWindow("depth", 2);
+    //namedWindow("depth", 2);
   #endif
   cam.disk_record_init();
   //Video Stuff
@@ -96,8 +96,21 @@ int main() {
 
   #endif
   
-  //std::chrono::high_resolution_clock::time_point start, end, time_diff;
+  Mat img = imread("/home/marcsocha/MROVER/perception/mrover.jpg");
+  //check for failure
+  if(img.empty()){
+    cout << "Could not open or find the image" << endl;
+    cin.get();
+    return -1;
+  }
+  
+  string windowName = "FPS Display";
+  namedWindow(windowName, CV_WINDOW_AUTOSIZE);
+  imshow(windowName, img);
+  waitKey(0);
+
   double fps;
+  string fps_text, text_input;
   while (true) {
     auto start = std::chrono::high_resolution_clock::now();
 
@@ -205,8 +218,8 @@ int main() {
     lcm_.publish("/obstacle", &obstacleMessage);
 
     #if PERCEPTION_DEBUG && AR_DETECTION
-      imshow("depth", src);
-      waitKey(1);
+      //imshow("depth", src);
+      //waitKey(1);
       std::this_thread::sleep_for(0.2s);   
     #endif
     ++iterations;
@@ -216,8 +229,12 @@ int main() {
     cout << "TIME FOR ITERATION: " << std::chrono::duration<double, std::milli>(time_diff).count() << " ms" << endl;
     fps = 1 / std::chrono::duration<double>(time_diff).count();
     cout << "FPS: " << fps << " fps"<< endl;
-
     
+    fps_text = to_string(fps);
+    text_input = fps_text + " fps";
+    putText(img, text_input, Point(5,20), FONT_HERSHEY_PLAIN, 1, Scalar(255,255,255), 1);
+    imshow(windowName, img);
+    waitKey(1);
   }
   #if OBSTACLE_DETECTION && PERCEPTION_DEBUG
   viewer->close();
@@ -226,6 +243,10 @@ int main() {
   #if AR_RECORD
   vidWrite.release();
   #endif
+
+  
+  destroyWindow(windowName);
+
   return 0;
 }
 
