@@ -32,7 +32,7 @@ int main() {
   int iterations = 0;
   int counter_fail = 0;
   #if PERCEPTION_DEBUG
-    //namedWindow("depth", 2);
+    namedWindow("depth", 2);
   #endif
   cam.disk_record_init();
   //Video Stuff
@@ -95,19 +95,21 @@ int main() {
   #endif
 
   #endif
+  Mat img(250, 400, CV_8UC3, Scalar(0,0,0));
   
-  Mat img = imread("/home/marcsocha/MROVER/perception/mrover.jpg");
   //check for failure
+  /*
   if(img.empty()){
     cout << "Could not open or find the image" << endl;
     cin.get();
     return -1;
   }
-  
+  */
+
   string windowName = "FPS Display";
-  namedWindow(windowName, CV_WINDOW_AUTOSIZE);
+  namedWindow(windowName);
   imshow(windowName, img);
-  waitKey(0);
+  waitKey(30);
 
   double fps;
   string fps_text, text_input;
@@ -218,21 +220,25 @@ int main() {
     lcm_.publish("/obstacle", &obstacleMessage);
 
     #if PERCEPTION_DEBUG && AR_DETECTION
-      //imshow("depth", src);
-      //waitKey(1);
+      imshow("depth", src);
+      waitKey(1);
       std::this_thread::sleep_for(0.2s);   
     #endif
     ++iterations;
 
     auto end = std::chrono::high_resolution_clock::now();
     auto time_diff = end - start;
-    cout << "TIME FOR ITERATION: " << std::chrono::duration<double, std::milli>(time_diff).count() << " ms" << endl;
+    //cout << "TIME FOR ITERATION: " << std::chrono::duration<double, std::milli>(time_diff).count() << " ms" << endl;
     fps = 1 / std::chrono::duration<double>(time_diff).count();
-    cout << "FPS: " << fps << " fps"<< endl;
+    //cout << "FPS: " << fps << " fps"<< endl;
     
     fps_text = to_string(fps);
+    //update old fps to black again so numbers don't copy over each other
+    putText(img, text_input, Point(5,25), FONT_HERSHEY_PLAIN, 2, Scalar(0,0,0), 1);
+
+    //update new fps
     text_input = fps_text + " fps";
-    putText(img, text_input, Point(5,20), FONT_HERSHEY_PLAIN, 1, Scalar(255,255,255), 1);
+    putText(img, text_input, Point(5,25), FONT_HERSHEY_PLAIN, 2, Scalar(255,255,255), 1);
     imshow(windowName, img);
     waitKey(1);
   }
