@@ -61,7 +61,6 @@ pair<Tag, Tag> TagDetector::findARTags(Mat &src, Mat &depth_src, Mat &rgb) {  //
     // clear ids and corners vectors for each detection
     ids.clear();
     corners.clear();
-<<<<<<< HEAD
 
     Mat gray;
     cvtColor(rgb, gray, cv::COLOR_RGB2GRAY);
@@ -149,6 +148,19 @@ pair<Tag, Tag> TagDetector::findARTags(Mat &src, Mat &depth_src, Mat &rgb) {  //
     }
     Mat final = rgb + drawing;
     /*------------------------------------CONTOURING-----------------------------------------------------*/
+    /*----------------------------------DEPTH FILTERING--------------------------------------------------*/
+    Mat filteredDepth(rgb.rows,rgb.cols, CV_8UC3, Scalar(255,255,255));
+    for(int i = 0; i < depth_src.rows; ++i){
+        for(int j = 0; j < depth_src.cols; ++j){
+            if(depth_src.at<float>(i,j) < 7000){
+                filteredDepth.at<cv::Vec3b>(i,j)[0] = rgb.at<cv::Vec3b>(i,j)[0];
+                filteredDepth.at<cv::Vec3b>(i,j)[1] = rgb.at<cv::Vec3b>(i,j)[1];
+                filteredDepth.at<cv::Vec3b>(i,j)[2] = rgb.at<cv::Vec3b>(i,j)[2];
+            }
+                
+        }
+    }
+    /*----------------------------------DEPTH FILTERING--------------------------------------------------*/
     /*------------------------------------REJECTS-----------------------------------------------------*/
     std::vector<std::vector<cv::Point2f> > rejected;
     /*------------------------------------REJECTS-----------------------------------------------------*/
@@ -163,7 +175,7 @@ pair<Tag, Tag> TagDetector::findARTags(Mat &src, Mat &depth_src, Mat &rgb) {  //
     you are debugging.
     ------------------------------------TESTING WALKTHROUGH-----------------------------------------------------*/
     /*------------------------------------TAG DETECTION (Necessary for All Methods)-----------------------------------------------------*/
-    cv::aruco::detectMarkers(final, alvarDict, corners, ids, alvarParams, rejected);
+    cv::aruco::detectMarkers(filteredDepth, alvarDict, corners, ids, alvarParams, rejected);
     /*------------------------------------TAG DETECTION (Necessary for All Methods)-----------------------------------------------------*/
     /*------------------------------------REJECTS CONTINUED-----------------------------------------------------*/
     Mat drawing2 = Mat::zeros(rgb.size(), CV_8UC3);
@@ -193,8 +205,8 @@ cv::aruco::drawDetectedMarkers(rgb, corners, ids);
 #endif
 #if PERCEPTION_DEBUG
     // Draw detected tags
-    cv::aruco::drawDetectedMarkers(final, corners, ids);
-    cv::imshow("AR Tags", final);
+    cv::aruco::drawDetectedMarkers(filteredDepth, corners, ids);
+    cv::imshow("AR Tags", filteredDepth);
 
     // on click debugging for color
     DEPTH = depth_src;

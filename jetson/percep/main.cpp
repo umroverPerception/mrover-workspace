@@ -256,7 +256,7 @@ int main() {
       imshow("depth", src);
       waitKey(1);
       auto start = std::chrono::high_resolution_clock::now();
-      std::this_thread::sleep_for(0.2s);
+      std::this_thread::sleep_for(0.05s);
       auto end = std::chrono::high_resolution_clock::now();    
     #endif
     ++j;
