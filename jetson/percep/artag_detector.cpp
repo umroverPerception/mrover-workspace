@@ -61,15 +61,42 @@ pair<Tag, Tag> TagDetector::findARTags(Mat &src, Mat &depth_src, Mat &rgb) {  //
     // clear ids and corners vectors for each detection
     ids.clear();
     corners.clear();
+
+    Mat gray;
+    cvtColor(rgb, gray, cv::COLOR_RGB2GRAY);
+    /*------------------------------------------CODE WALKTHROUGH------------------------------------------
+    For a walkthrough of how to test any code that you add, scroll down to the TESTING WALKTHROUGH section.
+    Here are the different methods that we have tried in order to detect AR-Tags on a Dark/Varied Background:
+    1. Image Thresholding -> The general idea behind image thresholding is that if a pixel is lighter than 
+    some color (in our case pretty dark) then it should be set to white. What that means for the purposes of 
+    our image is that everything should be white except pixels that are as dark or darker than the black squares
+    of an AR Tag. This code had some issues, but another set of eyes might be able to get it to work.
     
-    /*------------------------------------THRESHOLDING CODE (Doesn't Work)-----------------------------------------------------*/
+    2. Image Saturation/Sharpening -> The idea here is to increase to difference between various colors in order to make
+    the edges of the AR Tag sharper and thus give the detectMarkers function a better chance of picking up the AR Tag.
+    This solution worked reasonably well, but I'm concerned that it's use case is limited or that its dependent on the amount
+    of light already in the image.
+
+    3. Contouring -> With this method, we are trying to detect edges ourselves using the Canny Edge Detection Algorithm.
+    After doing this we impose those edges in white on top of the image essentially giving us a pseudo white background 
+    for any AR Tag. Additionally there is code in this method for taking the edges and detecting squares/rectangles in order
+    to only impose square or rectangular edges as opposed to all of them. This hasn't been working particularly well so far
+    but their might be something that I'm missing. The Method that has worked the best so far for filtering out unnecessary edges
+    was to look at the size of the contour and if it was too small, exclude it.
+
+    4. OpenCV Rejects -> The OpenCV detectMarkers function by default returns a list of rejected candidates as well. I thought
+    I would try drawing white borders around those rejected candidates, to see if the reason detectMarkers rejected them was
+    because they didn't have a white background. This didn't work very well when I tried it, and it would potentially be inefficient
+    as 2 calls to detectMarkers would be required.
+    ------------------------------------------CODE WALKTHROUGH------------------------------------------*/
+    /*------------------------------------THRESHOLDING (Doesn't Work)-----------------------------------------------------*/
     //Apply Custom thresholding in order to detect AR Tags with no outline
-    /*Mat threshold;
+    Mat threshold;
     const double threshold_val = 5; //If rgb is greater than threshold_val then set to white, otherwise set to black
     const double threshold_max = 255;
     const int threshold_type = 0; //Binary Thresholding (described above)
-    cv::threshold(gray, threshold, threshold_val, threshold_max, threshold_type);*/
-    /*------------------------------------THRESHOLDING CODE (Doesn't Work)-----------------------------------------------------*/
+    cv::threshold(gray, threshold, threshold_val, threshold_max, threshold_type);
+    /*------------------------------------THRESHOLDING (Doesn't Work)-----------------------------------------------------*/
     /*------------------------------------IMAGE SATURATION---------------------------------------------*/
     Mat sat_image = Mat::zeros(rgb.size(), rgb.type());
     double alpha = 3; /*< Simple contrast control */
@@ -84,16 +111,8 @@ pair<Tag, Tag> TagDetector::findARTags(Mat &src, Mat &depth_src, Mat &rgb) {  //
             }
         }
     }
-
-    Mat sharp;
-    Mat kernel = (Mat_<double>(3, 3) << -1,-1,-1, -1, 9,-1, -1,-1,-1);
-    filter2D(rgb, sharp, -1 , kernel);
-
     /*------------------------------------IMAGE SATURATION---------------------------------------------*/
-    /*------------------------------------CONTOURING CODE-----------------------------------------------------*/
-    //GrayScale Image
-    Mat gray;
-    cvtColor(rgb, gray, cv::COLOR_RGB2GRAY);
+    /*------------------------------------CONTOURING-----------------------------------------------------*/
     Mat canny_output;
     std::vector<std::vector<cv::Point>> contours;
     std::vector<std::vector<cv::Point>> accepted;
@@ -101,28 +120,71 @@ pair<Tag, Tag> TagDetector::findARTags(Mat &src, Mat &depth_src, Mat &rgb) {  //
     int thresh = 15;
     Canny(gray, canny_output, thresh, thresh * 3, 3);
     findContours(canny_output, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0));
-
+    //You can only use SIZE BASED DETECTION or SQUARE DETECTION -> Use one and comment out the other
     std::vector<std::vector<Point>>poly(contours.size());
     for (int i = 0; i < contours.size(); ++i) {
         cv::approxPolyDP(Mat(contours[i]), poly[i], 0.01*arcLength(Mat(contours[i]), true), true);
-        //if (poly[i].size() < 20 && contourArea(contours[i]) > 75) {
-            //accepted.push_back(contours[i]);
-        //}
-
-        if (poly[i].size() == 4){
+        /*--------------SIZE BASED DETECTION (Comment out the if statement and closing brace but not the line 
+        inside the if statement if you want to impose all edges)--------------*/
+        if (poly[i].size() < 20 && contourArea(contours[i]) > 75) {
             accepted.push_back(contours[i]);
         }
+        /*--------------SIZE BASED DETECTION (Comment out the if statement and closing brace but not the line 
+        inside the if statement if you want to impose all edges)--------------*/
+        /*--------------SQUARE DETECTION (Comment out the if statement and closing brace but not the line 
+        inside the if statement if you want to impose all edges)--------------*/
+        //if (poly[i].size() == 4){
+            //accepted.push_back(contours[i]);
+        //}
+        /*--------------SQUARE DETECTION (Comment out the if statement and closing brace but not the line 
+        inside the if statement if you want to impose all edges)--------------*/
     }
 
     Mat drawing = Mat::zeros(canny_output.size(), CV_8UC3);
     for (int i = 0; i < accepted.size(); i++) {
         Scalar color = Scalar(255, 255, 255);
-        drawContours(drawing, accepted, i, color, 2, 8, hierarchy, 0, Point());
+        int thickness = int(accepted[i].size() * 0.001);
+        drawContours(drawing, accepted, i, color, 2, 8, hierarchy, 0);
     }
-    /*------------------------------------CONTOURING CODE-----------------------------------------------------*/
-    /// Find tags
     Mat final = rgb + drawing;
-    cv::aruco::detectMarkers(final, alvarDict, corners, ids, alvarParams);
+    /*------------------------------------CONTOURING-----------------------------------------------------*/
+    /*------------------------------------REJECTS-----------------------------------------------------*/
+    std::vector<std::vector<cv::Point2f> > rejected;
+    /*------------------------------------REJECTS-----------------------------------------------------*/
+    /*------------------------------------TESTING WALKTHROUGH-----------------------------------------------------
+    In order to test Your Code, there are three lines that you need to be aware of:
+    1. The first is directly beneath this comment -> cv::aruco::detectMarkers. The first parameter in this function
+    is the Matrix(Image) that the Detector Function will take in to find ARtags.
+
+    2. The second and third are right next to one another. Under the preprocessor Directive #if PERCEPTION_DEBUG a little bit further
+    down the file. They are cv::aruco::drawDetectedMarkers and cv::imshow. The first parameter in drawDetectedMarkers and the second parameter
+    in imshow should be the same Matrix(Image). They should both be the image you actually want to see in the window that opens up while
+    you are debugging.
+    ------------------------------------TESTING WALKTHROUGH-----------------------------------------------------*/
+    /*------------------------------------TAG DETECTION (Necessary for All Methods)-----------------------------------------------------*/
+    cv::aruco::detectMarkers(final, alvarDict, corners, ids, alvarParams, rejected);
+    /*------------------------------------TAG DETECTION (Necessary for All Methods)-----------------------------------------------------*/
+    /*------------------------------------REJECTS CONTINUED-----------------------------------------------------*/
+    Mat drawing2 = Mat::zeros(rgb.size(), CV_8UC3);
+    for(int i = 0; i < rejected.size(); ++i){
+        double distOne = cv::norm(rejected[i][0]-rejected[i][1]);
+        double distTwo = cv::norm(rejected[i][0]-rejected[i][2]);
+        double distThree = cv::norm(rejected[i][0]-rejected[i][3]);
+        double maxDist = std::max(std::max(distOne, distTwo), distThree);
+        int index = 0;
+        if(maxDist == distThree){
+            index = 3;
+        }else if(maxDist == distTwo){
+            index = 2;
+        }else{ 
+            index = 1;
+        }
+        Scalar color = Scalar(255, 255, 255);
+        cv::rectangle(drawing2, rejected[i][0], rejected[i][index], color, 3);
+    }
+
+    Mat final2 = rgb + drawing2;
+    /*------------------------------------REJECTS CONTINUED-----------------------------------------------------*/
 
     
 #if AR_RECORD
