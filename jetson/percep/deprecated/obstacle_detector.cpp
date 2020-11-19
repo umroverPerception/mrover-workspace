@@ -3,8 +3,10 @@ using namespace cv;
 using namespace std;
 
 //Global Variables 
-int THRESHOLD_NO_OBSTACLE_CENTER = 300000;
-int THRESHOLD_NO_SUBWINDOW = 70000;
+int THRESHOLD_NO_OBSTACLE_CENTER = mRoverConfig["threshold"]["threshold_no_object_center"].GetDouble();
+int THRESHOLD_NO_SUBWINDOW = mRoverConfig["threshold"]["threshold_no_object_center"].GetDouble();
+int RESOLUTION_WIDTH=mRoverConfig["zed_specs"]["resolution_width"].GetInt();
+int RESOLUTION_HEIGHT=mRoverConfig["zed_specs"]["resolution_height"].GetInt();;
 // record the last direction
 static int last_center;
 Rect cropped = Rect( 20, SKY_START_ROW, 1240, 300 ); // (x, y, width, height) 
@@ -87,7 +89,7 @@ bool compare_second(pair<int, float> p1, pair<int, float> p2)
 }
 
 pair<int, float> get_final_col(vector<pair<int, float> > & sorted_sums, float middle_sum ) {
-  float max_sum_threshold = sorted_sums[0].second - SIMILARITY_THRESHOLD;
+  float max_sum_threshold = sorted_sums[0].second - mRoverConfig["threshold"]["similarity_threshold"].GetString();
   // go straight if possible
   #if PERCEPTION_DEBUG
     //cout<<"middle col sum is "<<middle_sum<<endl;
@@ -129,7 +131,7 @@ obstacle_return refine_rt(obstacle_return rt_val, pair<int, float> candidate, Si
   float max_sum_sw = candidate.second;
   int final_start_col = candidate.first;
 
-  if (max_sum_sw > THRESHOLD_NO_WAY) {
+  if (max_sum_sw > mRoverConfig["threshold"]["threshold_no_way"].GetDouble()) {
     #if PERCEPTION_DEBUG
       //cout<<"max_sum_sw "<<max_sum_sw<<", col start at "<<final_start_col<<endl;
       putText(rgb_img, "New Clear Path", Point( final_start_col, SKY_START_ROW-60), CV_FONT_HERSHEY_SIMPLEX, 1, cvScalar(255, 0, 0), 2);

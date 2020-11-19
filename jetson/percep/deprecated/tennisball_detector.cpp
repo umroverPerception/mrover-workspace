@@ -86,7 +86,7 @@ pair<Point2f, double> findTennisBall(Mat &src, Mat & depth_src){
     
     for(unsigned i = 0; i < center.size(); i++ ){
         double rad = radius[i];
-        if(rad > biggestRadius && rad >= BALL_DETECTION_MIN_RAD && rad <= BALL_DETECTION_MAX_RAD){
+        if(rad > biggestRadius && rad >= mRoverConfig["ball_detection"]["ball_detection_min_rad"].GetDouble() && rad <= mRoverConfig["ball_detection"]["ball_detection_max_rad"].GetDouble()){
             biggestRadius = rad;
             biggestCircle = center[i];
         }

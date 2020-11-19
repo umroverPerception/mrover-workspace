@@ -71,11 +71,11 @@ int main(){
 	    Mat src;
 	    Mat depth_img;
 
-		const float roverWidth = 46 * 25.4; //inches to mm
-		const float focalLength = 2.8; //zed focal length in mm
-		const float fieldofView = 110 * PI/180;	//degrees to radians
+		const float roverWidth = mRoverConfig["rover_specs"]["realWidth"].GetFloat(); //inches to mm
+		const float focalLength = mRoverConfig["zed_specs"]["focalLength"].GetFloat(); //zed focal length in mm
+		const float fieldofView = mRoverConfig["zed_specs"]["fieldofView"].GetFloat();	//degrees to radians
 
-		float distThreshold;    //meters, used to calculate rover pixels for scanning width
+		float distThreshold=mRoverConfig["obstacle_detection"]["distThreshold"].getFloat();    //meters, used to calculate rover pixels for scanning width
 
 		cout << "Changing zed angle or height, or distance threshold will require recalibration.\n \n";
 		cout << "Enter Distance Threshold (meters): ";

@@ -35,10 +35,10 @@ class PCL {
         pt_cloud_ptr{new pcl::PointCloud<pcl::PointXYZRGB>} {
 
         #if ZED_SDK_PRESENT
-        sl::Resolution cloud_res = sl::Resolution(PT_CLOUD_WIDTH, PT_CLOUD_HEIGHT);
+        sl::Resolution cloud_res = sl::Resolution(mRoverConfig["pt_cloud"]]["pt_cloud_width"].GetDouble(), mRoverConfig["pt_cloud"]]["pt_cloud_height"].GetDouble());
         cloudArea = cloud_res.area();
         #else
-        cloudArea = PT_CLOUD_WIDTH*PT_CLOUD_HEIGHT;
+        cloudArea = mRoverConfig["pt_cloud"]]["pt_cloud_width"].GetDouble()*mRoverConfig["pt_cloud"]]["pt_cloud_height"].GetDouble();
         std::cerr << cloudArea<< endl;
         #endif
 
@@ -49,6 +49,8 @@ class PCL {
     bool detected;
     pcl::PointCloud<pcl::PointXYZRGB>::Ptr pt_cloud_ptr;
     int cloudArea;
+    double HALF_ROVER=mRoverConfig["pt_cloud"]["half_rover"].GetDouble();
+    double CENTERX=mRoverConfig["pt_cloud"]["centerx"].GetDouble();
 
     private:
 

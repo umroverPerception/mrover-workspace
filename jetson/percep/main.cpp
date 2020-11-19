@@ -95,7 +95,7 @@ int main() {
 
     // write to disk if permitted
     #if WRITE_CURR_FRAME_TO_DISK
-      if (iterations % FRAME_WRITE_INTERVAL == 0) {
+      if (iterations % mRoverConfig["frame_write_interval"].GetInt() == 0) {
         Mat rgb_copy = src.clone(), depth_copy = depth_img.clone();
         cerr << "Copied correctly" << endl;
         cam.write_curr_frame_to_disk(rgb_copy, depth_copy, iterations);

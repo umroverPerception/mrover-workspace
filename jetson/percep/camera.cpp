@@ -59,7 +59,7 @@ Camera::Impl::Impl() {
   
   this->zed_.setCameraSettings(sl::VIDEO_SETTINGS::BRIGHTNESS, 1);
 
-	this->runtime_params_.confidence_threshold = THRESHOLD_CONFIDENCE;
+	this->runtime_params_.confidence_threshold = mRoverConfig["threshold"]["threshold_confidence"].GetDouble();
 	std::cout<<"ZED init success\n";
 	this->runtime_params_.sensing_mode = sl::SENSING_MODE::STANDARD;
 
