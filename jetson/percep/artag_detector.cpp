@@ -61,6 +61,7 @@ pair<Tag, Tag> TagDetector::findARTags(Mat &src, Mat &depth_src, Mat &rgb) {  //
     // clear ids and corners vectors for each detection
     ids.clear();
     corners.clear();
+<<<<<<< HEAD
 
     Mat gray;
     cvtColor(rgb, gray, cv::COLOR_RGB2GRAY);
@@ -89,7 +90,7 @@ pair<Tag, Tag> TagDetector::findARTags(Mat &src, Mat &depth_src, Mat &rgb) {  //
     because they didn't have a white background. This didn't work very well when I tried it, and it would potentially be inefficient
     as 2 calls to detectMarkers would be required.
     ------------------------------------------CODE WALKTHROUGH------------------------------------------*/
-    /*------------------------------------THRESHOLDING (Doesn't Work)-----------------------------------------------------*/
+    /*------------------------------------THRESHOLDING CODE (Doesn't Work)-----------------------------------------------------*/
     //Apply Custom thresholding in order to detect AR Tags with no outline
     Mat threshold;
     const double threshold_val = 5; //If rgb is greater than threshold_val then set to white, otherwise set to black
