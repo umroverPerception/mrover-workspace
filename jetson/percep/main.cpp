@@ -1,6 +1,6 @@
 #include "perception.hpp"
-#include "rover_msgs/Target.hpp"
-#include "rover_msgs/TargetList.hpp"
+//#include "rover_msgs/Target.hpp"
+//#include "rover_msgs/TargetList.hpp"
 #include <unistd.h>
 #include <deque>
 
@@ -8,8 +8,11 @@ using namespace cv;
 using namespace std;
 using namespace std::chrono_literals;
 
+int test_kernel(void);
+
 int main() {
   
+  test_kernel();
   /* --- Camera Initializations --- */
   Camera cam;
   int iterations = 0;
@@ -29,7 +32,7 @@ int main() {
     cam.disk_record_init();
   #endif
 
-  /* -- LCM Messages Initializations -- */
+  /* -- LCM Messages Initializations -- 
   lcm::LCM lcm_;
   rover_msgs::TargetList arTagsMessage;
   rover_msgs::Target* arTags = arTagsMessage.targetList;
@@ -37,12 +40,14 @@ int main() {
   arTags[0].distance = -1;
   arTags[1].distance = -1;
   obstacleMessage.detected = false;
-
+*/
   /* --- AR Tag Initializations --- */
+  #if AR_DETECTION
   TagDetector detector;
   pair<Tag, Tag> tagPair;
   int left_tag_buffer = 0;
   int right_tag_buffer = 0;
+  #endif
   
   /* --- Point Cloud Initializations --- */
   #if OBSTACLE_DETECTION
@@ -66,6 +71,7 @@ int main() {
   #endif
 
   /* --- AR Recording Initializations and Implementation--- */ 
+  #if AR_RECORD
   TagDetector d1;
   pair<Tag, Tag> tp;
   
@@ -73,7 +79,7 @@ int main() {
   char* ltm = ctime(&now);
   string timeStamp(ltm);
 
-  #if AR_RECORD
+  
   //initializing ar tag videostream object
   
   Mat depth_img = cam.depth();
@@ -116,9 +122,9 @@ int main() {
     #endif
 
 /* --- AR Tag Processing --- */
+    #if AR_DETECTION
     arTags[0].distance = -1;
     arTags[1].distance = -1;
-    #if AR_DETECTION
       tagPair = detector.findARTags(src, depth_img, rgb);
       #if AR_RECORD
       vidWrite.write(rgb);
@@ -197,9 +203,9 @@ int main() {
       lastObstacle = obstacle_detection;
       
      //Update LCM 
-    obstacleMessage.bearing = lastObstacle.bearing; //update LCM bearing field
-    obstacleMessage.distance = lastObstacle.distance; //update LCM distance field
-    cerr << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Path Sent: " << obstacleMessage.bearing << "\n";
+    //obstacleMessage.bearing = lastObstacle.bearing; //update LCM bearing field
+    //obstacleMessage.distance = lastObstacle.distance; //update LCM distance field
+    //cerr << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Path Sent: " << obstacleMessage.bearing << "\n";
 
     #if PERCEPTION_DEBUG
       //Update Processed 3D Viewer
@@ -211,8 +217,8 @@ int main() {
     #endif
     
 /* --- Publish LCMs --- */
-    lcm_.publish("/target_list", &arTagsMessage);
-    lcm_.publish("/obstacle", &obstacleMessage);
+    //lcm_.publish("/target_list", &arTagsMessage);
+    //lcm_.publish("/obstacle", &obstacleMessage);
 
     std::this_thread::sleep_for(0.2s); // Iteration speed control 
     ++iterations;

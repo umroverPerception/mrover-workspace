@@ -4,10 +4,10 @@
 #include <opencv2/aruco.hpp>
 #include "config.h"
 #include "camera.hpp"
-#include "rover_msgs/Obstacle.hpp"
+//#include "rover_msgs/Obstacle.hpp"
 #include <chrono>
 #include <cmath>
-#include <lcm/lcm-cpp.hpp>
+//#include <lcm/lcm-cpp.hpp>
 #include <sys/stat.h> // for disk writing
 #include <algorithm>
 #include <ctime>

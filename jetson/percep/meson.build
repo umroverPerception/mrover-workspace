@@ -1,9 +1,8 @@
-project('jetson_percep', 'cpp', default_options : ['cpp_std=c++14'])
+project('jetson_percep', 'cpp', 'cuda', default_options : ['cpp_std=c++14'])
 
 opencv = dependency('opencv')
-lcm = dependency('lcm')
-
-all_deps = [opencv, lcm]
+#lcm = dependency('lcm')
+all_deps = [opencv]
 
 with_zed = get_option('with_zed')
 obs_detection = get_option('obs_detection')
@@ -86,6 +85,6 @@ configure_file(
 	configuration: conf_data)
 
 executable('jetson_percep',
-		   'main.cpp', 'camera.cpp', 'artag_detector.cpp', 'pcl.cpp',
+		   'main.cpp', 'camera.cpp', 'artag_detector.cpp', 'pcl_gpu.cpp', 'test-kernel.cu',
 		   dependencies : all_deps, cpp_args : '-mavx',
 		   install : true)

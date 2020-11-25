@@ -15,7 +15,7 @@ __global__ void fast_add(float* a, float* b, float* res) {
 	return;
 }
 
-int main() {
+int test_kernel(void) {
 	float aHost[] = {1, 2, 3, 4, 5};
 	float bHost[] = {1, 2, 3, 4, 5};
 	float* aDevice, *bDevice, *resDevice, *resHost;
