@@ -74,9 +74,23 @@ int main() {
   cam.record_ar_init();
   #endif
 
+  #if PERCEPTION_DEBUG
+  Mat img(250, 400, CV_8UC3, Scalar(0,0,0));
 
+  string windowName = "Console Display";
+  namedWindow(windowName);
+  imshow(windowName, img);
+  waitKey(30);
+
+  double fps;
+  string fps_text, fps_input, bearing_text, bearing_input;
+  #endif
 /* --- Main Processing Stuff --- */
   while (true) {
+    #if PERCEPTION_DEBUG
+    auto start = std::chrono::high_resolution_clock::now();
+    #endif
+
     //Check to see if we were able to grab the frame
     if (!cam.grab()) break;
 
@@ -201,6 +215,28 @@ int main() {
     std::this_thread::sleep_for(0.2s); // Iteration speed control 
 
     ++iterations;
+
+    #if PERCEPTION_DEBUG
+    auto end = std::chrono::high_resolution_clock::now();
+    auto time_diff = end - start;
+    fps = 1 / std::chrono::duration<double>(time_diff).count();
+
+    fps_text = to_string(fps);
+    bearing_text = to_string(pointcloud.bearing);
+
+    //update old fps to black again so numbers don't copy over each other
+    putText(img, fps_input, Point(5,20), FONT_HERSHEY_PLAIN, 1, Scalar(0,0,0), 1);
+    putText(img, bearing_input, Point(5,40), FONT_HERSHEY_PLAIN, 1, Scalar(0,0,0), 1);
+
+    //update new fps
+    fps_input = "fps: " + fps_text;
+    bearing_input = "bearing: " + bearing_text;
+    putText(img, fps_input, Point(5,20), FONT_HERSHEY_PLAIN, 1, Scalar(255,255,255), 1);
+    putText(img, bearing_input, Point(5,40), FONT_HERSHEY_PLAIN, 1, Scalar(255,255,255), 1);
+
+    imshow(windowName, img);
+    waitKey(1);
+    #endif
   }
 
 
@@ -212,7 +248,11 @@ int main() {
   #if AR_RECORD
   cam.record_ar_finish();
   #endif
-  
+
+  #if PERCEPTION_DEBUG
+  destroyWindow(windowName);
+  #endif
+
   return 0;
 }
 
