@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "perception.hpp"
+#include "rapidjson/document.h"
 
 using namespace std;
 using namespace cv;
@@ -18,6 +19,9 @@ class TagDetector {
     std::vector<int> ids;
     std::vector<std::vector<cv::Point2f> > corners;
     cv::Mat rgb;
+    //config file reference
+    const rapidjson::Document& mRoverConfig;
+    
 
    public:
     TagDetector();                                                                  //constructor loads dictionary data from file

@@ -1,7 +1,10 @@
 #if OBSTACLE_DETECTION
 #pragma once
 
+
 #include "perception.hpp"
+#include "rapidjson/document.h"
+using namespace rapidjson;
 #include <pcl/common/common_headers.h>
 
 /* --- Compare Line Class --- */
@@ -34,11 +37,25 @@ class PCL {
         bearing{0}, distance{0}, detected{false},
         pt_cloud_ptr{new pcl::PointCloud<pcl::PointXYZRGB>} {
 
+        ifstream configFile;
+        string configPath = getenv("MROVER_CONFIG");
+        configPath += "/config_nav/config.json";
+        configFile.open( configPath );
+        string config = "";
+        string setting;
+        while( configFile >> setting )
+        {
+           config += setting;
+        }
+        configFile.close();
+
+        mRoverConfig.Parse( config.c_str() );
+
         #if ZED_SDK_PRESENT
         sl::Resolution cloud_res = sl::Resolution(mRoverConfig["pt_cloud"]]["pt_cloud_width"].GetDouble(), mRoverConfig["pt_cloud"]]["pt_cloud_height"].GetDouble());
         cloudArea = cloud_res.area();
         #else
-        cloudArea = mRoverConfig["pt_cloud"]]["pt_cloud_width"].GetDouble()*mRoverConfig["pt_cloud"]]["pt_cloud_height"].GetDouble();
+        cloudArea = mRoverConfig["pt_cloud"]]["pt_cloud_width"].GetInt()*mRoverConfig["pt_cloud"]]["pt_cloud_height"].GetInt();
         std::cerr << cloudArea<< endl;
         #endif
 

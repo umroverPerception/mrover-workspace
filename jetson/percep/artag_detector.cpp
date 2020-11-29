@@ -1,4 +1,5 @@
 #include "perception.hpp"
+#include "artag_detector.hpp"
 
 static Mat HSV;
 static Mat DEPTH;
@@ -15,7 +16,21 @@ void onMouse(int event, int x, int y, int flags, void *userdata) {
     }
 }
 
-TagDetector::TagDetector() {  //initializes detector object with pre-generated dictionary of tags
+TagDetector::TagDetector()  { //initializes detector object with pre-generated dictionary of tags
+
+    ifstream configFile;
+    std::string configPath = getenv("MROVER_CONFIG");
+    configPath += "/config_percep/config.json";
+    configFile.open( configPath );
+    std::string config = "";
+    std::string setting;
+    while( configFile >> setting )
+    {
+        config += setting;
+    }
+    configFile.close();
+    mRoverConfig.Parse( config.c_str() );
+    
 
     cv::FileStorage fsr("jetson/percep/alvar_dict.yml", cv::FileStorage::READ);
     if (!fsr.isOpened()) {  //throw error if dictionary file does not exist
@@ -126,5 +141,7 @@ cv::aruco::drawDetectedMarkers(rgb, corners, ids);
 }
 
 double TagDetector::getAngle(float xPixel, float wPixel){
+    double fieldofView=mRoverConfig["zed_specs"]["fieldOfView"].GetDouble();
+    double PI=mRoverConfig["pi"].GetDouble();
     return atan((xPixel - wPixel/2)/(wPixel/2)* tan(fieldofView/2))* 180.0 /PI;
 }

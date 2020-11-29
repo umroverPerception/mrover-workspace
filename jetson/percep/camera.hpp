@@ -1,6 +1,7 @@
 #pragma once
 #include <opencv2/opencv.hpp>
 #include "perception.hpp"
+#include "rapidjson/document.h"
 
 //#include "artag_detector.hpp"
 
@@ -41,5 +42,8 @@ public:
 	void disk_record_init();
 	void write_curr_frame_to_disk(cv::Mat rgb, cv::Mat depth, int counter);
 
+	//reference to config file
+	const rapidjson::Document mRoverConfig;
+	
 };
 

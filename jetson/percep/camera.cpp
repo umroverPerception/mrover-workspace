@@ -106,6 +106,8 @@ Camera::Impl::~Impl() {
 	this->zed_.close();
 }
 
+
+
 #if OBSTACLE_DETECTION
 void Camera::Impl::dataCloud(pcl::PointCloud<pcl::PointXYZRGB>::Ptr & p_pcl_point_cloud) {
   //Might need an overloaded assignment operator
@@ -316,7 +318,7 @@ cv::Mat Camera::Impl::depth() {
 void Camera::record_ar_init() {
   //initializing ar tag videostream object
   std::pair<Tag, Tag> tp;
-  TagDetector d1;
+  TagDetector d1();
 
   Mat depth_img = depth();
   Mat rgb;
@@ -374,8 +376,20 @@ void Camera::Impl::writeDataCloud(int j){
 
 #endif
 
-Camera::Camera() : impl_{new Camera::Impl}, rgb_foldername{""},
-                   depth_foldername{""} {}
+Camera::Camera() :impl_{new Camera::Impl}, rgb_foldername{""},
+                   depth_foldername{""} {
+    ifstream configFile;
+    std::string configPath = getenv("MROVER_CONFIG");
+    configPath += "/config_percep/config.json";
+    configFile.open( configPath );
+    std::string config = "";
+    std::string setting;
+    while( configFile >> setting )
+    {
+        config += setting;
+    }
+    configFile.close();
+    mRoverConfig.Parse( config.c_str() );}
 
 Camera::~Camera() {
 	delete this->impl_;
@@ -417,6 +431,7 @@ void Camera::disk_record_init() {
 
 //writes the Mat to a file
 void Camera::write_curr_frame_to_disk(cv::Mat rgb, cv::Mat depth, int counter){
+    int FRAME_WRITE_INTERVAL=mRoverConfig["frame_write_interval"].GetInt();
     string fileName = to_string(counter / FRAME_WRITE_INTERVAL);
     while(fileName.length() < 4){
       fileName = '0'+fileName;

@@ -14,6 +14,7 @@
 #include <string>
 #include <chrono>
 #include <thread>
+#include "rapidjson/document.h"
 
 #if OBSTACLE_DETECTION
 /* --- PCL Includes --- */
@@ -125,6 +126,9 @@ class obstacle_return {
 };
 
 
+
+//declare config file
+const rapidjson::Document mRoverConfig;
 
 //ar tag detector class
 #include "artag_detector.hpp"
