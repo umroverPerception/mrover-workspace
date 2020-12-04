@@ -28,7 +28,16 @@ public:
 	
 
 	#if OBSTACLE_DETECTION
-	void getDataCloud(pcl::PointCloud<pcl::PointXYZRGB>::Ptr &p_pcl_point_cloud);
+	//void getDataCloud(pcl::PointCloud<pcl::PointXYZRGB>::Ptr &p_pcl_point_cloud);
+	template <typename PointInT> 
+	void getDataCloud(PointInT &p_pcl_point_cloud);
+	#endif
+
+	#if WRITE_CURR_FRAME_TO_DISK && AR_DETECTION && OBSTACLE_DETECTION
+	void disk_record_init();
+	template <typename PointInT>
+	void write_curr_frame_to_disk(cv::Mat rgb, cv::Mat depth, PointInT &p_pcl_point_cloud, int counter);
+	//void write_curr_frame_to_disk(cv::Mat rgb, cv::Mat depth, pcl::PointCloud<pcl::PointXYZRGB>::Ptr &p_pcl_point_cloud, int counter);
 	#endif
 
 	#if WRITE_CURR_FRAME_TO_DISK && AR_DETECTION && OBSTACLE_DETECTION

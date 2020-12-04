@@ -1,6 +1,8 @@
 #include "camera.hpp"
 #include "perception.hpp"
 
+//PointInT
+
 #if OBSTACLE_DETECTION
   #include <pcl/common/common_headers.h>
 #endif
@@ -28,7 +30,7 @@ public:
 	cv::Mat depth();
 
   #if OBSTACLE_DETECTION
-  void dataCloud(pcl::PointCloud<pcl::PointXYZRGB>::Ptr &p_pcl_point_cloud);
+  template <typename PointInT> void dataCloud(PointInT &p_pcl_point_cloud)
   #endif
   
   
@@ -153,8 +155,8 @@ public:
   #endif
 
   #if OBSTACLE_DETECTION
-  void dataCloud(pcl::PointCloud<pcl::PointXYZRGB>::Ptr &p_pcl_point_cloud);
-  void pcl_write(const cv::String &filename, pcl::PointCloud<pcl::PointXYZRGB>::Ptr &p_pcl_point_cloud);
+  template <typename PointInT> void dataCloud(PointInT &p_pcl_point_cloud);
+  template <typename PointInT> void pcl_write(const cv::String &filename, PointInT &p_pcl_point_cloud);
 
   #endif
 
@@ -350,7 +352,7 @@ void Camera::record_ar_finish() {
 
 //Reads the point data cloud p_pcl_point_cloud
 #if OBSTACLE_DETECTION
-void Camera::Impl::dataCloud(pcl::PointCloud<pcl::PointXYZRGB>::Ptr &p_pcl_point_cloud){
+template <typename PointInT> void dataCloud(PointInT &p_pcl_point_cloud){
  
  //Read in image names
  std::string pcd_name = pcd_names[idx_curr_pcd_img];
@@ -386,6 +388,7 @@ cv::Mat Camera::depth() {
 #endif
 
 #if OBSTACLE_DETECTION
+template <typename PointInT>
 void Camera::getDataCloud(pcl::PointCloud<pcl::PointXYZRGB>::Ptr &p_pcl_point_cloud) {
   this->impl_->dataCloud(p_pcl_point_cloud);
 }
@@ -412,18 +415,18 @@ void Camera::disk_record_init() {
 
 //writes the Mat to a file
 
+
 //Writes point cloud data to data folder specified in build tag 
-void pcl_write(const cv::String &filename, pcl::PointCloud<pcl::PointXYZRGB>::Ptr &p_pcl_point_cloud){
+template <typename PointInT> 
+void pcl_write(const cv::String &filename, PointInT &p_pcl_point_cloud)
+{
   std::cout << "name of path is: " << filename << endl;
   try{ pcl::io::savePCDFileASCII (filename, *p_pcl_point_cloud); }
   catch (pcl::IOException &e){cerr << e.what();}
 }
 
-void Camera::write_curr_frame_to_disk(cv::Mat rgb, cv::Mat depth, pcl::PointCloud<pcl::PointXYZRGB>::Ptr &p_pcl_point_cloud, int counter){
-    string fileName = to_string(counter / FRAME_WRITE_INTERVAL);
     while(fileName.length() < 4){
       fileName = '0'+fileName;
-    }
 
     pcl_write(pcl_foldername + fileName + std::string(".pcd"), p_pcl_point_cloud);
     cv::imwrite(rgb_foldername +  fileName + std::string(".jpg"), rgb );

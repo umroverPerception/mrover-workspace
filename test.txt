@@ -1,0 +1,15 @@
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 0
+width: 0
+height: 0
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 0
+width: 0
+height: 0
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]

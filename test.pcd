@@ -1,0 +1,266 @@
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 0
+width: 0
+height: 0
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 1
+width: 1
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 0
+width: 0
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 1
+width: 1
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 1
+width: 1
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 1
+width: 1
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 1
+width: 1
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 319
+width: 319
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 261
+width: 261
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 255
+width: 255
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 194
+width: 194
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 1
+width: 1
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 9
+width: 9
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 18
+width: 18
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 4
+width: 4
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 1
+width: 1
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 1
+width: 1
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 1
+width: 1
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 1
+width: 1
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 1
+width: 1
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 1
+width: 1
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 1
+width: 1
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 1
+width: 1
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 1
+width: 1
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 0
+width: 0
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 1
+width: 1
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 14
+width: 14
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 1
+width: 1
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 1
+width: 1
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 0
+width: 0
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 1
+width: 1
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 4
+width: 4
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 1
+width: 1
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 1
+width: 1
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 1
+width: 1
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 1
+width: 1
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 1
+width: 1
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]
+header: seq: 0 stamp: 0 frame_id: 
+
+points[]: 1
+width: 1
+height: 1
+is_dense: 1
+sensor origin (xyz): [0, 0, 0] / orientation (xyzw): [0, 0, 0, 1]

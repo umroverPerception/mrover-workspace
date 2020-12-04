@@ -1,0 +1,2092 @@
+[33mcommit 7ba85663e30a65e8e8df80a4db62f104260a773e[m[33m ([m[1;36mHEAD -> [m[1;32mpcl_write[m[33m, [m[1;31mperception/pcl_write[m[33m)[m
+Author: arschall <arschall@umich.edu>
+Date:   Thu Nov 12 19:50:35 2020 -0500
+
+    Final changes made, code cleaned up and functional
+
+[33mcommit 0c08b28fb37d571e5552713d65a59c29518f3ca9[m
+Author: arschall <arschall@umich.edu>
+Date:   Wed Nov 11 18:50:13 2020 -0500
+
+    Fixed compiling errors
+
+[33mcommit fff9b89e1a3dd5f8830280401f191cd23299187a[m
+Author: vidyasilai <vsilai@umich.edu>
+Date:   Wed Nov 11 18:38:51 2020 -0500
+
+    cleaned up files
+
+[33mcommit a55a848789d1da1fb24763413d0f2e3adf3f2de8[m
+Author: mmartin4972 <mmartin4972@gmail.com>
+Date:   Thu Oct 15 20:20:00 2020 -0400
+
+    [percep] Added point cloud write to file capabilities resolves #469
+
+[33mcommit 84ea85a3b2ce06c1ed3d832754ce025a3b43f86a[m
+Author: Ashwin Gupta <ashwingupta2000@gmail.com>
+Date:   Sun Nov 8 00:57:32 2020 -0500
+
+    [percep] organized AR tag record (#472)
+    
+    * organized AR tag record
+    
+    * fixed typo
+    
+    * fixed compilation bug in ar-record
+
+[33mcommit 157835955800f8eb2da49255f38198c5ef7be993[m
+Author: mmartin4972 <49988239+mmartin4972@users.noreply.github.com>
+Date:   Sun Nov 1 12:16:44 2020 -0500
+
+    [percep] created FP filter and made code look beautiful resolves #419 (#467)
+    
+    * [percep] added frame saving functions to camera class resolves #433 #434
+    
+    * [percep] made minor changes
+    
+    * [percep] created FP filter and made code look beautiful resolves #419
+    
+    Co-authored-by: JayeshM <jayeshsmate@gmail.com>
+
+[33mcommit 7c687e795b5b5d348ba96190eb07706120cf06c8[m
+Author: JayeshM29 <71610772+JayeshM29@users.noreply.github.com>
+Date:   Sat Oct 31 21:36:37 2020 -0400
+
+    [percep] added frame saving functions to camera class resolves #433 #434 (#466)
+    
+    * [percep] added frame saving functions to camera class resolves #433 #434
+    
+    * [percep] made minor changes
+    
+    Co-authored-by: mmartin4972 <mmartin4972@gmail.com>
+
+[33mcommit 2e218648ba60c6c96d43f104ede945ef9fc85c9c[m
+Author: Nikhil Sridhar <nik.sridhar@gmail.com>
+Date:   Thu Oct 29 19:14:13 2020 -0400
+
+    Pcl restructure (#463)
+    
+    * [percep] Added point cloud read and tested image read resolves #403 #418 (#432)
+    
+    * [percep] Created class structure for pcl obstacle detection resolves #353
+    
+    Co-authored-by: mmartin4972 <49988239+mmartin4972@users.noreply.github.com>
+    Co-authored-by: niksrid <niksrid@umich.edu>
+
+[33mcommit dd16a57d66448184544aabbf8f6a4be2b0d46c26[m[33m ([m[1;31mupstream/percep-main[m[33m, [m[1;31mperception/pcl_restructure[m[33m, [m[1;31mperception/moving_average[m[33m, [m[1;31mperception/gpu[m[33m, [m[1;32mtest[m[33m, [m[1;32mmain[m[33m)[m
+Author: mmartin4972 <49988239+mmartin4972@users.noreply.github.com>
+Date:   Sun Oct 11 13:23:29 2020 -0400
+
+    [percep] Added point cloud read and tested image read resolves #403 #418 (#432)
+
+[33mcommit d2cd880e3d8d8fdbb55f5ba8f13d0726cc15e10d[m
+Merge: 27a74e06 b6643d96
+Author: mmartin4972 <49988239+mmartin4972@users.noreply.github.com>
+Date:   Wed Sep 30 12:07:59 2020 -0400
+
+    Merge pull request #407 from mmartin4972/master
+    
+    Perception added initial point cloud implementation
+
+[33mcommit b6643d9642c0d096268d8f4b80c33fe7d15c6da1[m
+Author: mmartin4972 <mmartin4972@gmail.com>
+Date:   Mon Sep 28 00:53:01 2020 -0400
+
+    Perception added initial point cloud implementation
+
+[33mcommit 27a74e060c168d5d9da68f8da1b0678532c5c6f4[m
+Merge: 9dfed2c6 baf1ea73
+Author: mmartin4972 <49988239+mmartin4972@users.noreply.github.com>
+Date:   Sat Sep 26 23:18:55 2020 -0400
+
+    Merge pull request #335 from mmartin4972/PR
+    
+    ZED SDK 3.0 Refactor
+
+[33mcommit baf1ea73097b935168ab87b20ac05749f1fa28f0[m
+Author: Matt <mmartin4972@gmail.com>
+Date:   Mon Aug 31 22:30:07 2020 -0400
+
+    Perception refactored for ZED SDK 3.0 and removed obsolete tennis ball detection program
+
+[33mcommit 33094b2a5aee18440c301218e8f86cfc1fecf1c2[m
+Author: Matt <mmartin4972@gmail.com>
+Date:   Mon Aug 31 21:08:59 2020 -0400
+
+    Perception added video and obstacle recording and obstacle debugging features
+
+[33mcommit c183c73e1a68d59769a6241351543b827812a8e8[m[33m ([m[1;31mupstream/sysadmin-main[m[33m, [m[1;31mupstream/main[m[33m, [m[1;31mperception/main[m[33m)[m
+Merge: 583e600c d87f59a2
+Author: raytitan <43522375+raytitan@users.noreply.github.com>
+Date:   Tue Sep 22 10:03:09 2020 -0400
+
+    Merge pull request #381 from amverni/name-change
+    
+    Rename onboard directory to jetson
+
+[33mcommit d87f59a247a3b27508161c647ad71b82926f3781[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Mon Sep 21 16:09:01 2020 -0400
+
+    Rename pip_deps file
+
+[33mcommit a3f7761779a89bb9ffbd5c2a6f398f374fb1875b[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Mon Sep 21 15:34:14 2020 -0400
+
+    Migrate to jetson naming scheme from onboard
+
+[33mcommit bf43303f5c0d4df0632092a4b631d40e97067194[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Sun Sep 20 15:44:18 2020 -0400
+
+    Rename onboard directory to jetson
+    
+    resolves #380
+
+[33mcommit 583e600c54870fc6c2d951cb767d28913521d065[m
+Merge: 9dfed2c6 91e83170
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Wed Sep 9 20:05:08 2020 -0400
+
+    Merge pull request #317 from amverni/new_sim
+    
+    [nav] Refactor navigation simulator
+
+[33mcommit 91e8317009fe453ec92cf02f2619b9ce4a49a63e[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Fri Jun 5 22:14:17 2020 -0400
+
+    [nav] Refactor navigation simulator
+    
+    resolves #308
+    
+    Refactor navigation simulator to use Vue and TypeScript.
+    This refactor is indented to make the simulator easier to maintain,
+    make it easier to add new features, and move towards using
+    technologies that are more commonly used in industry.
+    
+    We are keeping around the old version of the simulator
+    temporarily in case the refactored version has any major
+    problems. This should be deleted when the correctness of the
+    refactored version is confirmed.
+
+[33mcommit 9dfed2c66e2ad1a170f9f44220fce81c8f74321c[m[33m ([m[1;31mupstream/esw-main[m[33m, [m[1;31mAndrew1/percep-main[m[33m, [m[1;31mAndrew1/loc-main[m[33m, [m[1;31mAndrew1/esw-main[m[33m)[m
+Merge: ae95d997 5cfa1f3e
+Author: raytitan <43522375+raytitan@users.noreply.github.com>
+Date:   Sat May 16 13:25:26 2020 -0700
+
+    Merge pull request #307 from umrover/dependabot/npm_and_yarn/base_station/gui/acorn-5.7.4
+    
+    Bump acorn from 5.7.1 to 5.7.4 in /base_station/gui
+
+[33mcommit ae95d997ccf2351b94437d48eb10bd8bc169c961[m
+Merge: 238f4fbd 759c9511
+Author: raytitan <43522375+raytitan@users.noreply.github.com>
+Date:   Sat May 16 13:25:07 2020 -0700
+
+    Merge pull request #306 from umrover/dependabot/npm_and_yarn/simulators/nav/minimist-1.2.5
+    
+    Bump minimist from 1.2.0 to 1.2.5 in /simulators/nav
+
+[33mcommit 238f4fbd9c3d70b8545d3036c25f027d4805d463[m
+Merge: 923dcc88 06dbc140
+Author: raytitan <43522375+raytitan@users.noreply.github.com>
+Date:   Sat May 16 13:24:42 2020 -0700
+
+    Merge pull request #305 from umrover/dependabot/npm_and_yarn/simulators/nav/acorn-5.7.4
+    
+    Bump acorn from 5.5.0 to 5.7.4 in /simulators/nav
+
+[33mcommit 5cfa1f3e9f9d261d1ed1fd348552ebefa60695b9[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Sun Apr 5 21:20:41 2020 +0000
+
+    Bump acorn from 5.7.1 to 5.7.4 in /base_station/gui
+    
+    Bumps [acorn](https://github.com/acornjs/acorn) from 5.7.1 to 5.7.4.
+    - [Release notes](https://github.com/acornjs/acorn/releases)
+    - [Commits](https://github.com/acornjs/acorn/compare/5.7.1...5.7.4)
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit 759c95113726972a76611e17d51c1392dc929cdc[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Mon Mar 16 20:04:00 2020 +0000
+
+    Bump minimist from 1.2.0 to 1.2.5 in /simulators/nav
+    
+    Bumps [minimist](https://github.com/substack/minimist) from 1.2.0 to 1.2.5.
+    - [Release notes](https://github.com/substack/minimist/releases)
+    - [Commits](https://github.com/substack/minimist/compare/1.2.0...1.2.5)
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit 06dbc14006af89d1f411f6cd55ebe74f31ca52e3[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Mon Mar 16 01:40:15 2020 +0000
+
+    Bump acorn from 5.5.0 to 5.7.4 in /simulators/nav
+    
+    Bumps [acorn](https://github.com/acornjs/acorn) from 5.5.0 to 5.7.4.
+    - [Release notes](https://github.com/acornjs/acorn/releases)
+    - [Commits](https://github.com/acornjs/acorn/compare/5.5.0...5.7.4)
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit 923dcc882ed36c1d98dc1cbffb5ca8f0ea42a81f[m
+Merge: e8a117d8 c142a9ec
+Author: calebhar12 <43727519+calebhar12@users.noreply.github.com>
+Date:   Mon Feb 24 17:30:35 2020 -0500
+
+    Merge pull request #302 from y2kmurali/master
+    
+    [cv] update LCM distance field if obstacle is detected
+
+[33mcommit c142a9ec4aa872c8f26bbba73ca70d691aeaaf61[m
+Author: Murali Mohan <y2kmurali@gmail.com>
+Date:   Mon Feb 24 13:32:26 2020 -0500
+
+    [cv] update LCM distance field if obstacle is detected
+
+[33mcommit e8a117d8f6dfa2255fd68eca806e0121292ebb6f[m
+Merge: 29ae6fd4 fe5f4c08
+Author: aswarner <43736653+aswarner@users.noreply.github.com>
+Date:   Fri Feb 21 15:27:17 2020 -0500
+
+    Merge pull request #301 from amverni/nav
+    
+    [nav] SAR critical components
+
+[33mcommit fe5f4c08d651590069fd9f8e76a316d3a2677112[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Fri Feb 21 12:43:07 2020 -0500
+
+    [nav] Implement GateShimmy state
+    
+    This implementation assumes that we initially see both posts
+    of the gate from the center point and that we don't lose the
+    posts while in this state. This assumption will likely need
+    to be revisited in the future.
+
+[33mcommit 8253ee1896f823ddc3f9030ae9476e70ec8208bc[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Fri Feb 21 12:38:42 2020 -0500
+
+    [nav] bug fixes in using relative bearings instead of absolute
+
+[33mcommit ab257eb1048e4a5902af3b6a164319bf24afd3c7[m
+Merge: 5743742b 29ae6fd4
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Thu Feb 20 10:37:13 2020 -0500
+
+    Merge remote-tracking branch 'upstream/master' into nav
+
+[33mcommit 5743742b11b7da8a3bd937ef11d361e2839766a7[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Wed Feb 19 21:58:11 2020 -0500
+
+    [nav] implement remained of gate state machine
+    
+    This does not include GateShimmy
+
+[33mcommit 089ba10c18c439f42dfdc031ccf0b89d1be47aaf[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Wed Feb 19 21:03:38 2020 -0500
+
+    [nav] Implement search for gate post 2
+
+[33mcommit 0ae3f1c6cca68c7d4a13bdd074164d03df59875a[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Wed Feb 19 14:08:29 2020 -0500
+
+    [nav] Implement GateSpin and GateSpinWait
+
+[33mcommit 29ae6fd4489eec58fcaa56485a56667f228dc533[m
+Merge: b20cc3b2 5de3ddd2
+Author: jubeemer <32436541+jubeemer@users.noreply.github.com>
+Date:   Sun Feb 16 17:25:50 2020 -0500
+
+    Merge pull request #297 from acfang/controls
+    
+    [teleop] added SA end effector controls, updated gimbal controls
+
+[33mcommit 5de3ddd24dee24939928011925d740de86dc1243[m
+Author: acfang <acfang@umich.edu>
+Date:   Sun Feb 16 16:13:22 2020 -0500
+
+    [teleop] added SA end effector controls, updated gimbal controls
+
+[33mcommit b20cc3b208e9c442906efd047d0ac1540d90ac2a[m
+Merge: 9757aff0 7abeda0e
+Author: jubeemer <32436541+jubeemer@users.noreply.github.com>
+Date:   Sat Feb 15 18:32:57 2020 -0500
+
+    Merge pull request #296 from cgiger00/odrive_final
+    
+    [onboard] ODrive Bridge
+
+[33mcommit 9757aff02488150285937a25466303670523ec66[m
+Merge: 8e85aef1 523b2c9e
+Author: jubeemer <32436541+jubeemer@users.noreply.github.com>
+Date:   Sat Feb 15 18:28:26 2020 -0500
+
+    Merge pull request #295 from acfang/controls
+    
+    [teleop] updated ra/sa arm controls
+
+[33mcommit 523b2c9e778b5e5a7459e782e0eb9e4378e61da2[m
+Author: acfang <acfang@umich.edu>
+Date:   Wed Feb 12 13:00:47 2020 -0500
+
+    updated ra/sa arm controls
+    
+    updated PIDConstants.lcm
+    
+    made GimbalControls component
+    
+    removed duplicate gimbal controls code
+
+[33mcommit 7abeda0e65dedde586f661a8439dc4120a08b617[m
+Author: Carmen Giger <cgiger00@gmail.com>
+Date:   Sat Feb 15 16:23:23 2020 -0500
+
+    [onboard] ODrive Bridge
+
+[33mcommit 8e85aef1160ca3e9d9b6c797ac72f059af4288b5[m
+Merge: 504146dc 7ea71afc
+Author: calebhar12 <43727519+calebhar12@users.noreply.github.com>
+Date:   Wed Feb 12 19:41:51 2020 -0500
+
+    Merge pull request #284 from y2kmurali/master
+    
+    [cv] Add missing AR Tags and miscellaneous fixes
+
+[33mcommit 503bf9f00005fe0cf2da577edfccf8176ab01192[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Tue Feb 11 20:28:17 2020 -0500
+
+    [nav-sim] Implement notifying when rover crashes into gate.
+    
+    The gates are still note drawn completely to scale and it is possible
+    to appear to be driving through a gate post when you actually are not.
+    This, along with a more fleshed out logic for crashes will come in a
+    later commit but this functionality was needed now for testing even if the
+    UI was not perfect.
+
+[33mcommit bd6248119a2e63d62be022c605cbba7854f42dba[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Tue Feb 11 10:47:23 2020 -0500
+
+    [nav-sim] Reset rover button will stop sending drop_complete LCMs
+
+[33mcommit 1bf60f2430b0459faf6593304f1082e78130d36c[m
+Author: Elisabeth Garber <elgarber@umich.edu>
+Date:   Sat Feb 8 17:11:52 2020 -0500
+
+    [gui] added ability for auton page to see when repeater is dropped
+
+[33mcommit 9d7280d35b3d7c8f24c5a07601edffb7ebf09c32[m
+Author: Elisabeth Garber <elgarber@umich.edu>
+Date:   Mon Jan 27 20:10:20 2020 -0500
+
+    [Nav] Added logic for radio repeater drops
+    
+    Corrected return statements for executeTurn and executeDrive. Changed path to deque.
+    
+    added safety for if rover turned off during task
+    
+    abstracted radio repeater logic for when to enter repeater state
+    
+    Added labels to NavState class
+    
+    to squash
+    
+    [nav] updates for rr from pull requestion
+
+[33mcommit 504146dccec26c546e690dfef8d339a93f21f639[m
+Merge: 48871836 37e39ff7
+Author: prabid <35053122+prabid@users.noreply.github.com>
+Date:   Mon Feb 10 21:12:21 2020 -0500
+
+    Merge pull request #294 from wolfm/master
+    
+    [teleop] Scripts/component for radio signal strength and setup
+
+[33mcommit 488718366bed2d44a59da09b45c99bc618fdf935[m
+Merge: 5b13e0db eef884f0
+Author: prabid <35053122+prabid@users.noreply.github.com>
+Date:   Mon Feb 10 21:04:06 2020 -0500
+
+    Merge pull request #293 from skorman/master
+    
+    [IK] Created orientation IK; created IK testing suite; created torque…
+
+[33mcommit 5b13e0db366ef450f1d1ab18fa0f684a262828fd[m
+Merge: 609a2e76 fd368e6b
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Sun Feb 9 15:25:55 2020 -0500
+
+    Merge pull request #291 from amverni/sim
+    
+    [nav-sim] Gate/AR tag bug fixes and improvements
+
+[33mcommit 37e39ff76f6f2549aa46dcd3ab70dfbae2d63e1d[m
+Author: Michael Wolf <mjwolf@umich.edu>
+Date:   Sat Jan 25 14:40:39 2020 -0500
+
+    Implemented scripts and component for showing radio signal strength and calling radio setup
+    
+    Updated tcl script for getting data from radio. Created python script to periodically call it
+    
+    Created RadioSignalStrength component to display signal strength
+    
+    Deleted old version of rover_msgs.json at old location
+    
+    Deleted unecessary file rad_msg.txt
+    
+    Updated radio_setup.tct with Andrea's changes
+    
+    Added GUI button for radio setup
+    
+    Deleted unecessary file rad_msg.txt
+    
+    Updated radio_setup.tcl with Andrea's changes
+    
+    Add GUI button for radio setup
+
+[33mcommit eef884f0904af06731d944b12cc8797fa6c6309d[m
+Author: skorman <skorman@umich.edu>
+Date:   Sun Oct 20 14:03:58 2019 -0400
+
+    [IK] Created orientation IK; created IK testing suite; created torque calculation; updated to new arm model; refined collision avoidance model
+    
+    Ready to test orientation IK
+    
+    simulation working, computation not
+    
+    updated algorithm, still not functioning properly
+    
+    changed way we calculate rotation matrix
+    
+    we updated the calculation
+    
+    need to work on proof of concept
+    
+    my amazing message
+    
+    orientation IK POC good enough, not great tolerance.
+    
+    removed one of the fk calculations
+    
+    need changes from poc
+    
+    again
+    
+    sids gonna look at a way to move the ef
+    
+    added fantom joint f
+    
+    Made changes to kinematics tester
+    
+    Made changes to kinematics tester
+    
+    Created quadratic relationship between radius and phi
+    
+    Update kinematics_tester.py
+    
+    Updated kinematics_tester
+    
+    created class
+    
+    kinematics tester working. We fail a lot of the time
+    
+    need more time to test
+    
+    We realize the issue is with the testing suite
+    
+    Testing suite seems to be working with position, not 100% sure
+    
+    Orientation IK is officially extremely feasiblegit add .git add .
+    
+    added boolean functionality for euler angles
+    
+    Testing needs more work but orientation IK is good
+    
+    Added some featurez. Print points and run tests can be toggled. Still need to fix update bug.
+    
+    changed the testing suite to be a half sphere
+    
+    Modified the testing suite to be more realistic
+    
+    made small syle changes
+    
+    going to start working on using yaw pitch and roll for testing suite
+    
+    added conversion from yaw pitch and roll to rotation matrix
+    
+    conversion from yaw pitch and roll directly to euler angles
+    
+    created configuration tester. Will run overnight
+    
+    testing configuration space
+    
+    Be careful, removed safeties on IK algorithm
+    
+    valid configs 2
+    
+    Added time functionality to kinematics_tester
+    
+    running different tests for the spreadsheet
+    
+    testing IK with different parameters
+    
+    Created torque calculator
+    
+    Added mass dictionary as global variable to mrover_arm
+    
+    updated json
+    
+    Code for torques fully implemented, needs testing
+    
+    pride bot
+    
+    debugging some torque changes
+    
+    changed some commenting
+    
+    Changed CAD files to match new arm, added coloring
+    
+    Added joint world positions
+    
+    matched visual model with CAD model
+    
+    added center of mass xyz
+    
+    changed configuration test
+    
+    adding collision avoidance
+    
+    New stl file from michael, still need to change rotation axes but should be pretty good now
+    
+    all the rotational axes are correct now
+    
+    finished inputting collision data
+    
+    changed json to match end effector position
+    
+    Added some link functions
+    
+    changed kinematics
+    
+    changing collision avoidance system
+    
+    changed JSON format
+    
+    completed getting all part transforms for collision avoidance
+    
+    deez nuts - sid
+    
+    added safety data
+    
+    got IK working for new arm, can begin to run orientation tests soon
+    
+    doing IK tests with new arm
+    
+    new configuration space
+    
+    about to merge
+    
+    added toggle for orientation
+
+[33mcommit fd368e6be19bb36d593324dd29f19517330a4bcb[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Sat Feb 8 21:52:58 2020 -0500
+
+    [nav-sim] Allow simulator to see up to two ar tags at once
+
+[33mcommit 609a2e76499407849c33e42423d3cf4239cbcdbb[m
+Merge: 049b71bd ab3dd879
+Author: raytitan <43522375+raytitan@users.noreply.github.com>
+Date:   Sun Feb 9 12:55:27 2020 -0500
+
+    Merge pull request #286 from jubeemer/mosfets
+    
+    [beaglebone] refactored mosfet program
+
+[33mcommit 7ea71afc855514971f57b597bdd8a4d07ee88a51[m
+Author: Murali Mohan <y2kmurali@gmail.com>
+Date:   Fri Feb 7 19:58:56 2020 -0500
+
+    Add missing AR Tags and miscellaneous fixes
+
+[33mcommit 049b71bdb51c3ac306fad7d17a14521b04fd0ab6[m
+Merge: 7586d3d1 0a441f4b
+Author: raytitan <43522375+raytitan@users.noreply.github.com>
+Date:   Sun Feb 9 12:11:46 2020 -0500
+
+    Merge pull request #289 from jjtom34/driving
+    
+    Refactored Teleop/HWI drive LCM interface
+
+[33mcommit 32c47df6662c31b18a4e886c101b695a28892286[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Sat Feb 8 19:53:41 2020 -0500
+
+    [nav] Add gate width to waypoints
+    
+    For waypoints that have a gate at them, the gate width will
+    specify the size of the associated gate.
+
+[33mcommit 865b7fc4e9df8a155e14d8cc4404f1edb202cbca[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Sat Feb 8 17:02:22 2020 -0500
+
+    [nav-sim] Fix bug with not sending tag ids.
+
+[33mcommit 1b0780c19cc230a05947ab8483159f638c2507e1[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Sat Feb 8 16:11:31 2020 -0500
+
+    [nav-sim] Fix gate visual
+    
+    Flip left and right and fix bug where certain angles caused misdrawn
+    gate direction arrows.
+
+[33mcommit 0a441f4bdcec8bddcae23473b39f242fb6cac152[m
+Author: Philip Rabideau <prabid@umich.edu>
+Date:   Sat Feb 8 16:32:26 2020 -0500
+
+    [teleop] Changed /motor to /drive_vel_cmd
+
+[33mcommit 858094702cb19461c08ed9bceeee8397b5305d0f[m
+Author: jjtom <jjtom@umich.edu>
+Date:   Sat Feb 8 16:27:24 2020 -0500
+
+    Reformated drive vel lcm to spec
+
+[33mcommit ab3dd87917f910ea045f86cf61d984b786a153ae[m
+Author: Justin Beemer <jubeemer@umich.edu>
+Date:   Fri Feb 7 22:16:12 2020 -0500
+
+    [beaglebone] refactored mosfet program
+
+[33mcommit 7586d3d1ebacc33fe3777fd201415d53020cb2d0[m
+Merge: 417b7332 c0918cad
+Author: jubeemer <32436541+jubeemer@users.noreply.github.com>
+Date:   Fri Feb 7 21:50:00 2020 -0500
+
+    Merge pull request #283 from jubeemer/jarvispip
+    
+    [jarvis] Added option to exclude Jetson pip dependencies
+
+[33mcommit 417b7332015a15ec9c1a8885ffa01b20a741de4d[m
+Merge: 29f954b8 b4859d8c
+Author: jubeemer <32436541+jubeemer@users.noreply.github.com>
+Date:   Fri Feb 7 21:22:46 2020 -0500
+
+    Merge pull request #282 from umrover/ubuntu18
+    
+    Development Environment Support for Ubuntu 18.04
+
+[33mcommit 29f954b8b17cabb28fbf405938197132cc5513c4[m
+Merge: 936212b5 750d2a78
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Fri Feb 7 19:03:28 2020 -0500
+
+    Merge pull request #281 from amverni/sim
+    
+    [nav] Clean up nav components and improve simulator.
+
+[33mcommit b4859d8c20e0f9e41fb1709f17b95b81e074e539[m
+Author: Justin Beemer <jubeemer@umich.edu>
+Date:   Fri Feb 7 16:34:28 2020 -0500
+
+    [ansible] fortran compiler to build scipy
+
+[33mcommit c0918cad927c742adf554ea48c72efbebb360274[m
+Author: Justin Beemer <jubeemer@umich.edu>
+Date:   Fri Feb 7 14:27:37 2020 -0500
+
+    [jarvis] Added option to exclude Jetson pip dependencies
+
+[33mcommit 4c14fb4e59946179610939213f4a604b49ec05d0[m
+Author: Justin Beemer <jubeemer@umich.edu>
+Date:   Thu Feb 6 21:37:56 2020 -0500
+
+    Updated ansible scripts to address deprecation warnings
+
+[33mcommit 4daaac1aad27c8e0e9350bb96f5af785ccbc645a[m
+Author: Justin Beemer <jubeemer@umich.edu>
+Date:   Thu Feb 6 20:40:50 2020 -0500
+
+    Added missing dependencies for pip requirements
+
+[33mcommit 37c4daab1f119250de231fb9b6d9d40c5a15f54f[m
+Author: Justin Beemer <jubeemer@umich.edu>
+Date:   Thu Feb 6 18:41:29 2020 -0500
+
+    Upped development environment support to Ubuntu 18.04
+
+[33mcommit 750d2a787a37d2fb246b16c61261e0e6a51bdf4a[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Wed Feb 5 16:45:52 2020 -0500
+
+    [gui] Fix buttons to convert between DMS formats
+    
+    Buttons to switch between degree, degree-minute, and
+    degree-minute-seconds for entire Auton GUI page.
+
+[33mcommit ec6b72e3fcc7a5fe2f81309ce7637f0fa5f73dcb[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Tue Feb 4 15:53:33 2020 -0500
+
+    [gui] Add IDs to Waypoints in Course LCM
+    
+    These IDs are necessary for CIRC competition.
+
+[33mcommit 172a86dff6e88faad69b990297eea6719b3041a1[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Tue Feb 4 15:18:04 2020 -0500
+
+    [gui] Fix uninitialized variables in Course
+
+[33mcommit bf0e2a3016da4ee2c2db4f42900e6b95b04b815d[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Tue Feb 4 13:19:16 2020 -0500
+
+    [nav] Remove unused member variable mObstacleAvoidancePoint
+    
+    This variable has moved to the obstacle avoidance state
+    machine so I am removing it to avoid any future bugs
+    with using the wrong variable.
+
+[33mcommit c367149a56450b26de41bb93859cdc0e6dd9db37[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Tue Feb 4 13:12:42 2020 -0500
+
+    [nav] Clean up NavStatus LCM
+    
+    Remove nav_state because it was no longer used and
+    no longer kept up to date.
+    
+    Remove missed_wps because it was no longer used.
+    
+    Remove found_tbs and total_tbs because it is not
+    necessary anymore given the new autonomy task and
+    it was being improperly used.
+
+[33mcommit 0f2a2a227fbd5deba0b4dbbe56bcf534ee7eb681[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Tue Feb 4 13:07:49 2020 -0500
+
+    [nav-sim] fix uninitialized values in LCMs
+    
+    Adds missing id field to Target object in TargetList LCM.
+    
+    Adds missing speed field in Odometry object in Waypoint object
+    in Course LCM.
+
+[33mcommit f26ddcae23866cbee3a62fd1e2835551b1c3c628[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Tue Feb 4 00:10:32 2020 -0500
+
+    [nav-sim] Fix bug with sending single seen target in second position of TargetList
+
+[33mcommit e7096e8d6a6a47bc7bda72dcaa1881207d1d1bbb[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Mon Feb 3 23:33:35 2020 -0500
+
+    [nav-sim] add id's to waypoints for circ testing
+
+[33mcommit fe1715815af34e291d8a925a1ae090d94db428b7[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Mon Feb 3 18:45:51 2020 -0500
+
+    [nav-sim] Make rover visibility a circle sector instead of triangle
+
+[33mcommit 16ef76d87567e97851f8331e228b6159512cfd44[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Mon Feb 3 16:16:34 2020 -0500
+
+    [nav-sim] Add field of view debug tools
+
+[33mcommit 936212b5f19abf1a1a586751f659a76f561aa121[m
+Merge: 91c188a7 4e587970
+Author: prabid <35053122+prabid@users.noreply.github.com>
+Date:   Tue Feb 4 19:52:50 2020 -0500
+
+    Merge pull request #280 from nratan3/master
+    
+    [teleop] Added input box to input end effector target position and an…
+
+[33mcommit 4e5879701e859157facdc56796baa5852f47bf7b[m
+Author: nratan3 <nratan@umich.edu>
+Date:   Tue Feb 4 19:21:22 2020 -0500
+
+    [teleop] Added input box to input end effector target position and angles and removed lines which interfered with display of position
+
+[33mcommit 91c188a7d3dc66f87cdb614d6c6a50e81eaf6f7e[m
+Merge: 25ee3711 81ae740d
+Author: David Smith <dleroys@umich.edu>
+Date:   Mon Feb 3 19:17:44 2020 -0500
+
+    Merge pull request #279 from jubeemer/cleanup
+    
+    Remove outdated onboard programs
+
+[33mcommit 25ee371145a5c6be5f79038a28656801d20d2afe[m
+Merge: 4154e296 171dd491
+Author: jubeemer <32436541+jubeemer@users.noreply.github.com>
+Date:   Sun Feb 2 14:34:54 2020 -0500
+
+    Merge pull request #278 from DavidSmith166/flake-8
+    
+    [Jarvis] Changed python linter maxumim line length to 120 characters
+
+[33mcommit 81ae740d21557b31e0d554c9bfbe68e2b32e9a21[m
+Author: Justin Beemer <jubeemer@umich.edu>
+Date:   Sun Feb 2 14:23:54 2020 -0500
+
+    [onboard] Deleted old Auton LED program
+
+[33mcommit dd2fc5de5c4df2cb158a858f58b1759193761f30[m
+Author: Justin Beemer <jubeemer@umich.edu>
+Date:   Sun Feb 2 14:22:51 2020 -0500
+
+    [onboard] Deleted old IMU program
+
+[33mcommit 218eae68105c0c6893c44073531c0eee1b147e88[m
+Author: Justin Beemer <jubeemer@umich.edu>
+Date:   Sun Feb 2 14:18:56 2020 -0500
+
+    [onboard] Deleted old GPS program
+
+[33mcommit 171dd491e899cb96f8e566b401f34ccdd06175d0[m
+Author: david <dleroys@umich.edu>
+Date:   Sun Feb 2 14:03:22 2020 -0500
+
+    [Jarvis] Changed python linter maxumim line length to 120 characters
+
+[33mcommit 4154e296a498f7444f725389be574f2abea97b10[m
+Merge: b0bf9c24 c7c93e3a
+Author: elgarber <34079527+elgarber@users.noreply.github.com>
+Date:   Sat Feb 1 16:32:36 2020 -0500
+
+    Merge pull request #276 from amverni/rr
+    
+    [nav-sim] Simulator Updates
+
+[33mcommit b0bf9c2486df8abe303392fdbf03eb973e35ce1b[m
+Merge: bdc6926a 75f436db
+Author: jubeemer <32436541+jubeemer@users.noreply.github.com>
+Date:   Thu Jan 30 10:34:33 2020 -0500
+
+    Merge pull request #277 from y2kmurali/artag
+    
+    [cv] Integrate AR Tag detection into onboard/cv
+
+[33mcommit 75f436dbddc44ead08872f47d8c5462dcba54850[m
+Author: Murali Mohan <y2kmurali@gmail.com>
+Date:   Sat Jan 18 12:31:59 2020 -0500
+
+    [cv] Integrate AR Tag detection into CV's main
+    
+    Now detects AR Tags and pushes them to LCM
+
+[33mcommit c7c93e3a6b22e7e1f066cd44d4cbd947b96bc6bd[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Wed Jan 29 18:43:23 2020 -0500
+
+    [nav-sim] Add debugging features
+
+[33mcommit acafa8e78cb08144e5957e8841cae1ad386d8a86[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Wed Jan 29 16:27:15 2020 -0500
+
+    [nav-sim] improve gate interface
+    
+    Blue post is always on left
+    Add flip post ID button
+
+[33mcommit ec9c6adaa185d6b5e2733cee29cf968cf051a93a[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Wed Jan 29 14:52:17 2020 -0500
+
+    [nav-sim] Finish ability to simulate radio repeaters
+
+[33mcommit bdc6926a690c5ce913906f63937c5b5ecae9c9b9[m
+Merge: 6beef8e7 3139b629
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Wed Jan 29 18:21:49 2020 -0500
+
+    Merge pull request #274 from amverni/sim
+    
+    [nav-sim] Update navigation simulator for radio repeaters and gate directionality
+
+[33mcommit 6beef8e76cbe6afa3ef98a984c1f5df9d2db69cb[m
+Merge: 9b517870 1b0338f7
+Author: jubeemer <32436541+jubeemer@users.noreply.github.com>
+Date:   Tue Jan 28 22:41:01 2020 -0500
+
+    Merge pull request #275 from umrover/opencv32
+    
+    Added OpenCV 3.2 to travis builds
+
+[33mcommit 1b0338f7ffa417c676b0c885533b123d0d34bb41[m
+Author: Justin Beemer <jubeemer@umich.edu>
+Date:   Mon Jan 27 19:32:07 2020 -0500
+
+    Added install of OpenCV 3.2
+
+[33mcommit 09b518f4ed27feade8575bf3008ab717f21b0024[m
+Author: Justin Beemer <jubeemer@umich.edu>
+Date:   Mon Jan 27 19:31:22 2020 -0500
+
+    [ansible] removed opencv 2.4 from cv_dev script
+
+[33mcommit 3139b6290ce392c3f599d832dcc07b9fae252ae5[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Tue Jan 28 00:01:32 2020 -0500
+
+    [nav-sim] add pause and next debugging buttons
+
+[33mcommit 3515ddddc690b64b9e9de1df0714420f7a7d7db2[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Mon Jan 27 19:57:04 2020 -0500
+
+    [nav-sim] Add radio signal strength to simulator
+
+[33mcommit 17f77d5522c68e90b81a7c429b59e874bc8adf95[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Sun Jan 26 15:28:47 2020 -0500
+
+    [nav-sim] add directionality to gates on simulator
+
+[33mcommit 1568151f557bf110f797bd9b0d9dd6934c44db8e[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Fri Jan 24 14:50:24 2020 -0500
+
+    [nav-sim] Fix gate visibility calculations
+    
+    Also adds logic for one post blocking a post behind it
+    within a single gate
+
+[33mcommit 15fa73cf2ddfd589f41a12878d869b477bd1bb08[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Wed Jan 22 17:19:19 2020 -0500
+
+    [nav-sim] add rover reset button
+    
+    Add button to reset the rover's position without
+    having to fully the page. Does not remove simulator
+    field elements.
+
+[33mcommit 9b517870ae70764e2e10b6fab453ef59deaad51b[m
+Merge: c5784507 3006a40b
+Author: jubeemer <32436541+jubeemer@users.noreply.github.com>
+Date:   Mon Jan 27 13:04:45 2020 -0500
+
+    Merge pull request #273 from jubeemer/master
+    
+    [lcm_tools] added missing dependencies
+
+[33mcommit 3006a40b510fcea03b8d1bdcf6fadea72baaf107[m
+Author: Justin Beemer <jubeemer@umich.edu>
+Date:   Mon Jan 27 12:12:02 2020 -0500
+
+    [lcm_tools] added missing dependencies
+
+[33mcommit c578450765a7cef8e224f0ebe6d89ed74ea55d66[m
+Merge: 298edca8 961e0009
+Author: raytitan <43522375+raytitan@users.noreply.github.com>
+Date:   Sun Jan 26 18:41:32 2020 -0500
+
+    Merge pull request #272 from Polishdudealan/master
+    
+    [GPS] added GPS program and LCM struct.
+
+[33mcommit 961e0009703a73a72357e0dbf3281e1f3dcc4c34[m
+Author: Polishdudealan <atondryk@umich.edu>
+Date:   Thu Jan 9 21:44:16 2020 -0500
+
+    [GPS] added GPS program and LCM struct.
+
+[33mcommit 298edca88e38d132e666342f974321a81e76336f[m
+Merge: b5b7176d c71c0ae5
+Author: jubeemer <32436541+jubeemer@users.noreply.github.com>
+Date:   Sat Jan 25 16:32:57 2020 -0500
+
+    Merge pull request #268 from raytitan/master
+    
+    [LCM] Reworked LCM Messages between HWI and Teleop
+
+[33mcommit c71c0ae53c52259f3bd509e7703a0d595c97ae4e[m
+Author: raytitan <raytitan@umich.edu>
+Date:   Sun Nov 24 10:50:15 2019 -0500
+
+    [LCM] Reworked LCM messages between HWI and Teleop
+
+[33mcommit b5b7176df035a685dc24c80d678cb589fc735bea[m
+Merge: 1fd89324 b1929ec6
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Wed Jan 22 15:51:27 2020 -0500
+
+    Merge pull request #264 from elgarber/master
+    
+    [Nav] Updated simulator to include gate functionality
+
+[33mcommit b1929ec6a6a2731a8f85ed90156f0c5eaa9a5e80[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Wed Jan 22 15:12:05 2020 -0500
+
+    [nav-sim] increase usability of simulator
+
+[33mcommit 1fd89324895403cece82f5d34a4ed32cfa125eac[m
+Merge: 6382008e d54fa203
+Author: jubeemer <32436541+jubeemer@users.noreply.github.com>
+Date:   Tue Jan 21 16:57:31 2020 -0500
+
+    Merge pull request #267 from amverni/gui
+    
+    [nav-sim] Create auton gui page
+
+[33mcommit 6382008e72387b531d45c36da006ba37c7795432[m
+Merge: cc68282e e56afc6a
+Author: prabid <35053122+prabid@users.noreply.github.com>
+Date:   Tue Jan 21 15:28:39 2020 -0500
+
+    Merge pull request #266 from jjtom34/lcm
+    
+    [ODrive_Bridge] Added LCM messages for Odrive
+
+[33mcommit d54fa203d1c4595da952fffad04254155edfe68d[m
+Author: scsheeha <scsheeha@umich.edu>
+Date:   Sat Nov 2 22:00:22 2019 -0400
+
+    [nav-sim] Create auton gui page
+
+[33mcommit e56afc6abc84491441e5459762c519c24604330a[m
+Author: jjtom <jjtom@umich.edu>
+Date:   Sun Jan 19 15:16:48 2020 -0500
+
+    Added LCM messages for Odrive
+
+[33mcommit cc68282e3d848e81a4f6aa3e9f3a51ba2dea6249[m
+Merge: 449b3a4c eef97a5f
+Author: prabid <35053122+prabid@users.noreply.github.com>
+Date:   Sun Jan 19 10:54:43 2020 -0500
+
+    Merge pull request #265 from nratan3/master
+    
+    [teleop] Added orientation to end effector and end effector target in…
+
+[33mcommit eef97a5f368ed117a539f21f4ae0e5f6935e99f8[m
+Author: nratan3 <nratan@umich.edu>
+Date:   Tue Jan 14 18:41:08 2020 -0500
+
+    [teleop] Added orientation to end effector and end effector target in ik gui
+
+[33mcommit 525e8be1569bfda9b2e7c7b9febe3a1304ab5066[m
+Author: Elisabeth Garber <elgarber@umich.edu>
+Date:   Sun Jan 12 14:00:08 2020 -0500
+
+    [Nav] Updated simulator to include gate functionality
+
+[33mcommit 449b3a4cd728ce4612572636de9dba64eee688b6[m
+Merge: 6543cf60 298292c0
+Author: aswarner <43736653+aswarner@users.noreply.github.com>
+Date:   Thu Jan 9 15:42:52 2020 -0500
+
+    Merge pull request #260 from amverni/master
+    
+    [nav] switch from TennisBall LCM to TargetList
+
+[33mcommit 298292c0f5cc952afc31b74ff2b851603b781f3b[m
+Merge: c39609c7 6543cf60
+Author: aswarner <43736653+aswarner@users.noreply.github.com>
+Date:   Wed Jan 8 19:47:14 2020 -0500
+
+    Merge branch 'master' into master
+
+[33mcommit 6543cf60ada17613f723a4a5c9b2546f292ed9c7[m
+Merge: 59c40f52 c3f31ea7
+Author: prabid <35053122+prabid@users.noreply.github.com>
+Date:   Tue Jan 7 18:39:27 2020 -0500
+
+    Merge pull request #262 from wolfm/master
+    
+    Implemented LCM Send form that populates with fields for msg type
+
+[33mcommit c3f31ea73ee93d26148cc2668b86ff5fdd77b2e7[m
+Author: Michael Jeffrey Wolf <mjwolf@umich.edu>
+Date:   Sun Nov 24 14:42:21 2019 -0500
+
+    Implemented graphial LCM Send form that populates with fields for each message type
+    
+    Populating message type dropdown based on rover_msgs.json
+    
+    Populating window with types, labels, and textboxes corresponding to selected message type
+    
+    Now converting LCMSend inputs to corresponding types
+    
+    Finished implmenting graphical LCM Send page
+
+[33mcommit c39609c779bad0a1b934797770ebe293b3210ea1[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Sun Dec 8 14:59:45 2019 -0500
+
+    [cv] Switch from TennisBall LCM to Target LCM
+
+[33mcommit 0b98d8448eacc65a733fc67ee8425f6e07bc7964[m
+Author: acfang <acfang@umich.edu>
+Date:   Tue Nov 26 22:26:52 2019 -0500
+
+    [teleop] Added comms script for continuously recording signal strength between two radios
+    
+    [teleop] Added comms script for continuously recording signal strength between two radios
+
+[33mcommit 835de9a27e42c8d7ef4d0e5a93a1cfef176e13fc[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Wed Dec 4 21:37:11 2019 -0500
+
+    [nav] fixed driving to waypoint with nearby obstacle
+    
+    Added logic from ar tag and obstacle to waypoint and obstacle.
+    The rover now checks if it can reach the ar tag/waypoint without
+    hitting the obstacle. Only if it can't will it avoid the obstacle.
+
+[33mcommit f7ce7909fc61c8b3c12115ac25b3370b0248ad2c[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Thu Nov 21 20:21:58 2019 +0000
+
+    Bump lodash from 4.17.10 to 4.17.15 in /base_station/gui
+    
+    Bumps [lodash](https://github.com/lodash/lodash) from 4.17.10 to 4.17.15.
+    - [Release notes](https://github.com/lodash/lodash/releases)
+    - [Commits](https://github.com/lodash/lodash/compare/4.17.10...4.17.15)
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit c99ab677296c0fae866085f7baef9be4cebe16de[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Thu Nov 14 23:01:25 2019 +0000
+
+    Bump mixin-deep from 1.3.1 to 1.3.2 in /base_station/gui
+    
+    Bumps [mixin-deep](https://github.com/jonschlinkert/mixin-deep) from 1.3.1 to 1.3.2.
+    - [Release notes](https://github.com/jonschlinkert/mixin-deep/releases)
+    - [Commits](https://github.com/jonschlinkert/mixin-deep/compare/1.3.1...1.3.2)
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit c3cac7ec61a47160e5f368b165b1f5b07d0c4291[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Thu Nov 14 23:00:47 2019 +0000
+
+    Bump lodash from 4.17.5 to 4.17.13 in /simulators/nav
+    
+    Bumps [lodash](https://github.com/lodash/lodash) from 4.17.5 to 4.17.13.
+    - [Release notes](https://github.com/lodash/lodash/releases)
+    - [Commits](https://github.com/lodash/lodash/compare/4.17.5...4.17.13)
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit 145b563af690fe08409780c19b89c1fcb985b3e2[m
+Author: acfang <acfang@umich.edu>
+Date:   Tue Nov 12 19:36:31 2019 -0500
+
+    [teleop] Added comms radio setup script and script to convert all .lcm files into a single .json file.
+    
+    Added radio ip argument, new script for comms
+    
+    Fixed file destination for radio setup script
+    
+    Removed new_script.tcl
+
+[33mcommit 1884d16191bcf725a33d31621230d17a4b331c53[m
+Author: Justin Beemer <jubeemer@umich.edu>
+Date:   Tue Nov 12 18:41:01 2019 -0500
+
+    [jarvis] added odrive dependency
+
+[33mcommit 59c40f5229ef551c7e2d6ff9a5add46c267d1035[m
+Merge: b9d860b9 563ed78c
+Author: prabid <35053122+prabid@users.noreply.github.com>
+Date:   Sun Dec 8 09:03:38 2019 -0500
+
+    Merge pull request #258 from acfang/master
+    
+    [teleop] Added comms script for continuously recording signal strengt…
+
+[33mcommit 4abc3b56b8f1321d88a91f4970137c3cb7bc1058[m
+Author: juslong <juslong@umich.edu>
+Date:   Wed Oct 2 22:17:13 2019 -0400
+
+    [Nav] Switch Auton TennisBall to TargetList LCM
+    
+    Renamed tennisBall to target and created targetList LCM.
+    Fixed a bug in isReachable when the rover detected both an obstacle and a target.
+    Removed isReachable from the Obstacle and Search state machines and made it an utility function.
+
+[33mcommit a3c60375edb9fb94e2631f3165af7a47dff8c293[m
+Author: Elisabeth Garber <elgarber@umich.edu>
+Date:   Wed Oct 9 19:51:53 2019 -0400
+
+    [nav-sim] Updated simulator for TargetList instead of TennisBall
+
+[33mcommit 563ed78c80f81d59e1e93a7f5a675422f0078f85[m
+Author: acfang <acfang@umich.edu>
+Date:   Tue Nov 26 22:26:52 2019 -0500
+
+    [teleop] Added comms script for continuously recording signal strength between two radios
+    
+    [teleop] Added comms script for continuously recording signal strength between two radios
+
+[33mcommit b9d860b911340ebbe3f64b21dbf90a8d99bb2dff[m
+Merge: 7923688b 24a19320
+Author: jubeemer <32436541+jubeemer@users.noreply.github.com>
+Date:   Thu Nov 21 15:46:59 2019 -0500
+
+    Merge pull request #250 from umrover/dependabot/npm_and_yarn/base_station/gui/lodash-4.17.15
+    
+    Bump lodash from 4.17.10 to 4.17.15 in /base_station/gui
+
+[33mcommit 7923688bfba3d5961c99cff08d89c6220d36cb7c[m
+Merge: d7e45f38 67a3b1de
+Author: jubeemer <32436541+jubeemer@users.noreply.github.com>
+Date:   Thu Nov 21 15:31:39 2019 -0500
+
+    Merge pull request #248 from umrover/dependabot/npm_and_yarn/base_station/gui/mixin-deep-1.3.2
+    
+    Bump mixin-deep from 1.3.1 to 1.3.2 in /base_station/gui
+
+[33mcommit 24a19320e15976d2809cbd06b73f2f9866e1dc9a[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Thu Nov 21 20:21:58 2019 +0000
+
+    Bump lodash from 4.17.10 to 4.17.15 in /base_station/gui
+    
+    Bumps [lodash](https://github.com/lodash/lodash) from 4.17.10 to 4.17.15.
+    - [Release notes](https://github.com/lodash/lodash/releases)
+    - [Commits](https://github.com/lodash/lodash/compare/4.17.10...4.17.15)
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit d7e45f3833ba073f41e1003069fea27470ff711a[m
+Merge: 69c3460b 598c3a65
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Thu Nov 21 15:21:21 2019 -0500
+
+    Merge pull request #249 from umrover/dependabot/npm_and_yarn/simulators/nav/lodash-4.17.13
+    
+    Bump lodash from 4.17.5 to 4.17.13 in /simulators/nav
+
+[33mcommit 69c3460b0083ea0e2c6fc348896061baef228023[m
+Merge: fb14ae32 2fa0041f
+Author: prabid <35053122+prabid@users.noreply.github.com>
+Date:   Mon Nov 18 21:11:56 2019 -0500
+
+    Merge pull request #256 from acfang/master
+    
+    [teleop] Added comms radio setup script and script to convert all .lc…
+
+[33mcommit 2fa0041f025bbdc5153c6619c6441acfabc5fbd3[m
+Author: acfang <acfang@umich.edu>
+Date:   Tue Nov 12 19:36:31 2019 -0500
+
+    [teleop] Added comms radio setup script and script to convert all .lcm files into a single .json file.
+    
+    Added radio ip argument, new script for comms
+    
+    Fixed file destination for radio setup script
+    
+    Removed new_script.tcl
+
+[33mcommit fb14ae32fc76e55664e34f2ba12e8cd3e852b921[m
+Merge: 76666b82 3ea8b595
+Author: jubeemer <32436541+jubeemer@users.noreply.github.com>
+Date:   Thu Nov 14 20:40:24 2019 -0500
+
+    Merge pull request #255 from jubeemer/master
+    
+    [jarvis] added odrive dependency
+
+[33mcommit 3ea8b5955f1f7a9d100fac376c291d398ca794e2[m
+Author: Justin Beemer <jubeemer@umich.edu>
+Date:   Tue Nov 12 18:41:01 2019 -0500
+
+    [jarvis] added odrive dependency
+
+[33mcommit 67a3b1deed3cac314e2c0a42ec5541f331805c00[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Thu Nov 14 23:01:25 2019 +0000
+
+    Bump mixin-deep from 1.3.1 to 1.3.2 in /base_station/gui
+    
+    Bumps [mixin-deep](https://github.com/jonschlinkert/mixin-deep) from 1.3.1 to 1.3.2.
+    - [Release notes](https://github.com/jonschlinkert/mixin-deep/releases)
+    - [Commits](https://github.com/jonschlinkert/mixin-deep/compare/1.3.1...1.3.2)
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit 598c3a650efab517d4eb8543382b7a6fd568010a[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Thu Nov 14 23:00:47 2019 +0000
+
+    Bump lodash from 4.17.5 to 4.17.13 in /simulators/nav
+    
+    Bumps [lodash](https://github.com/lodash/lodash) from 4.17.5 to 4.17.13.
+    - [Release notes](https://github.com/lodash/lodash/releases)
+    - [Commits](https://github.com/lodash/lodash/compare/4.17.5...4.17.13)
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit 76666b82009dcd36d8b801659e5571571490f4a3[m
+Merge: 9667f1d6 562c94fd
+Author: jubeemer <32436541+jubeemer@users.noreply.github.com>
+Date:   Thu Nov 14 17:59:22 2019 -0500
+
+    Merge pull request #252 from amverni/master
+    
+    [gui] add printing of lists of LCMs on echo page
+
+[33mcommit 562c94fd65069464e9dd457922c9c305257c042d[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Thu Nov 14 16:37:14 2019 -0500
+
+    Update zed sdk to 2.8 and CUDA to 10.0 for travis
+    
+    ZED sdk 2.8.3 for ubuntu 16
+
+[33mcommit bd8903222d2b8ee767cea925dd158af6ffa71791[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Sun Nov 3 16:16:03 2019 -0500
+
+    [gui] add clear feed button to LCM Echo page
+
+[33mcommit b093c16662da8fcd6555a538c8d1397377e534ff[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Sun Nov 3 14:53:31 2019 -0500
+
+    Fix beaglebone dependencies
+
+[33mcommit b29bbb7766e3cf43dd46feb78dc4390e8e291a51[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Sun Nov 3 12:44:25 2019 -0500
+
+    Fix Dockerfile's downloading of the zed sdk
+
+[33mcommit 6a58764cdbc72651508541014560fae9d7271c66[m
+Author: Andrew Vernier <amverni@umich.edu>
+Date:   Thu Oct 31 10:03:52 2019 -0400
+
+    [gui] add printing of lists of LCMs on echo page
+
+[33mcommit 9667f1d6e9034f18b6ffcdccdd7029b78d528348[m
+Merge: 1168c39f d9e3d9bd
+Author: prabid <35053122+prabid@users.noreply.github.com>
+Date:   Tue Oct 22 18:14:16 2019 -0400
+
+    Merge pull request #251 from nratan3/master
+    
+    [gui] added first draft of LCMSend page
+
+[33mcommit d9e3d9bd9b97eb7d56c0aa6ba176aca6119af517[m
+Author: nratan3 <nratan@umich.edu>
+Date:   Sun Oct 6 15:15:22 2019 -0400
+
+    [gui] added first draft of LCMSend page
+
+[33mcommit 1168c39f73158952c715c95c55d2320b0198fbb0[m
+Merge: 82dc278c 4a0bee92
+Author: jubeemer <32436541+jubeemer@users.noreply.github.com>
+Date:   Mon Jul 29 20:52:35 2019 -0400
+
+    Merge pull request #247 from umrover/urc
+    
+    URC changes
+
+[33mcommit 4a0bee92f0f02092df1e45292691b1ccd7369dda[m
+Author: Jason Whitfield <jtwhit@umich.edu>
+Date:   Wed May 29 15:37:12 2019 -0600
+
+    [raman] Fixed ansible and data file.
+
+[33mcommit 9ee4a67f5f11344a2dbd1fa80bfee1e8dc8c2f4d[m
+Author: Jason Whitfield <jtwhit@umich.edu>
+Date:   Wed May 29 14:47:13 2019 -0600
+
+    [gui] Enabled RGB LEDs by default.
+
+[33mcommit 0a39a748b246394407681fdb2cbb5ac73230cc9c[m
+Author: Jason Whitfield <jtwhit@umich.edu>
+Date:   Wed May 29 13:45:27 2019 -0600
+
+    [raman] Fixed raman data file path and removed async lcm.
+
+[33mcommit 086f35df574ef9a020f9f4efc85c749ae976c283[m
+Author: Jason Whitfield <jtwhit@umich.edu>
+Date:   Wed May 29 13:42:03 2019 -0400
+
+    [sa] Increased esc ramp time to 10 seconds.
+
+[33mcommit baed4a2b88cfa387e20fa78284f4249e4fc8a450[m
+Author: Jason Whitfield <jtwhit@umich.edu>
+Date:   Tue May 28 23:24:24 2019 -0400
+
+    [ik] Fixed log file save location.
+
+[33mcommit 9c8ed00daa11d86e5759e0289b8555c2df5daf9f[m
+Author: Rover Laptop <rover@umich.edu>
+Date:   Tue May 28 21:28:53 2019 -0400
+
+    [gui] Fixed waypoint entering and display bugs.
+
+[33mcommit 82dc278ca0c17f5233718b68f4d1c82afb6e03e6[m[33m ([m[1;33mtag: urc19[m[33m)[m
+Merge: f11e341a 816d395b
+Author: jtwhit <jtwhit@umich.edu>
+Date:   Tue May 28 20:52:27 2019 -0400
+
+    Merge pull request #245 from jtwhit/services
+    
+    [ansible] Updated base station and onboard services.
+
+[33mcommit f11e341a63cff2fb4b635232bc12aa7b66c2a4d0[m
+Merge: 6fb6d2b0 9a42f676
+Author: jtwhit <jtwhit@umich.edu>
+Date:   Tue May 28 20:52:17 2019 -0400
+
+    Merge pull request #244 from jtwhit/master
+    
+    [auton] Added program to control autonomy light.
+
+[33mcommit 6fb6d2b0fba0d165be7947eff8b6bc1325b47575[m
+Merge: cc1b5255 e2fa206c
+Author: jeqyin <jeqyin@umich.edu>
+Date:   Sun May 26 03:05:51 2019 -0400
+
+    Merge pull request #246 from jtwhit/frame_write
+    
+    [cv] Switched frame writing to its own thread and reduced its frequency.
+
+[33mcommit e2fa206c211bb17b8736168f86440c9edbb59176[m
+Author: mrover_software <mrover_software@umich.edu>
+Date:   Sat May 18 18:09:50 2019 -0400
+
+    [cv] Switched frame writing to its own thread and reduced its frequency.
+
+[33mcommit 9a42f67609d8b85fe33528d6f8c78079d1194f33[m
+Author: Jason Whitfield <jtwhit@umich.edu>
+Date:   Fri May 17 13:25:20 2019 -0400
+
+    [auton] Added program to control autonomy light.
+
+[33mcommit 816d395b0f6e2ed833cee7c06113de2536a008cb[m
+Author: Jason Whitfield <jtwhit@umich.edu>
+Date:   Sat May 25 11:47:55 2019 -0400
+
+    [ansible] Updated base station and onboard services.
+
+[33mcommit cc1b5255f38808f740d2b5fd1f07efab9c126b3f[m
+Merge: 7a094fc2 d8899e07
+Author: jtwhit <jtwhit@umich.edu>
+Date:   Fri May 24 22:57:35 2019 -0400
+
+    Merge pull request #243 from jubeemer/logging
+    
+    [logging] log each rgb reading individually
+
+[33mcommit d8899e07313e1839d366d3d2c75d2b0b91c89b48[m
+Author: Justin Beemer <jubeemer@umich.edu>
+Date:   Fri May 24 22:34:33 2019 -0400
+
+    [logging] log each rgb reading individually
+
+[33mcommit 7a094fc299280c1cf6d4936fa3161d21db2f6304[m
+Merge: 5f738434 377d64c2
+Author: jubeemer <32436541+jubeemer@users.noreply.github.com>
+Date:   Thu May 23 22:05:18 2019 -0400
+
+    Merge pull request #242 from jubeemer/laser
+    
+    [hwi] added laser toggling
+
+[33mcommit 5f73843464e30a07f8ddaf72ceca74876c2165e8[m
+Merge: 70870906 067906ee
+Author: jubeemer <32436541+jubeemer@users.noreply.github.com>
+Date:   Thu May 23 22:01:25 2019 -0400
+
+    Merge pull request #241 from jubeemer/master
+    
+    [hwi] fixed rgb channels
+
+[33mcommit 377d64c2dbdde3d4ddd2f0610e32ddb8a8c70b6c[m
+Author: Justin Beemer <jubeemer@umich.edu>
+Date:   Thu May 23 21:48:48 2019 -0400
+
+    [hwi] added laser toggling
+
+[33mcommit 067906ee9666418d8b283bafb124e6f8a49fc6fd[m
+Author: Justin Beemer <jubeemer@umich.edu>
+Date:   Thu May 23 21:41:09 2019 -0400
+
+    [hwi] fixed rgb channels
+
+[33mcommit 7087090674252f9a35926a1f4009f2bd4b7bb653[m
+Merge: 442d2c88 45fa21de
+Author: spenfarr <31659876+spenfarr@users.noreply.github.com>
+Date:   Thu May 23 21:29:12 2019 -0400
+
+    Merge pull request #240 from jtwhit/rgb
+    
+    [gui] Added RGB LED control button to gui.
+
+[33mcommit 45fa21de503707f6ae2c6b1079970f1d1e2fe9c6[m
+Author: Jason Whitfield <jtwhit@umich.edu>
+Date:   Thu May 23 19:59:24 2019 -0400
+
+    [gui] Added RGB LED control button to gui.
+
+[33mcommit 442d2c88564cd99bec4241952bba3de5ee482b38[m
+Merge: bb587aa6 6f074727
+Author: spenfarr <31659876+spenfarr@users.noreply.github.com>
+Date:   Thu May 23 20:25:00 2019 -0400
+
+    Merge pull request #239 from jtwhit/sa_task
+    
+    [sa] Renamed sites from 0 and 1 to 1 and 2.
+
+[33mcommit bb587aa6a07b0cb0d76135f2a7920831dd7c91a6[m
+Merge: 8025ae30 2372b44c
+Author: spenfarr <31659876+spenfarr@users.noreply.github.com>
+Date:   Thu May 23 20:24:14 2019 -0400
+
+    Merge pull request #237 from jtwhit/pis
+    
+    [pis] Increased bitrate and made picture taking asynchronous.
+
+[33mcommit 6f0747270952ec673127faa7886375d5fd0c3740[m
+Author: Jason Whitfield <jtwhit@umich.edu>
+Date:   Thu May 23 19:43:10 2019 -0400
+
+    [sa] Renamed sites from 0 and 1 to 1 and 2.
+
+[33mcommit 2372b44c10647ed4bbbe19a40d9b7a6505c2ac5a[m
+Author: Jason Whitfield <jtwhit@umich.edu>
+Date:   Wed May 22 17:05:01 2019 -0400
+
+    [pis] Increased bitrate and made picture taking asynchronous.
+
+[33mcommit 8025ae308b3ea3a43d6e90ef67e5a3e4619979e1[m
+Merge: 478f3529 f26a07c8
+Author: jubeemer <32436541+jubeemer@users.noreply.github.com>
+Date:   Thu May 23 18:46:49 2019 -0400
+
+    Merge pull request #238 from jubeemer/rgb_leds
+    
+    [hwi] RGB program handles toggling sensor leds.
+
+[33mcommit f26a07c8c7861f402b3e4c690cb20406b6a20029[m
+Author: Justin Beemer <jubeemer@umich.edu>
+Date:   Tue May 21 20:53:47 2019 -0400
+
+    [hwi] RGB program handles toggling sensor leds.
+
+[33mcommit 478f3529c5da5300ad5847cd0119f2311441f94a[m
+Merge: 4a944a0b 1c5b0cad
+Author: jtwhit <jtwhit@umich.edu>
+Date:   Wed May 22 11:27:23 2019 -0400
+
+    Merge pull request #235 from jtwhit/beaglebone
+    
+    [sa] Removed ammonia test automatic servo controls.
+
+[33mcommit 4a944a0bacd49c2cc5ad53ce6f63eac85987ad3e[m
+Merge: 7fe8d4bc 3fe83db9
+Author: jubeemer <32436541+jubeemer@users.noreply.github.com>
+Date:   Tue May 21 23:11:06 2019 -0400
+
+    Merge pull request #232 from jtwhit/esc
+    
+    [gui] Made esc toggles exclusive.
+
+[33mcommit 7fe8d4bc937503f6ac2e9b503b02ffbe36350081[m
+Merge: 8a7c4db2 89327f0b
+Author: jubeemer <32436541+jubeemer@users.noreply.github.com>
+Date:   Tue May 21 23:06:06 2019 -0400
+
+    Merge pull request #234 from jtwhit/laser_light
+    
+    [gui] Added laser to arm toggles.
+
+[33mcommit 8a7c4db2ff96de4adecb3be76d50e16477d04b16[m
+Merge: 1c86548c c7f647a6
+Author: jtwhit <jtwhit@umich.edu>
+Date:   Tue May 21 22:45:52 2019 -0400
+
+    Merge pull request #236 from jtwhit/esc_ramp
+    
+    [beaglebone] Refactored esc ramping.
+
+[33mcommit 1c5b0cad177edd0a52986b03adf5d3c41956b318[m
+Author: Jason Whitfield <jtwhit@umich.edu>
+Date:   Tue May 21 22:15:04 2019 -0400
+
+    [sa] Removed ammonia test automatic servo controls.
+
+[33mcommit 89327f0bac820f96cc0c60b47f7b22addfba7a2a[m
+Author: Jason Whitfield <jtwhit@umich.edu>
+Date:   Tue May 21 22:09:48 2019 -0400
+
+    [gui] Added laser to arm toggles.
+
+[33mcommit c7f647a6d28e7fed069e9753e484b77da9c42dc8[m
+Author: Jason Whitfield <jtwhit@umich.edu>
+Date:   Tue May 21 21:38:23 2019 -0400
+
+    [beaglebone] Refactored esc ramping.
+
+[33mcommit 3fe83db93a3557fa658963b57927856b082a6bad[m
+Author: Jason Whitfield <jtwhit@umich.edu>
+Date:   Tue May 21 20:57:02 2019 -0400
+
+    [gui] Made esc toggles exclusive.
+
+[33mcommit 1c86548c861d176c59016a4379a87c7dd0cf26ac[m
+Merge: 378c9a36 ee52dbca
+Author: jubeemer <32436541+jubeemer@users.noreply.github.com>
+Date:   Tue May 21 20:15:18 2019 -0400
+
+    Merge pull request #217 from jtwhit/current_limit
+    
+    [talon] Added current limiting for drive talons.
+
+[33mcommit 378c9a36ccadeca34c933dd837b8ab179fa7d916[m
+Merge: fd642d71 5fd5199e
+Author: jtwhit <jtwhit@umich.edu>
+Date:   Tue May 21 20:14:51 2019 -0400
+
+    Merge pull request #231 from spenfarr/master
+    
+    [pis] fix scp command formatting
+
+[33mcommit 5fd5199efc7963bfb7680ae0cd6a2e2b839bc6f3[m
+Author: spenfarr <spenfarr@umich.edu>
+Date:   Tue May 21 17:25:11 2019 -0400
+
+    [pis] remove heartbeat program
+
+[33mcommit a1d15805aa966ae69495346776e3ff662f3f155f[m
+Author: spenfarr <spenfarr@umich.edu>
+Date:   Tue May 21 16:03:19 2019 -0400
+
+    [pis] fix scp command formatting
+
+[33mcommit fd642d71e7d0c44806751233324f73f536cc70a5[m
+Merge: b04e6d5c e7d6a469
+Author: jtwhit <jtwhit@umich.edu>
+Date:   Mon May 20 21:32:03 2019 -0400
+
+    Merge pull request #230 from jtwhit/beaglebone
+    
+    [beaglebone] Forced flushing on microcam sync output.
+
+[33mcommit e7d6a46913b82637ce38dbccf5237129fdddd127[m
+Author: Jason Whitfield <jtwhit@umich.edu>
+Date:   Mon May 20 21:20:19 2019 -0400
+
+    [beaglebone] Forced flushing on microcam sync output.
+
+[33mcommit b04e6d5c144d0cde55df8dbb991d94772baf1cec[m
+Merge: a4d1af43 e0408512
+Author: jtwhit <jtwhit@umich.edu>
+Date:   Mon May 20 20:38:45 2019 -0400
+
+    Merge pull request #229 from jeqyin/master
+    
+    [cv] changed offline testing to grab frames in order
+
+[33mcommit e04085127a7ab3b36421d06affde06021333d89c[m
+Author: jeqyin <jeqyin@umich.edu>
+Date:   Mon May 20 19:45:53 2019 -0400
+
+    [cv] changed offline testing to grab frames in order
+
+[33mcommit a4d1af43e032e55748c9d3a0f05f708ff48faec4[m
+Merge: 4d0b655f 55cc3808
+Author: spenfarr <31659876+spenfarr@users.noreply.github.com>
+Date:   Mon May 20 18:01:30 2019 -0400
+
+    Merge pull request #228 from jtwhit/beaglebone
+    
+    [beaglebone] Fixed microcam image path.
+
+[33mcommit 55cc38083261adf644295d22496934a9291897ec[m
+Author: Jason Whitfield <jtwhit@umich.edu>
+Date:   Mon May 20 17:49:40 2019 -0400
+
+    [beaglebone] Fixed microcam image path.
+
+[33mcommit 4d0b655fcee9596e728f4158900d0e598d950f86[m
+Merge: 88464b77 44420de5
+Author: jtwhit <jtwhit@umich.edu>
+Date:   Mon May 20 17:13:22 2019 -0400
+
+    Merge pull request #227 from jeqyin/master
+    
+    [cv] fixed window opening when perception_debug=false
+
+[33mcommit 88464b777ee1f14aa1a0ba5a684fec06ef2e8be3[m
+Merge: 615094f9 c5858148
+Author: jeqyin <jeqyin@umich.edu>
+Date:   Mon May 20 17:12:06 2019 -0400
+
+    Merge pull request #226 from spenfarr/master
+    
+    Pi Mac settings
+
+[33mcommit 615094f93af40c7e3910e44919573be64805de2b[m
+Merge: d19928c3 9d666b39
+Author: spenfarr <31659876+spenfarr@users.noreply.github.com>
+Date:   Mon May 20 16:58:03 2019 -0400
+
+    Merge pull request #225 from jtwhit/map_ignore
+    
+    [gui] Added map tiles to gitignore.
+
+[33mcommit c5858148c558fdfad2c8942326a76cc411833477[m
+Author: spenfarr <spenfarr@umich.edu>
+Date:   Mon May 20 16:56:31 2019 -0400
+
+    [logging] correct microcam directory
+
+[33mcommit 44420de5415a6b05bfd51eefff280d0ef6915b35[m
+Author: jeqyin <jeqyin@umich.edu>
+Date:   Mon May 20 16:56:16 2019 -0400
+
+    [cv] fixed window opening when perception_debug=false
+
+[33mcommit e96d7f0c1080fabc33a052a7705fdbd63ef73796[m
+Author: spenfarr <spenfarr@umich.edu>
+Date:   Mon May 20 16:55:52 2019 -0400
+
+    [ansible] correct MAC setting
+
+[33mcommit d19928c3fab695bc20df1757e6f5fc708227a59f[m
+Merge: 5964c9be 301c96e5
+Author: spenfarr <31659876+spenfarr@users.noreply.github.com>
+Date:   Mon May 20 15:18:24 2019 -0400
+
+    Merge pull request #224 from jtwhit/beaglebone
+    
+    [ansible] Updated ansible for beaglebones.
+
+[33mcommit 5964c9be77786e74a5d919b451b2aaabb9a41709[m
+Merge: 7a649661 e4c4ce2f
+Author: jeqyin <jeqyin@umich.edu>
+Date:   Mon May 20 15:11:03 2019 -0400
+
+    Merge pull request #215 from jtwhit/tb_depth
+    
+    [cv] Added depth detection using tennis ball size.
+
+[33mcommit 9d666b39c2e613ed783d84c1ea3b66beb0c711db[m
+Author: Jason Whitfield <jtwhit@umich.edu>
+Date:   Mon May 20 11:34:18 2019 -0400
+
+    [gui] Added map tiles to gitignore.
+
+[33mcommit ee52dbca7eaaad55a17c3d0583de7552d35df6c2[m
+Author: Jason Whitfield <jtwhit@umich.edu>
+Date:   Fri May 17 15:12:09 2019 -0400
+
+    [talon] Added current limiting for drive talons.
+
+[33mcommit 301c96e5e10d4cffceea4489cd195fc1bdcb6b0e[m
+Author: Jason Whitfield <jtwhit@umich.edu>
+Date:   Sun May 19 20:21:25 2019 -0400
+
+    [ansible] Updated ansible for beaglebones.
+
+[33mcommit 7a649661596b9d546aea036252f07f754ed6319e[m
+Merge: d951aa6d 84f22abb
+Author: jubeemer <32436541+jubeemer@users.noreply.github.com>
+Date:   Sun May 19 19:41:29 2019 -0400
+
+    Merge pull request #220 from jtwhit/auton_ramp
+    
+    [talon] Added throttle ramping in autonomous mode only.
+
+[33mcommit d951aa6dfb1c33c1ba5bd51027c1dffcef6e5c06[m
+Merge: dbcf0033 2c72ca0b
+Author: jubeemer <32436541+jubeemer@users.noreply.github.com>
+Date:   Sun May 19 19:40:18 2019 -0400
+
+    Merge pull request #221 from jtwhit/talon_braking
+    
+    [talon] Enabled braking on all talons.
+
+[33mcommit 84f22abbc025fa3abec7c25a0e96ffbd87101dbc[m
+Author: Jason Whitfield <jtwhit@umich.edu>
+Date:   Fri May 17 15:21:05 2019 -0400
+
+    [talon] Added throttle ramping in autonomous mode only.
+
+[33mcommit e4c4ce2f917d4877ee26452144933ee4d7b5dadf[m
+Author: mrover_software <mrover_software@umich.edu>
+Date:   Sat May 18 15:37:20 2019 -0400
+
+    [cv] Added depth detection using tennis ball size.
+
+[33mcommit 2c72ca0b0e86aac3d7b0955a11856110147515fe[m
+Author: Jason Whitfield <jtwhit@umich.edu>
+Date:   Fri May 17 14:58:13 2019 -0400
+
+    [talon] Enabled braking on all talons.
+
+[33mcommit dbcf003324e686ae5ac4ab35f3a1e04f9f8a18d5[m
+Merge: 15336aa4 2fccc161
+Author: spenfarr <31659876+spenfarr@users.noreply.github.com>
+Date:   Sun May 19 15:30:24 2019 -0400
+
+    Merge pull request #223 from jtwhit/removed-map
+    
+    [gui] Moved map tiles to different repository.
+
+[33mcommit 15336aa41bdac6323b19104c16127fd94f9b5bee[m
+Merge: 0007baed fef4ff3a
+Author: jtwhit <jtwhit@umich.edu>
+Date:   Sun May 19 15:25:18 2019 -0400
+
+    Merge pull request #222 from spenfarr/low_quality
+    
+    [gui] add microcam button
+
+[33mcommit fef4ff3a39218ea0400305b49b7178cf3c0bdbf8[m
+Author: spenfarr <spenfarr@umich.edu>
+Date:   Sun May 19 15:06:54 2019 -0400
+
+    [gui] add microcam button
+
+[33mcommit 0007baede501cad3432f1d5b3f791991bd6fef81[m
+Merge: 17aa8cd5 7211ae0d
+Author: jtwhit <jtwhit@umich.edu>
+Date:   Sat May 18 21:33:58 2019 -0400
+
+    Merge pull request #212 from jtwhit/new_ik
+    
+    [IK] Integrated custom inverse kinematics.
+
+[33mcommit 17aa8cd55d731feff983832684943adc3c6fe5f4[m
+Merge: e2d67734 aaf986cd
+Author: jtwhit <jtwhit@umich.edu>
+Date:   Sat May 18 21:31:45 2019 -0400
+
+    Merge pull request #218 from spenfarr/low_quality
+    
+    pi quality reduction
+
+[33mcommit e2d67734ad1735a5e96b4e142109582c5cf9bbfd[m
+Merge: f7671d98 89370354
+Author: jtwhit <jtwhit@umich.edu>
+Date:   Sat May 18 21:31:27 2019 -0400
+
+    Merge pull request #219 from spenfarr/new_controls
+    
+    [gui] removed toggle nature of solenoid
+
+[33mcommit 893703544de8cfde03e4dbd476d411347667f48a[m
+Author: spenfarr <spenfarr@umich.edu>
+Date:   Sat May 18 20:35:36 2019 -0400
+
+    [gui] removed toggle nature of solenoid
+
+[33mcommit aaf986cdd816755b4689963d2aadbfa38f2458a9[m
+Author: spenfarr <spenfarr@umich.edu>
+Date:   Tue May 7 16:03:14 2019 -0400
+
+    [pis] automatic quality reduction
+
+[33mcommit 0fdf3a3d4ca3606c760b6bbed75afe002574ea25[m
+Author: spenfarr <spenfarr@umich.edu>
+Date:   Mon May 6 17:29:41 2019 -0400
+
+    [pis] remove high quality on pis end
+
+[33mcommit f7671d988b871098ade388a6a780f9128174ef6a[m
+Merge: 7ccbe85e 31076472
+Author: jtwhit <jtwhit@umich.edu>
+Date:   Sat May 18 16:51:46 2019 -0400
+
+    Merge pull request #216 from spenfarr/new_controls
+    
+    [science] science laptop ansible
+
+[33mcommit 3107647285d7d84017cdb511894fa81026a6eb77[m
+Author: spenfarr <spenfarr@umich.edu>
+Date:   Fri May 17 20:32:35 2019 -0400
+
+    [science] science laptop ansible
+
+[33mcommit 7ccbe85ee2f26a8c8af6194bb523e0d20f00fb10[m
+Merge: 2fccc161 b1b56713
+Author: spenfarr <31659876+spenfarr@users.noreply.github.com>
+Date:   Sat May 18 15:53:35 2019 -0400
+
+    Merge pull request #214 from jubeemer/master
+    
+    [hwi] Final ACK message when taking image fixed
+
+[33mcommit b1b56713648feea141a1f1989f92857ae5fa8700[m
+Author: Justin Beemer <jubeemer@umich.edu>
+Date:   Sat May 18 13:23:09 2019 -0400
+
+    [hwi] Final ACK message when taking image fixed
+
+[33mcommit 2fccc1615538bbeff1f63f6a3aa62ab72880b863[m
+Merge: 86139378 a700b91e
+Author: jtwhit <jtwhit@umich.edu>
+Date:   Fri May 17 17:07:14 2019 -0400
+
+    Merge pull request #213 from spenfarr/new_controls
+    
+    Science things
+
+[33mcommit a700b91e0f41c0a919cbd38bb1e9528517d73522[m
+Author: spenfarr <spenfarr@umich.edu>
+Date:   Fri May 17 16:41:49 2019 -0400
+
+    [onboard] added science service
+
+[33mcommit fb68dbd73deb6f9811e0fd1a8878c9e740183997[m
+Author: spenfarr <spenfarr@umich.edu>
+Date:   Fri May 17 16:35:31 2019 -0400
+
+    [logging_server] restarts on failure and correct csv headers
+
+[33mcommit 861393783da193d8d2ae2226272b4c8343903854[m
+Merge: bb7e3c26 b49097f0
+Author: jtwhit <jtwhit@umich.edu>
+Date:   Fri May 17 12:29:41 2019 -0400
+
+    Merge pull request #211 from elgarber/searcher
+    
+    Fixed bug in turning and driving to tennis ball found while testing. …
+
+[33mcommit b49097f0232343827d2296d5b64d19f4c1aba1b4[m
+Author: elgarber <elgarber@umich.edu>
+Date:   Mon May 13 15:43:49 2019 -0400
+
+    Fixed bug in turning and driving to tennis ball found while testing. Additionally fixed config file issues. Now all search points will be removed after a tennis ball is found.
+
+[33mcommit 7211ae0da073ccc7b6423d33b2f0bf7ac47bf3c2[m
+Author: Jason Whitfield <jtwhit@umich.edu>
+Date:   Mon Apr 29 13:17:43 2019 -0400
+
+    [IK] Integrated custom inverse kinematics.
+
+[33mcommit bb7e3c26f791a457ee2eec000d232c251a3701bf[m
+Merge: 0f3d2e26 ba849da7
+Author: jubeemer <32436541+jubeemer@users.noreply.github.com>
+Date:   Thu May 16 22:10:48 2019 -0400
+
+    Merge pull request #210 from spenfarr/new_controls
+    
+    [gui] updated buttons for science
+
+[33mcommit 0f3d2e266fda27dd26da192db6b3b48357c464c8[m
+Merge: cc088480 03f91df7
+Author: spenfarr <31659876+spenfarr@users.noreply.github.com>
+Date:   Thu May 16 22:02:31 2019 -0400
+
+    Merge pull request #201 from jubeemer/arm
+    
+    [hwi] arm solenoid and magnet
+
+[33mcommit cc088480880df974a07599be84fc220471b24a8d[m
+Merge: 08deb4a8 e355bcba
+Author: spenfarr <31659876+spenfarr@users.noreply.github.com>
+Date:   Thu May 16 21:59:00 2019 -0400
+
+    Merge pull request #209 from jubeemer/sa_fixes
+    
+    [hwi] updates to RGB and ESC/Servo programs
+
+[33mcommit ba849da7037d4ffe87528d33b93a63231fbbaff8[m
+Author: spenfarr <spenfarr@umich.edu>
+Date:   Thu May 16 21:47:02 2019 -0400
+
+    [gui] updated buttons for science
+
+[33mcommit e355bcba8cdfc6604aaa3ee595e92c9ba65c329a[m
+Author: Justin Beemer <jubeemer@umich.edu>
+Date:   Thu May 16 21:42:04 2019 -0400
+
+    [hwi] vacuum ramps to full power
+
+[33mcommit dfac81542f52acd8f1e67dc935106d3cb97df2de[m
+Author: Justin Beemer <jubeemer@umich.edu>
+Date:   Thu May 16 21:36:34 2019 -0400
+
+    [hwi] updated I2C mux channels
+
+[33mcommit 03f91df7cfc94b6e10c2568c9148ddf469382fc5[m
+Author: Justin Beemer <jubeemer@umich.edu>
+Date:   Sat May 11 14:28:47 2019 -0400
+
+    [hwi] arm solenoid and magnet
+
+[33mcommit 08deb4a839f8cddb08e13fccf45422e7e02672f1[m
+Merge: 5df7e45c 7a67020d
+Author: jtwhit <jtwhit@umich.edu>
+Date:   Wed May 15 16:00:08 2019 -0400
+
+    Merge pull request #208 from spenfarr/new_controls
+    
+    [raman] removed gui components from raman for use onboard
+
+[33mcommit 7a67020d67318e1fade8e2b090ec9ef430425bde[m
+Author: spenfarr <spenfarr@umich.edu>
+Date:   Tue May 14 19:14:06 2019 -0400
+
+    [raman] removed gui components from raman for use onboard
+
+[33mcommit 5df7e45c39df36e208acce260295a1d116bfeb2e[m
+Merge: 18e3cb51 1eafc027
+Author: jubeemer <32436541+jubeemer@users.noreply.github.com>
+Date:   Mon May 13 21:29:46 2019 -0400
+
+    Merge pull request #207 from jtwhit/master
+    
+    [gui] Removed speed limit on drills.
+
+[33mcommit 1eafc027eb431d0aa0a577cfb30f3cc5e8258eef[m
+Author: Jason Whitfield <jtwhit@umich.edu>
+Date:   Mon May 13 18:23:57 2019 -0400
+
+    [gui] Removed speed limit on drills.
+
+[33mcommit 18e3cb511717aa1e1325f900a43ad0f81f83dee1[m
+Merge: 0678bfc1 2919ed30
+Author: jtwhit <jtwhit@umich.edu>
+Date:   Mon May 13 18:14:02 2019 -0400
+
+    Merge pull request #206 from jtwhit/master
+    
+    [gui] Changed talon config messages to constantly publish.
+
+[33mcommit 2919ed30fbf9de14cb3d487565a1fd82aa0fedfc[m
+Author: Jason Whitfield <jtwhit@umich.edu>
+Date:   Mon May 13 17:58:03 2019 -0400
+
+    [gui] Changed talon config messages to constantly publish.
+
+[33mcommit 0678bfc110952a4ac572affba6f5608d9998de41[m
+Merge: b474df49 3463c427
+Author: jtwhit <jtwhit@umich.edu>
+Date:   Mon May 13 17:57:21 2019 -0400
+
+    Merge pull request #205 from spenfarr/new_controls
+    
+    [gui] correct microscope lcm and ansible

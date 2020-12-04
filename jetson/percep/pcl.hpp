@@ -33,12 +33,14 @@ class PCL {
     PCL() : 
         bearing{0}, distance{0}, detected{false},
         pt_cloud_ptr{new pcl::PointCloud<pcl::PointXYZRGB>} {
-
+        
+        //pt_cloud_ptr{new pcl::PointCloud<pcl::PointXYZ>} {
         #if ZED_SDK_PRESENT
         sl::Resolution cloud_res = sl::Resolution(PT_CLOUD_WIDTH, PT_CLOUD_HEIGHT);
         cloudArea = cloud_res.area();
         #else
         cloudArea = PT_CLOUD_WIDTH*PT_CLOUD_HEIGHT;
+        std::cerr << cloudArea<< endl;
         #endif
 
     };

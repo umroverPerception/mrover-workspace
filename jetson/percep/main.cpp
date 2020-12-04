@@ -3,6 +3,8 @@
 #include "rover_msgs/TargetList.hpp"
 #include <unistd.h>
 #include <deque>
+#include <typeinfo>
+#include <fstream>
 
 using namespace cv;
 using namespace std;
@@ -47,6 +49,16 @@ int main() {
 
   PCL pointcloud;
 
+  ofstream fout("test.pcd");
+  pcl::PointCloud<pcl::PointXYZ> input;
+
+  //cerr << "before size: " << input.fields << endl;
+  //fout << input;
+  //fout << '\n';
+  //cerr << "type of input is: " << typeid(input).name() << endl;
+  //pcl::PointCloud<pcl::PointXYZRGB> cloud;
+  //cerr << "after size: " << input.fields << endl;
+  
   #if PERCEPTION_DEBUG
     /* --- Create PCL Visualizer --- */
     shared_ptr<pcl::visualization::PCLVisualizer> viewer = pointcloud.createRGBVisualizer(); //This is a smart pointer so no need to worry ab deleteing it
@@ -77,6 +89,12 @@ int main() {
 
 /* --- Main Processing Stuff --- */
   while (true) {
+
+    pcl::copyPointCloud(*(pointcloud.pt_cloud_ptr),input);
+    fout << input;
+
+    //#if PERCEPTION_DEBUG == false
+      
     //Check to see if we were able to grab the frame
     if (!cam.grab()) break;
 
