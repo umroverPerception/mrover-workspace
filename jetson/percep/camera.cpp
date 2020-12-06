@@ -30,7 +30,9 @@ public:
 	cv::Mat depth();
 
   #if OBSTACLE_DETECTION
-  template <typename PointInT> void dataCloud(PointInT &p_pcl_point_cloud)
+    //template <typename PointInT> void dataCloud(pcl::PointCloud<PointInT>::Ptr &p_pcl_point_cloud)
+  //template <typename PointInT> void dataCloud(PointInT &p_pcl_point_cloud)
+    void Camera::Impl::dataCloud(pcl::PointCloud<pcl::PointXYZRGB>::Ptr & p_pcl_point_cloud);
   #endif
   
   
@@ -108,6 +110,7 @@ Camera::Impl::~Impl() {
 	this->zed_.close();
 }
 
+//DO NOT TOUCH
 #if OBSTACLE_DETECTION
 void Camera::Impl::dataCloud(pcl::PointCloud<pcl::PointXYZRGB>::Ptr & p_pcl_point_cloud) {
   //Might need an overloaded assignment operator
@@ -155,13 +158,13 @@ public:
   #endif
 
   #if OBSTACLE_DETECTION
+  //template <typename PointInT> void dataCloud(pcl::PointCloud<PointInT>::Ptr &p_pcl_point_cloud);
   template <typename PointInT> void dataCloud(PointInT &p_pcl_point_cloud);
+  //void dataCloud(pcl::PointCloud<pcl::PointXYZRGB>::Ptr &p_pcl_point_cloud);
+  //template <typename PointInT> void pcl_write(const cv::String &filename, pcl::PointCloud<PointInT> &p_pcl_point_cloud);
   template <typename PointInT> void pcl_write(const cv::String &filename, PointInT &p_pcl_point_cloud);
 
   #endif
-
-  void disk_record_init();
-  void write_curr_frame_to_disk(cv::Mat rgb, cv::Mat depth, int counter);
 
 private:
   std::vector<std::string> img_names;
@@ -209,7 +212,7 @@ Camera::Impl::Impl() {
   }
   #endif
   
-
+  
   // get the vector of image names, jpg/png for rgb files, .exr for depth files
   // we only read the rgb folder, and assume that the depth folder's images have the same name
   struct dirent *dp = NULL;
@@ -227,6 +230,7 @@ Camera::Impl::Impl() {
       std::string head = file_name.substr(0, file_name.size()-4);
       if (img_tails.find(tail) != img_tails.end()) {
         img_names.push_back(file_name);
+        cerr << "added " << file_name << '\n';
       }
     }
   } while  (dp != NULL);
@@ -252,7 +256,6 @@ Camera::Impl::Impl() {
       if (file_name.size() < 5) continue;
 
       pcd_names.push_back(file_name);
-      
     }
 
  } while (dp != NULL);
@@ -271,6 +274,7 @@ bool Camera::Impl::grab() {
   #if AR_DETECTION
   idx_curr_img++;
   if (idx_curr_img >= img_names.size()) {
+    std::cout<<"whatssss up\n";
     std::cout<<"Ran out of images\n";
     end = false;
   }
@@ -279,10 +283,12 @@ bool Camera::Impl::grab() {
   #if OBSTACLE_DETECTION
   idx_curr_pcd_img++;
   if (idx_curr_pcd_img >= pcd_names.size()-2) {
+    std::cout<<"whats up\n";
     std::cout<<"Ran out of images\n";
     end = false;  
   }
   #endif
+  
   if(!end){
     exit(1);
   }
@@ -352,8 +358,10 @@ void Camera::record_ar_finish() {
 
 //Reads the point data cloud p_pcl_point_cloud
 #if OBSTACLE_DETECTION
-template <typename PointInT> void dataCloud(PointInT &p_pcl_point_cloud){
- 
+template <typename PointInT> 
+void Camera::Impl::dataCloud(PointInT &p_pcl_point_cloud){
+//template <typename PointInT> void dataCloud(pcl::PointCloud<PointInT>::Ptr &p_pcl_point_cloud){
+
  //Read in image names
  std::string pcd_name = pcd_names[idx_curr_pcd_img];
  std::string full_path = pcd_path + std::string("/") + pcd_name;
@@ -389,8 +397,10 @@ cv::Mat Camera::depth() {
 
 #if OBSTACLE_DETECTION
 template <typename PointInT>
-void Camera::getDataCloud(pcl::PointCloud<pcl::PointXYZRGB>::Ptr &p_pcl_point_cloud) {
-  this->impl_->dataCloud(p_pcl_point_cloud);
+  void Camera::getDataCloud(pcl::PointCloud<PointInT> &p_pcl_point_cloud) {
+ // void Camera::getDataCloud(PointInT &p_pcl_point_cloud) {
+ // void Camera::getDataCloud(pcl::PointCloud<pcl::PointXYZRGB>::Ptr &p_pcl_point_cloud) {
+    this->impl_->dataCloud(p_pcl_point_cloud);
 }
 #endif
 
@@ -418,6 +428,7 @@ void Camera::disk_record_init() {
 
 //Writes point cloud data to data folder specified in build tag 
 template <typename PointInT> 
+//void pcl_write(const cv::String &filename, pcl::PointCloud<PointInT>::Ptr &p_pcl_point_cloud)
 void pcl_write(const cv::String &filename, PointInT &p_pcl_point_cloud)
 {
   std::cout << "name of path is: " << filename << endl;
@@ -425,8 +436,12 @@ void pcl_write(const cv::String &filename, PointInT &p_pcl_point_cloud)
   catch (pcl::IOException &e){cerr << e.what();}
 }
 
+//template <typename PointInT>
+void Camera::write_curr_frame_to_disk(cv::Mat rgb, cv::Mat depth, pcl::PointCloud<pcl::PointXYZRGB>::Ptr &p_pcl_point_cloud, int counter){
+    string fileName = to_string(counter / FRAME_WRITE_INTERVAL);
     while(fileName.length() < 4){
       fileName = '0'+fileName;
+    }
 
     pcl_write(pcl_foldername + fileName + std::string(".pcd"), p_pcl_point_cloud);
     cv::imwrite(rgb_foldername +  fileName + std::string(".jpg"), rgb );

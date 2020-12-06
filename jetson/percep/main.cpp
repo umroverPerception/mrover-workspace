@@ -108,7 +108,7 @@ int main() {
     #if OBSTACLE_DETECTION
     //Update Point Cloud
     pointcloud.update();
-    cam.getDataCloud(pointcloud.pt_cloud_ptr);
+    cam.getDataCloud(*pointcloud.pt_cloud_ptr);
     #endif
 
     #if WRITE_CURR_FRAME_TO_DISK && AR_DETECTION && OBSTACLE_DETECTION
