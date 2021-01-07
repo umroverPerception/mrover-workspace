@@ -19,9 +19,9 @@ class TagDetector {
     std::vector<int> ids;
     std::vector<std::vector<cv::Point2f> > corners;
     cv::Mat rgb;
-    //config file reference
-    const rapidjson::Document& mRoverConfig;
-    
+    //reference to config file
+    //const rapidjson::Document& mRoverConfig;
+    rapidjson::Document mRoverConfig;
 
    public:
     TagDetector();                                                                  //constructor loads dictionary data from file
@@ -29,3 +29,4 @@ class TagDetector {
     pair<Tag, Tag> findARTags(Mat &src, Mat &depth_src, Mat &rgb);                  //detects AR tags in a given Mat
     double getAngle(float xPixel, float wPixel);                                    //finds the angle from center given pixel coordinates
 };
+

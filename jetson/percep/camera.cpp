@@ -1,5 +1,6 @@
 #include "camera.hpp"
 #include "perception.hpp"
+#include "rapidjson/document.h"
 
 #if OBSTACLE_DETECTION
   #include <pcl/common/common_headers.h>
@@ -318,7 +319,7 @@ cv::Mat Camera::Impl::depth() {
 void Camera::record_ar_init() {
   //initializing ar tag videostream object
   std::pair<Tag, Tag> tp;
-  TagDetector d1();
+  TagDetector d1;
 
   Mat depth_img = depth();
   Mat rgb;
@@ -378,7 +379,7 @@ void Camera::Impl::writeDataCloud(int j){
 
 Camera::Camera() :impl_{new Camera::Impl}, rgb_foldername{""},
                    depth_foldername{""} {
-    ifstream configFile;
+   ifstream configFile;
     std::string configPath = getenv("MROVER_CONFIG");
     configPath += "/config_percep/config.json";
     configFile.open( configPath );
@@ -389,7 +390,9 @@ Camera::Camera() :impl_{new Camera::Impl}, rgb_foldername{""},
         config += setting;
     }
     configFile.close();
-    mRoverConfig.Parse( config.c_str() );}
+    mRoverConfig.Parse(config.c_str());
+    
+    }
 
 Camera::~Camera() {
 	delete this->impl_;

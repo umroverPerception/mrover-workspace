@@ -21,6 +21,10 @@ private:
   	//std::pair<Tag, Tag> tp;
   	//TagDetector d1;
 	cv::VideoWriter vidWrite;
+
+	//reference to config file
+	//rapidjson::Document& mRoverConfig;
+	rapidjson::Document mRoverConfig;
 	
 public:
 	Camera();
@@ -42,8 +46,7 @@ public:
 	void disk_record_init();
 	void write_curr_frame_to_disk(cv::Mat rgb, cv::Mat depth, int counter);
 
-	//reference to config file
-	const rapidjson::Document mRoverConfig;
+	
 	
 };
 

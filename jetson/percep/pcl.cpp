@@ -193,6 +193,7 @@ double PCL::FindClearPath(std::vector<std::vector<int>> interest_points,
     #endif
 
     int buffer = 50;
+    double PI=mRoverConfig["pi"].GetDouble();
 
     std::vector<int> obstacles; //X and Y values of the left and rightmost obstacles in path
 
@@ -473,8 +474,8 @@ obstacle_return PCL::pcl_obstacle_detection(shared_ptr<pcl::visualization::PCLVi
 void PCL::update() {
     pt_cloud_ptr->clear();
     pt_cloud_ptr->points.resize(cloudArea);
-    pt_cloud_ptr->width = PT_CLOUD_WIDTH;
-    pt_cloud_ptr->height = PT_CLOUD_HEIGHT;
+    pt_cloud_ptr->width = mRoverConfig["pt_cloud"]["pt_cloud_width"].GetDouble();
+    pt_cloud_ptr->height = mRoverConfig["pt_cloud"]["pt_cloud_height"].GetDouble();
     std::cerr << "Width: " << pt_cloud_ptr->width<<std::endl;
     std::cerr << "Height: "<< pt_cloud_ptr->height<<"\n";
 }

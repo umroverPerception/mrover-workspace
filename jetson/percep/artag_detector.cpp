@@ -1,5 +1,6 @@
 #include "perception.hpp"
 #include "artag_detector.hpp"
+#include "rapidjson/document.h"
 
 static Mat HSV;
 static Mat DEPTH;
@@ -18,7 +19,7 @@ void onMouse(int event, int x, int y, int flags, void *userdata) {
 
 TagDetector::TagDetector()  { //initializes detector object with pre-generated dictionary of tags
 
-    ifstream configFile;
+   ifstream configFile;
     std::string configPath = getenv("MROVER_CONFIG");
     configPath += "/config_percep/config.json";
     configFile.open( configPath );
@@ -29,7 +30,7 @@ TagDetector::TagDetector()  { //initializes detector object with pre-generated d
         config += setting;
     }
     configFile.close();
-    mRoverConfig.Parse( config.c_str() );
+    mRoverConfig.Parse(config.c_str());
     
 
     cv::FileStorage fsr("jetson/percep/alvar_dict.yml", cv::FileStorage::READ);

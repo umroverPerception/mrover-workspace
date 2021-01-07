@@ -39,7 +39,7 @@ int main() {
   obstacleMessage.detected = false;
 
   /* --- AR Tag Initializations --- */
-  TagDetector detector();
+  TagDetector detector;
   pair<Tag, Tag> tagPair;
   int left_tag_buffer = 0;
   int right_tag_buffer = 0;

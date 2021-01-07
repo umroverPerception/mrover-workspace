@@ -6,6 +6,8 @@
 #include "rapidjson/document.h"
 using namespace rapidjson;
 #include <pcl/common/common_headers.h>
+//config file
+//rapidjson::Document& mRoverConfig;
 
 /* --- Compare Line Class --- */
 //Functor that indicates where a point is in
@@ -39,7 +41,7 @@ class PCL {
 
         ifstream configFile;
         string configPath = getenv("MROVER_CONFIG");
-        configPath += "/config_nav/config.json";
+        configPath += "/config_percep/config.json";
         configFile.open( configPath );
         string config = "";
         string setting;
@@ -48,14 +50,14 @@ class PCL {
            config += setting;
         }
         configFile.close();
-
-        mRoverConfig.Parse( config.c_str() );
+        mRoverConfig.Parse(config.c_str());
+        assert(mRoverConfig.IsObject());
 
         #if ZED_SDK_PRESENT
-        sl::Resolution cloud_res = sl::Resolution(mRoverConfig["pt_cloud"]]["pt_cloud_width"].GetDouble(), mRoverConfig["pt_cloud"]]["pt_cloud_height"].GetDouble());
+        sl::Resolution cloud_res = sl::Resolution(mRoverConfig["pt_cloud"]["pt_cloud_width"].GetDouble(), mRoverConfig["pt_cloud"]["pt_cloud_height"].GetDouble());
         cloudArea = cloud_res.area();
         #else
-        cloudArea = mRoverConfig["pt_cloud"]]["pt_cloud_width"].GetInt()*mRoverConfig["pt_cloud"]]["pt_cloud_height"].GetInt();
+        cloudArea = mRoverConfig["pt_cloud"]["pt_cloud_width"].GetInt()*mRoverConfig["pt_cloud"]["pt_cloud_height"].GetInt();
         std::cerr << cloudArea<< endl;
         #endif
 
@@ -70,6 +72,9 @@ class PCL {
     double CENTERX=mRoverConfig["pt_cloud"]["centerx"].GetDouble();
 
     private:
+
+        //config file
+        rapidjson::Document mRoverConfig;
 
         //Filters points with values beyond certain threshold
         void PassThroughFilter();
