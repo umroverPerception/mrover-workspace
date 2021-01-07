@@ -79,6 +79,7 @@ int main() {
 
 /* --- Main Processing Stuff --- */
   while (true) {
+    cerr << "FPS: " <<  cam.getFPS() << endl;
 
     auto loopStart = high_resolution_clock::now();
     auto grabDuration = duration_cast<microseconds>(loopStart - prevLoopStart); 
@@ -86,8 +87,7 @@ int main() {
     cout << "** Total Loop time: " << (grabDuration.count()/1.0e3) << " ms" << endl; 
     cout << "*************************************************************************" << endl; 
 
- 
-    
+     
     auto grabStart = high_resolution_clock::now();
 
     //Check to see if we were able to grab the frame
@@ -120,6 +120,8 @@ int main() {
       }
     #endif
 
+    auto arStart = high_resolution_clock::now();
+
 /* --- AR Tag Processing --- */
     arTags[0].distance = -1;
     arTags[1].distance = -1;
@@ -137,16 +139,25 @@ int main() {
     #endif
 
     #endif
+    auto arEnd = high_resolution_clock::now();
+    auto arDur = duration_cast<microseconds>(arEnd - arStart); 
+    cout << "** ar time: " << (arDur.count()/1.0e3) << " ms" << endl; 
 
 /* --- Point Cloud Processing --- */
     #if OBSTACLE_DETECTION && !WRITE_CURR_FRAME_TO_DISK
     
+    auto viewerStart = high_resolution_clock::now();
+
     #if PERCEPTION_DEBUG
     //Update Original 3D Viewer
     viewer_original->updatePointCloud(pointcloud.pt_cloud_ptr);
     viewer_original->spinOnce(10);
     cerr<<"Original W: " <<pointcloud.pt_cloud_ptr->width<<" Original H: "<<pointcloud.pt_cloud_ptr->height<<endl;
     #endif
+
+    auto viewerEnd = high_resolution_clock::now();
+    auto viewerDur = duration_cast<microseconds>(viewerEnd - viewerStart); 
+    cout << "** viewer time: " << (viewerDur.count()/1.0e3) << " ms" << endl; 
 
     //Run Obstacle Detection
     auto obsStart = high_resolution_clock::now();
@@ -177,6 +188,8 @@ int main() {
       obstacleMessage.distance = (obstacle_detection.distance/1000); //update LCM distance field
     cerr << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Path Sent: " << obstacleMessage.bearing << "\n";
 
+    auto viewer2Start = high_resolution_clock::now();
+
     #if PERCEPTION_DEBUG
       //Update Processed 3D Viewer
       viewer->updatePointCloud(pointcloud.pt_cloud_ptr);
@@ -184,6 +197,10 @@ int main() {
       cerr<<"Downsampled W: " <<pointcloud.pt_cloud_ptr->width<<" Downsampled H: "<<pointcloud.pt_cloud_ptr->height<<endl;
     #endif
     
+    auto viewer2End = high_resolution_clock::now();
+    auto viewer2Dur = duration_cast<microseconds>(viewer2End - viewer2Start); 
+    cout << "** viewer2 time: " << (viewer2Dur.count()/1.0e3) << " ms" << endl; 
+
     #endif
     
 /* --- Publish LCMs --- */

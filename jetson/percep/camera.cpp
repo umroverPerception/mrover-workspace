@@ -27,6 +27,8 @@ public:
 	cv::Mat image();
 	cv::Mat depth();
 
+  double getFPS();
+
   #if OBSTACLE_DETECTION
   void dataCloud(pcl::PointCloud<pcl::PointXYZRGB>::Ptr &p_pcl_point_cloud);
   #endif
@@ -106,6 +108,10 @@ Camera::Impl::~Impl() {
 	this->zed_.close();
 }
 
+double Camera::Impl::getFPS() {
+  return zed_.getCurrentFPS();
+}
+
 #if OBSTACLE_DETECTION
 void Camera::Impl::dataCloud(pcl::PointCloud<pcl::PointXYZRGB>::Ptr & p_pcl_point_cloud) {
   //Might need an overloaded assignment operator
@@ -132,6 +138,7 @@ void Camera::Impl::dataCloud(pcl::PointCloud<pcl::PointXYZRGB>::Ptr & p_pcl_poin
   }
 
 }
+
 #endif
 
 #else //if OFFLINE_TEST
@@ -373,6 +380,10 @@ Camera::~Camera() {
 
 bool Camera::grab() {
 	return this->impl_->grab();
+}
+
+double Camera::getFPS() {
+  return this->impl_->getFPS();
 }
 
 #if AR_DETECTION
