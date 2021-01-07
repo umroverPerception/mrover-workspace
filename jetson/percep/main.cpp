@@ -8,6 +8,44 @@ using namespace cv;
 using namespace std;
 using namespace std::chrono_literals;
 
+
+class Display{
+  private:
+  Mat img{Mat(250, 400, CV_8UC3, Scalar(0,0,0))};
+  string window_name;
+  map<string, double> inputs;
+
+  void show_display(){
+    imshow(window_name, img);
+    waitKey(30);
+  }
+
+  public:
+    Display(string in_window_name) : window_name(in_window_name) {
+      namedWindow(window_name);
+      show_display();
+    }
+  
+    void update_display(map<string, double> new_inputs){
+      for(auto &input: inputs){
+        //black 
+        // string input_value_
+        // string combined_input = input_names[i] + ": " + to_string(input_value);
+      }
+      for(auto &new_input: new_inputs){
+        //copy values into inputs map
+      }
+      for(auto &input: inputs){
+        //white 
+      }
+    }
+
+    ~Display(){
+      destroyWindow(window_name);
+    }
+ 
+};
+
 int main() {
   
   /* --- Camera Initializations --- */
@@ -74,22 +112,22 @@ int main() {
   cam.record_ar_init();
   #endif
 
-  #if PERCEPTION_DEBUG
+  /*
   Mat img(250, 400, CV_8UC3, Scalar(0,0,0));
-
-  string windowName = "Console Display";
+  string windowName = "FPS Display";
   namedWindow(windowName);
   imshow(windowName, img);
   waitKey(30);
-
-  double fps;
-  string fps_text, fps_input, bearing_text, bearing_input;
-  #endif
+  */
+  //double fps;
+  //string fps_text, fps_input, bearing_text, bearing_input;
+  //#endif
+  Display display("Console Display"); 
 /* --- Main Processing Stuff --- */
   while (true) {
-    #if PERCEPTION_DEBUG
-    auto start = std::chrono::high_resolution_clock::now();
-    #endif
+    //#if PERCEPTION_DEBUG
+    //auto start = std::chrono::high_resolution_clock::now();
+    //#endif
 
     //Check to see if we were able to grab the frame
     if (!cam.grab()) break;
@@ -216,6 +254,7 @@ int main() {
 
     ++iterations;
 
+    /*
     #if PERCEPTION_DEBUG
     auto end = std::chrono::high_resolution_clock::now();
     auto time_diff = end - start;
@@ -237,6 +276,9 @@ int main() {
     imshow(windowName, img);
     waitKey(1);
     #endif
+    */
+    
+    display.update_display({"bearing": pointcloud.bearing, "fps": fps});
   }
 
 
@@ -250,9 +292,8 @@ int main() {
   #endif
 
   #if PERCEPTION_DEBUG
-  destroyWindow(windowName);
+  //destroyWindow(windowName);
   #endif
 
   return 0;
 }
-
