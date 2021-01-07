@@ -8,8 +8,11 @@ using namespace cv;
 using namespace std;
 using namespace std::chrono_literals;
 
+//temp
+#include <chrono> 
+using namespace std::chrono; 
+
 int main() {
-  
   /* --- Camera Initializations --- */
   Camera cam;
   int iterations = 0;
@@ -72,11 +75,25 @@ int main() {
   cam.record_ar_init();
   #endif
 
+  auto prevLoopStart = high_resolution_clock::now();
 
 /* --- Main Processing Stuff --- */
   while (true) {
+
+    auto loopStart = high_resolution_clock::now();
+    auto grabDuration = duration_cast<microseconds>(loopStart - prevLoopStart); 
+    prevLoopStart = loopStart;
+    cout << "** Total Loop time: " << (grabDuration.count()/1.0e3) << " ms" << endl; 
+    cout << "*************************************************************************" << endl; 
+
+ 
+    
+    auto grabStart = high_resolution_clock::now();
+
     //Check to see if we were able to grab the frame
     if (!cam.grab()) break;
+
+   
 
     #if AR_DETECTION
     //Grab initial images from cameras
@@ -90,6 +107,10 @@ int main() {
     pointcloud.update();
     cam.getDataCloud(pointcloud.pt_cloud_ptr);
     #endif
+
+    auto grabEnd = high_resolution_clock::now();
+    auto grabDur = duration_cast<microseconds>(grabEnd - grabStart); 
+    cout << "** grab time: " << (grabDur.count()/1.0e3) << " ms" << endl; 
 
     #if WRITE_CURR_FRAME_TO_DISK && AR_DETECTION && OBSTACLE_DETECTION
       if (iterations % FRAME_WRITE_INTERVAL == 0) {
@@ -128,8 +149,12 @@ int main() {
     #endif
 
     //Run Obstacle Detection
+    auto obsStart = high_resolution_clock::now();
     pointcloud.pcl_obstacle_detection(viewer);  
     obstacle_return obstacle_detection (pointcloud.bearing, pointcloud.distance);
+    auto obsEnd = high_resolution_clock::now();
+    auto obsDur = duration_cast<microseconds>(obsEnd - obsStart); 
+    cout << "** obs time: " << (obsDur.count()/1.0e3) << " ms" << endl; 
 
     //Outlier Detection Processing
     outliers.pop_back(); //Remove outdated outlier value
