@@ -76,6 +76,9 @@ void program() {
 
 std::chrono::duration<double, std::milli> grabTime{};
 std::chrono::duration<double, std::milli> arTime{};
+std::chrono::duration<double, std::milli> loopTime{};
+
+auto loopStart = std::chrono::high_resolution_clock::now();
 
 /* --- Main Processing Stuff --- */
   while (!stop) {
@@ -187,9 +190,12 @@ std::chrono::duration<double, std::milli> arTime{};
 
   }
 
+  auto loopEnd = std::chrono::high_resolution_clock::now();
+
+  loopTime += loopEnd-loopStart;
 
 /* --- Wrap Things Up --- */
-
+    std::cout << "Frame Rate: " << 1000/(loopTime.count()/iterations) << " FPS\n";
     std::cout << "Grab Time: " << grabTime.count()/iterations << " ms\n";
     std::cout << "AR Time: " << arTime.count()/iterations << " ms\n";
   

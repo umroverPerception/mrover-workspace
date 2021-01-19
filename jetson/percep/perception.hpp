@@ -64,8 +64,8 @@
 #define PI 3.14159265
 
 /* --- Point Cloud Definitions --- */
-#define PT_CLOUD_WIDTH 320
-#define PT_CLOUD_HEIGHT 180
+#define PT_CLOUD_WIDTH 160
+#define PT_CLOUD_HEIGHT 90
 #define ROVER_W_MM 1168
 #define HALF_ROVER 584
 #define CENTERX 0

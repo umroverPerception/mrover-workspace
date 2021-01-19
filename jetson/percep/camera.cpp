@@ -46,13 +46,14 @@ private:
 
 Camera::Impl::Impl() {
 	sl::InitParameters init_params;
-	init_params.camera_resolution = sl::RESOLUTION::HD720; // default: 720p
+	init_params.camera_resolution = sl::RESOLUTION::VGA; // default: 720p
 	init_params.depth_mode = sl::DEPTH_MODE::PERFORMANCE;
-	init_params.coordinate_units = sl::UNIT::METER;
-	init_params.camera_fps = 15;
+	init_params.coordinate_units = sl::UNIT::MILLIMETER;
+	init_params.camera_fps = 100;
+  
 	// TODO change this below?
 
-	assert(this->zed_.open() == sl::ERROR_CODE::SUCCESS);
+	assert(this->zed_.open(init_params) == sl::ERROR_CODE::SUCCESS);
   
   //Parameters for Positional Tracking
   init_params.coordinate_system = sl::COORDINATE_SYSTEM::RIGHT_HANDED_Y_UP; // Use a right-handed Y-up coordinate system
@@ -91,8 +92,8 @@ cv::Mat Camera::Impl::image() {
 }
 
 cv::Mat Camera::Impl::depth() {
-
-    this->zed_.retrieveMeasure(this->depth_zed_, sl::MEASURE::DEPTH,  sl::MEM::CPU,  this->image_size_);
+  sl::Resolution cloud_res(160, 90);
+  this->zed_.retrieveMeasure(this->depth_zed_, sl::MEASURE::DEPTH,  sl::MEM::CPU,  cloud_res);
 	return this->depth_;
 }
 

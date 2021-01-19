@@ -37,4 +37,6 @@ public:
 	void record_ar_init();
 	void record_ar(cv::Mat rgb);
 	void record_ar_finish();
+
+	double getFrameRate();
 };
