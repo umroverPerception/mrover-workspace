@@ -74,8 +74,17 @@ class PCL {
 
     //Destructor for PCL
     ~PCL() {
-        viewer -> close();
-        viewer_original -> close();
+        #if PERCEPTION_DEBUG
+            viewer -> close();
+            viewer_original -> close();
+        #endif
+        
+        std::cout << "PCL Time: " << pclTime.count()/loops << " ms\n";
+        std::cout << "Pass Through Time: " << passTime.count()/loops << " ms\n";
+        std::cout << "Voxel Time: " << voxelTime.count()/loops << " ms\n";
+        std::cout << "Ransac Time: " << ransacTime.count()/loops << " ms\n";
+        std::cout << "ECE Time: " << eceTime.count()/loops << " ms\n";
+        std::cout << "FindPath Time: " << findPathTime.count()/loops << " ms\n";
     };
 
     double bearing;
@@ -83,6 +92,15 @@ class PCL {
     bool detected;
     pcl::PointCloud<pcl::PointXYZRGB>::Ptr pt_cloud_ptr;
     int cloudArea;
+
+    //Timing values
+    int loops = 0;
+    std::chrono::duration<double, std::milli> passTime{};
+    std::chrono::duration<double, std::milli> voxelTime{};
+    std::chrono::duration<double, std::milli> ransacTime{};
+    std::chrono::duration<double, std::milli> eceTime{};
+    std::chrono::duration<double, std::milli> findPathTime{};
+    std::chrono::duration<double, std::milli> pclTime{};
 
     private:
 

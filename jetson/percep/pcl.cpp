@@ -1,6 +1,8 @@
 #include "pcl.hpp"
 #include "perception.hpp"
 
+using namespace std::chrono;
+
 #if OBSTACLE_DETECTION
 
 const int MAX_FIELD_OF_VIEW_ANGLE = 70;
@@ -460,15 +462,38 @@ shared_ptr<pcl::visualization::PCLVisualizer> PCL::createRGBVisualizer() {
 //This function is called in main.cpp
 void PCL::pcl_obstacle_detection() {
     obstacle_return result;
+
+    auto passStart = high_resolution_clock::now();
     PassThroughFilter("z", 7000.0);
     PassThroughFilter("y", 3000.0);
+    auto passStop = high_resolution_clock::now();
+    passTime += passStop-passStart;
+
+    auto voxStart = high_resolution_clock::now();
     DownsampleVoxelFilter();
+    auto voxStop = high_resolution_clock::now();
+    voxelTime += voxStop-voxStart;
+
+    auto ranStart = high_resolution_clock::now();
     RANSACSegmentation("remove");
+    auto ranStop = high_resolution_clock::now();
+    ransacTime += ranStop-ranStart;
+
+    auto eceStart = high_resolution_clock::now();
     std::vector<pcl::PointIndices> cluster_indices;
     CPUEuclidianClusterExtraction(cluster_indices);
+    auto eceStop = high_resolution_clock::now();
+    eceTime += eceStop-eceStart;
+
+    auto pathStart = high_resolution_clock::now();
     std::vector<std::vector<int>> interest_points(cluster_indices.size(), vector<int> (6));
     FindInterestPoints(cluster_indices, interest_points);
     bearing = FindClearPath(interest_points);
+    auto pathStop = high_resolution_clock::now();
+    findPathTime += pathStop-pathStart;
+
+    pclTime += pathStop-passStart;
+    loops++;
 }
 
 /* --- Update --- */

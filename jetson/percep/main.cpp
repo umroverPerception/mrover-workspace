@@ -3,12 +3,16 @@
 #include "rover_msgs/TargetList.hpp"
 #include <unistd.h>
 #include <deque>
+#include <ncurses.h>
+#include <atomic>
 
 using namespace cv;
 using namespace std;
 using namespace std::chrono_literals;
 
-int main() {
+std::atomic<bool> stop(false);
+
+void program() {
   
   /* --- Camera Initializations --- */
   Camera cam;
@@ -70,9 +74,13 @@ int main() {
   cam.record_ar_init();
   #endif
 
+std::chrono::duration<double, std::milli> grabTime{};
+std::chrono::duration<double, std::milli> arTime{};
 
 /* --- Main Processing Stuff --- */
-  while (true) {
+  while (!stop) {
+
+    auto grabStart = std::chrono::high_resolution_clock::now();
     //Check to see if we were able to grab the frame
     if (!cam.grab()) break;
 
@@ -88,6 +96,8 @@ int main() {
     pointcloud.update();
     cam.getDataCloud(pointcloud.pt_cloud_ptr);
     #endif
+    auto grabEnd = std::chrono::high_resolution_clock::now();
+    grabTime += grabEnd-grabStart;
 
     #if WRITE_CURR_FRAME_TO_DISK && AR_DETECTION && OBSTACLE_DETECTION
       if (iterations % FRAME_WRITE_INTERVAL == 0) {
@@ -99,6 +109,7 @@ int main() {
       }
     #endif
 
+    auto arStart = std::chrono::high_resolution_clock::now();
 /* --- AR Tag Processing --- */
     arTags[0].distance = -1;
     arTags[1].distance = -1;
@@ -116,6 +127,8 @@ int main() {
     #endif
 
     #endif
+    auto arEnd = std::chrono::high_resolution_clock::now();
+    arTime += arEnd-arStart;
 
 /* --- Point Cloud Processing --- */
     #if OBSTACLE_DETECTION && !WRITE_CURR_FRAME_TO_DISK
@@ -151,7 +164,7 @@ int main() {
       cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Path Bearing Sent: " << obstacleMessage.bearing << "\n";
       cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Distance Sent: " << obstacleMessage.distance << "\n";
     #endif
-    
+
     #if PERCEPTION_DEBUG
       //Update Processed 3D Viewer
       pointcloud.updateViewer(newView);
@@ -169,20 +182,34 @@ int main() {
     #if !ZED_SDK_PRESENT
       std::this_thread::sleep_for(0.2s); // Iteration speed control not needed when using camera 
     #endif
-    
+
     ++iterations;
+
   }
 
 
 /* --- Wrap Things Up --- */
-  #if OBSTACLE_DETECTION && PERCEPTION_DEBUG
+
+    std::cout << "Grab Time: " << grabTime.count()/iterations << " ms\n";
+    std::cout << "AR Time: " << arTime.count()/iterations << " ms\n";
+  
+  #if OBSTACLE_DETECTION
     pointcloud.~PCL();
   #endif
+
+
   
   #if AR_RECORD
     cam.record_ar_finish();
   #endif
   
-  return 0;
 }
 
+//Use multi-threading to exit when enter is pressed
+int main() {
+  std::thread t(program);
+  std::cin.get();
+  stop = true;
+  t.join();
+  return 0;
+}
