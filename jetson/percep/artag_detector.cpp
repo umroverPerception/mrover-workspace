@@ -63,8 +63,6 @@ pair<Tag, Tag> TagDetector::findARTags(Mat &src, Mat &depth_src, Mat &rgb) {  //
     ids.clear();
     corners.clear();
 
-    Mat gray;
-    cvtColor(rgb, gray, cv::COLOR_RGB2GRAY);
     /*------------------------------------------CODE WALKTHROUGH------------------------------------------
     For a walkthrough of how to test any code that you add, scroll down to the TESTING WALKTHROUGH section.
     Here are the different methods that we have tried in order to detect AR-Tags on a Dark/Varied Background:
@@ -96,7 +94,7 @@ pair<Tag, Tag> TagDetector::findARTags(Mat &src, Mat &depth_src, Mat &rgb) {  //
     const double threshold_val = 5; //If rgb is greater than threshold_val then set to white, otherwise set to black
     const double threshold_max = 255;
     const int threshold_type = 0; //Binary Thresholding (described above)
-    cv::threshold(gray, threshold, threshold_val, threshold_max, threshold_type);
+    //cv::threshold(gray, threshold, threshold_val, threshold_max, threshold_type);
     /*------------------------------------THRESHOLDING (Doesn't Work)-----------------------------------------------------*/
     /*------------------------------------IMAGE SATURATION---------------------------------------------*/
     Mat sat_image = Mat::zeros(rgb.size(), rgb.type());
@@ -113,6 +111,52 @@ pair<Tag, Tag> TagDetector::findARTags(Mat &src, Mat &depth_src, Mat &rgb) {  //
         }
     }
     /*------------------------------------IMAGE SATURATION---------------------------------------------*/
+    /*----------------------------------DEPTH FILTERING--------------------------------------------------*/
+    Mat filteredDepth(rgb.rows,rgb.cols, CV_8UC3, Scalar(255,255,255));
+    Mat kernel(3, 3, CV_8UC1, Scalar(1/9));
+    Mat depthData(depth_src.rows,depth_src.cols, CV_8UC1, Scalar(255,255,255));
+
+    cv::patchNaNs(depth_src, 7000);
+    cv::filter2D(depth_src, depthData, -1, kernel);
+
+    //Mat minKernel = Mat::ones(7, 7, CV_8UC1);
+
+    //cv::erode(depth_src, depthData, minKernel);
+    /*Mat depthDataInvert(depth_src.rows,depth_src.cols, CV_8UC1, Scalar(255,255,255));
+    // Invert depth data
+    for(int i = 0; i < depth_src.rows; ++i){
+        for(int j = 0; j < depth_src.cols; ++j){
+            if(depth_src.at<float>(i,j) != 0 && depth_src.at<float>(i,j) == depth_src.at<float>(i,j)) {
+                //cout << depth_src.at<float>(i,j) << endl;
+                depthDataInvert.at<float>(i,j) = 1 / depth_src.at<float>(i,j);
+                //cout << depthDataInvert.at<float>(i,j) << endl;
+            }
+        }
+    } 
+    // cout << "Do you work?";
+    //cv::medianBlur(depth_src, depthData, 7);
+    cv::filter2D(depthDataInvert, depthData, -1, kernel);
+    // Re-invert depth data
+    for(int i = 0; i < depthData.rows; ++i){
+        for(int j = 0; j < depthData.cols; ++j){
+            depthData.at<float>(i,j) = 1 / depthData.at<float>(i,j);
+        }
+    }*/ 
+
+    for(int i = 0; i < depthData.rows; ++i){
+        for(int j = 0; j < depthData.cols; ++j){
+            if(depthData.at<float>(i,j) < 7000){
+                filteredDepth.at<cv::Vec3b>(i,j)[0] = rgb.at<cv::Vec3b>(i,j)[0];
+                filteredDepth.at<cv::Vec3b>(i,j)[1] = rgb.at<cv::Vec3b>(i,j)[1];
+                filteredDepth.at<cv::Vec3b>(i,j)[2] = rgb.at<cv::Vec3b>(i,j)[2];
+            }
+                
+        }
+    }
+
+    Mat gray;
+    cvtColor(filteredDepth, gray, cv::COLOR_RGB2GRAY);
+    /*----------------------------------DEPTH FILTERING--------------------------------------------------*/
     /*------------------------------------CONTOURING-----------------------------------------------------*/
     Mat canny_output;
     std::vector<std::vector<cv::Point>> contours;
@@ -147,45 +191,8 @@ pair<Tag, Tag> TagDetector::findARTags(Mat &src, Mat &depth_src, Mat &rgb) {  //
         int thickness = int(accepted[i].size() * 0.001);
         drawContours(drawing, accepted, i, color, 2, 8, hierarchy, 0);
     }
-    Mat final = rgb + drawing;
+    Mat final = filteredDepth + drawing;
     /*------------------------------------CONTOURING-----------------------------------------------------*/
-    /*----------------------------------DEPTH FILTERING--------------------------------------------------*/
-    Mat filteredDepth(rgb.rows,rgb.cols, CV_8UC3, Scalar(255,255,255));
-    Mat kernel(3, 3, CV_8UC1, Scalar(1/9));
-    Mat depthData(depth_src.rows,depth_src.cols, CV_8UC1, Scalar(255,255,255));
-    // Mat depthDataInvert(depth_src.rows,depth_src.cols, CV_8UC1, Scalar(255,255,255));
-    // Invert depth data
-    // for(int i = 0; i < depth_src.rows; ++i){
-    //     for(int j = 0; j < depth_src.cols; ++j){
-    //         if(depth_src.at<float>(i,j) != 0 && depth_src.at<float>(i,j) == depth_src.at<float>(i,j)) {
-    //             cout << depth_src.at<float>(i,j) << endl;
-    //             depthDataInvert.at<float>(i,j) = 1 / depth_src.at<float>(i,j);
-    //             // cout << depthDataInvert.at<float>(i,j) << endl;
-    //             // depthData.at<float>(i,j) = depthData.at<float>(i,j) * 10000;
-    //         }
-    //     }
-    // } 
-    // cout << "Do you work?";
-    cv::medianBlur(depth_src, depthData, 7);
-    // // Re-invert depth data
-    // for(int i = 0; i < depthData.rows; ++i){
-    //     for(int j = 0; j < depthData.cols; ++j){
-    //         depthData.at<float>(i,j) = 1 / depthData.at<float>(i,j);
-    //     }
-    // } 
-
-    for(int i = 0; i < depthData.rows; ++i){
-        for(int j = 0; j < depthData.cols; ++j){
-            if(depthData.at<float>(i,j) < 7000){
-                filteredDepth.at<cv::Vec3b>(i,j)[0] = rgb.at<cv::Vec3b>(i,j)[0];
-                filteredDepth.at<cv::Vec3b>(i,j)[1] = rgb.at<cv::Vec3b>(i,j)[1];
-                filteredDepth.at<cv::Vec3b>(i,j)[2] = rgb.at<cv::Vec3b>(i,j)[2];
-            }
-                
-        }
-    }
-
-    /*----------------------------------DEPTH FILTERING--------------------------------------------------*/
     /*------------------------------------REJECTS-----------------------------------------------------*/
     std::vector<std::vector<cv::Point2f> > rejected;
     /*------------------------------------REJECTS-----------------------------------------------------*/
@@ -200,7 +207,7 @@ pair<Tag, Tag> TagDetector::findARTags(Mat &src, Mat &depth_src, Mat &rgb) {  //
     you are debugging.
     ------------------------------------TESTING WALKTHROUGH-----------------------------------------------------*/
     /*------------------------------------TAG DETECTION (Necessary for All Methods)-----------------------------------------------------*/
-    cv::aruco::detectMarkers(filteredDepth, alvarDict, corners, ids, alvarParams, rejected);
+    cv::aruco::detectMarkers(final, alvarDict, corners, ids, alvarParams, rejected);
     /*------------------------------------TAG DETECTION (Necessary for All Methods)-----------------------------------------------------*/
     /*------------------------------------REJECTS CONTINUED-----------------------------------------------------*/
     Mat drawing2 = Mat::zeros(rgb.size(), CV_8UC3);
@@ -226,12 +233,12 @@ pair<Tag, Tag> TagDetector::findARTags(Mat &src, Mat &depth_src, Mat &rgb) {  //
 
     
 #if AR_RECORD
-cv::aruco::drawDetectedMarkers(rgb, corners, ids);
+cv::aruco::drawDetectedMarkers(final, corners, ids);
 #endif
 #if PERCEPTION_DEBUG
     // Draw detected tags
-    cv::aruco::drawDetectedMarkers(filteredDepth, corners, ids);
-    cv::imshow("AR Tags", filteredDepth);
+    cv::aruco::drawDetectedMarkers(final, corners, ids);
+    cv::imshow("AR Tags", final);
 
     // on click debugging for color
     DEPTH = depth_src;
