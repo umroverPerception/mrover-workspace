@@ -3,10 +3,79 @@
 #include "rover_msgs/TargetList.hpp"
 #include <unistd.h>
 #include <deque>
+#include <thread>
 
 using namespace cv;
 using namespace std;
 using namespace std::chrono_literals;
+
+void ARTagProcessing(Mat &rgbIn, Mat &srcIn, Mat &depthImgIn, TagDetector &detectorIn, pair<Tag, Tag> &arTagsIn, 
+                      Camera &camIn) {
+  arTags[0].distance = -1;
+  arTags[1].distance = -1;
+  #if AR_DETECTION
+      tagPair = detector.findARTags(src, depth_img, rgb);
+      #if AR_RECORD
+        cam.record_ar(rgb);
+      #endif
+
+      detector.updateDetectedTagInfo(arTags, tagPair, depth_img, src);
+
+  #if PERCEPTION_DEBUG && AR_DETECTION
+      imshow("depth", src);
+      waitKey(1);  
+  #endif
+
+  #endif
+}
+
+void PCLProcessing(PCL &pointCloudIn, shared_ptr<pcl::visualization::PCLVisualizer> &viewerIn, shared_ptr<pcl::visualization::PCLVisualizer> &viewerOriginalIn
+                    deque<bool> &outliersIn,  obstacle_return &lastObstacleIn, rover_msgs::Obstacle &obstacleMessageIn) {
+  
+  #if OBSTACLE_DETECTION && !WRITE_CURR_FRAME_TO_DISK
+    
+  #if PERCEPTION_DEBUG
+    //Update Original 3D Viewer
+    viewer_original->updatePointCloud(pointcloud.pt_cloud_ptr);
+    viewer_original->spinOnce(10);
+    cerr<<"Original W: " <<pointcloud.pt_cloud_ptr->width<<" Original H: "<<pointcloud.pt_cloud_ptr->height<<endl;
+  #endif
+
+    //Run Obstacle Detection
+    pointcloud.pcl_obstacle_detection(viewer);  
+    obstacle_return obstacle_detection (pointcloud.leftBearing, pointcloud.rightBearing, pointcloud.distance);
+
+    //Outlier Detection Processing
+    outliers.pop_back(); //Remove outdated outlier value
+
+    if(pointcloud.leftBearing > 0.05 || pointcloud.leftBearing < -0.05) //Check left bearing
+        outliers.push_front(true);//if an obstacle is detected in front
+    else 
+        outliers.push_front(false); //obstacle is not detected
+
+    if(outliers == checkTrue) //If past iterations see obstacles
+      lastObstacle = obstacle_detection;
+    else if (outliers == checkFalse) // If our iterations see no obstacles after seeing obstacles
+      lastObstacle = obstacle_detection;
+
+     //Update LCM 
+    obstacleMessage.bearing = lastObstacle.leftBearing; //update LCM bearing field
+    obstacleMessage.rightBearing = lastObstacle.rightBearing;
+    if(lastObstacle.distance <= obstacle_detection.distance)
+      obstacleMessage.distance = (lastObstacle.distance/1000); //update LCM distance field
+    else
+      obstacleMessage.distance = (obstacle_detection.distance/1000); //update LCM distance field
+    cerr << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Path Sent: " << obstacleMessage.bearing << "\n";
+
+  #if PERCEPTION_DEBUG
+      //Update Processed 3D Viewer
+      viewer->updatePointCloud(pointcloud.pt_cloud_ptr);
+      viewer->spinOnce(20);
+      cerr<<"Downsampled W: " <<pointcloud.pt_cloud_ptr->width<<" Downsampled H: "<<pointcloud.pt_cloud_ptr->height<<endl;
+  #endif
+    
+  #endif
+}
 
 int main() {
 
@@ -98,9 +167,15 @@ int main() {
         cam.write_curr_frame_to_disk(rgb_copy, depth_copy, pointcloud.pt_cloud_ptr, iterations);
       }
     #endif
+  }
 
+  thread ARTagThread(ARTagProcessing, ref(rgb, src, depth_img, detector, arTags, cam));
+  thread PCLThread(PCLProcessing, ref(pointcloud, viewer, viewer_original, outliers, lastObstacle, obstacleMessage));
+  ARTagThread.join();
+  PCLThread.join();
+  
 /* --- AR Tag Processing --- */
-    arTags[0].distance = -1;
+    /* arTags[0].distance = -1;
     arTags[1].distance = -1;
     #if AR_DETECTION
       tagPair = detector.findARTags(src, depth_img, rgb);
@@ -115,10 +190,10 @@ int main() {
       waitKey(1);  
     #endif
 
-    #endif
+    #endif */
 
 /* --- Point Cloud Processing --- */
-    #if OBSTACLE_DETECTION && !WRITE_CURR_FRAME_TO_DISK
+    /* #if OBSTACLE_DETECTION && !WRITE_CURR_FRAME_TO_DISK
     
     #if PERCEPTION_DEBUG
     //Update Original 3D Viewer
@@ -160,7 +235,7 @@ int main() {
       cerr<<"Downsampled W: " <<pointcloud.pt_cloud_ptr->width<<" Downsampled H: "<<pointcloud.pt_cloud_ptr->height<<endl;
     #endif
     
-    #endif
+    #endif */
     
 /* --- Publish LCMs --- */
     lcm_.publish("/target_list", &arTagsMessage);
