@@ -187,7 +187,9 @@ auto loopStart = std::chrono::high_resolution_clock::now();
     #endif
 
     ++iterations;
-
+    auto bigEnd = std::chrono::high_resolution_clock::now();
+    auto loopDur= std::chrono::duration_cast<std::chrono::microseconds>(bigEnd - grabStart); 
+    cout << "FPS Iteration: " << (1000/(loopDur.count()/1.0e3)) << " \n";
   }
 
   auto loopEnd = std::chrono::high_resolution_clock::now();
