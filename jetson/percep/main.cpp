@@ -11,18 +11,6 @@ using namespace std::chrono_literals;
 
 // AR Tag processing thread function
 void ARTagProcessing(Mat &rgbIn, Mat &srcIn, Mat &depthImgIn, TagDetector &detectorIn, pair<Tag, Tag> &tagPairIn, 
-<<<<<<< HEAD
-                      rover_msgs::Target &arTagsIn, Camera &camIn) {
-  arTagsIn[0].distance = -1;
-  arTagsIn[1].distance = -1;
-  #if AR_DETECTION
-      tagPairIn = detector.findARTags(srcIn, depth_imgIn, rgbIn);
-      #if AR_RECORD
-        cam.record_ar(rgbIn);
-      #endif
-
-      detector.updateDetectedTagInfo(arTagsIn, tagPairIn, depthImgIn, srcIn);
-=======
                       Camera &camIn, rover_msgs::Target *&arTagsIn) {
   arTagsIn[0].distance = -1;
   arTagsIn[1].distance = -1;
@@ -33,7 +21,6 @@ void ARTagProcessing(Mat &rgbIn, Mat &srcIn, Mat &depthImgIn, TagDetector &detec
       #endif
 
       detectorIn.updateDetectedTagInfo(arTagsIn, tagPairIn, depthImgIn, srcIn);
->>>>>>> f3dae9f1f9b375bbcf86cb340a37c379585348a5
 
   #if PERCEPTION_DEBUG && AR_DETECTION
       imshow("depth", srcIn);
@@ -51,33 +38,20 @@ void PCLProcessing(PCL &pointCloudIn, shared_ptr<pcl::visualization::PCLVisualiz
     
   #if PERCEPTION_DEBUG
     //Update Original 3D Viewer
-<<<<<<< HEAD
-    viewer_original->updatePointCloud(pointCloudIn.pt_cloud_ptr);
-    viewer_original->spinOnce(10);
-=======
     viewerOriginalIn->updatePointCloud(pointCloudIn.pt_cloud_ptr);
     viewerOriginalIn->spinOnce(10);
->>>>>>> f3dae9f1f9b375bbcf86cb340a37c379585348a5
     cerr<<"Original W: " <<pointCloudIn.pt_cloud_ptr->width<<" Original H: "<<pointCloudIn.pt_cloud_ptr->height<<endl;
   #endif
 
     //Run Obstacle Detection
-<<<<<<< HEAD
-    pointCloudIn.pcl_obstacle_detection(viewer);  
-=======
     pointCloudIn.pcl_obstacle_detection(viewerIn);  
->>>>>>> f3dae9f1f9b375bbcf86cb340a37c379585348a5
     obstacle_return obstacle_detection (pointCloudIn.leftBearing, pointCloudIn.rightBearing, pointCloudIn.distance);
 
     //Outlier Detection Processing
     outliersIn.pop_back(); //Remove outdated outlier value
 
     if(pointCloudIn.leftBearing > 0.05 || pointCloudIn.leftBearing < -0.05) //Check left bearing
-<<<<<<< HEAD
-        outliers.push_front(true);//if an obstacle is detected in front
-=======
         outliersIn.push_front(true);//if an obstacle is detected in front
->>>>>>> f3dae9f1f9b375bbcf86cb340a37c379585348a5
     else 
         outliersIn.push_front(false); //obstacle is not detected
 
@@ -197,11 +171,8 @@ int main() {
     #endif
   }
 
-<<<<<<< HEAD
-  thread ARTagThread(ARTagProcessing, ref(rgb, src, depth_img, detector, tagPairIn, arTags, cam));
-=======
+  // Launch the two threads
   thread ARTagThread(ARTagProcessing, ref(rgb, src, depth_img, detector, tagPair, cam, arTags));
->>>>>>> f3dae9f1f9b375bbcf86cb340a37c379585348a5
   thread PCLThread(PCLProcessing, ref(pointcloud, viewer, viewer_original, outliers, lastObstacle, obstacleMessage));
   ARTagThread.join();
   PCLThread.join();
