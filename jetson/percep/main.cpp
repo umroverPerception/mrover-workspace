@@ -9,20 +9,20 @@ using namespace cv;
 using namespace std;
 using namespace std::chrono_literals;
 
-void ARTagProcessing(Mat &rgbIn, Mat &srcIn, Mat &depthImgIn, TagDetector &detectorIn, pair<Tag, Tag> &arTagsIn, 
-                      Camera &camIn) {
-  arTags[0].distance = -1;
-  arTags[1].distance = -1;
+void ARTagProcessing(Mat &rgbIn, Mat &srcIn, Mat &depthImgIn, TagDetector &detectorIn, pair<Tag, Tag> &tagPairIn, 
+                      Camera &camIn, rover_msgs::Target *&arTagsIn) {
+  arTagsIn[0].distance = -1;
+  arTagsIn[1].distance = -1;
   #if AR_DETECTION
-      tagPair = detector.findARTags(src, depth_img, rgb);
+      tagPairIn = detector.findARTags(srcIn, depthImgIn, rgbIn);
       #if AR_RECORD
-        cam.record_ar(rgb);
+        camIn.record_ar(rgbIn);
       #endif
 
-      detector.updateDetectedTagInfo(arTags, tagPair, depth_img, src);
+      detectorIn.updateDetectedTagInfo(arTagsIn, tagPairIn, depthImgIn, srcIn);
 
   #if PERCEPTION_DEBUG && AR_DETECTION
-      imshow("depth", src);
+      imshow("depth", srcIn);
       waitKey(1);  
   #endif
 
@@ -36,42 +36,42 @@ void PCLProcessing(PCL &pointCloudIn, shared_ptr<pcl::visualization::PCLVisualiz
     
   #if PERCEPTION_DEBUG
     //Update Original 3D Viewer
-    viewer_original->updatePointCloud(pointcloud.pt_cloud_ptr);
-    viewer_original->spinOnce(10);
-    cerr<<"Original W: " <<pointcloud.pt_cloud_ptr->width<<" Original H: "<<pointcloud.pt_cloud_ptr->height<<endl;
+    viewerOriginalIn->updatePointCloud(pointCloudIn.pt_cloud_ptr);
+    viewerOriginalIn->spinOnce(10);
+    cerr<<"Original W: " <<pointCloudIn.pt_cloud_ptr->width<<" Original H: "<<pointCloudIn.pt_cloud_ptr->height<<endl;
   #endif
 
     //Run Obstacle Detection
-    pointcloud.pcl_obstacle_detection(viewer);  
-    obstacle_return obstacle_detection (pointcloud.leftBearing, pointcloud.rightBearing, pointcloud.distance);
+    pointCloudIn.pcl_obstacle_detection(viewerIn);  
+    obstacle_return obstacle_detection (pointCloudIn.leftBearing, pointCloudIn.rightBearing, pointCloudIn.distance);
 
     //Outlier Detection Processing
-    outliers.pop_back(); //Remove outdated outlier value
+    outliersIn.pop_back(); //Remove outdated outlier value
 
-    if(pointcloud.leftBearing > 0.05 || pointcloud.leftBearing < -0.05) //Check left bearing
-        outliers.push_front(true);//if an obstacle is detected in front
+    if(pointCloudIn.leftBearing > 0.05 || pointCloudIn.leftBearing < -0.05) //Check left bearing
+        outliersIn.push_front(true);//if an obstacle is detected in front
     else 
-        outliers.push_front(false); //obstacle is not detected
+        outliersIn.push_front(false); //obstacle is not detected
 
-    if(outliers == checkTrue) //If past iterations see obstacles
-      lastObstacle = obstacle_detection;
-    else if (outliers == checkFalse) // If our iterations see no obstacles after seeing obstacles
-      lastObstacle = obstacle_detection;
+    if(outliersIn == checkTrue) //If past iterations see obstacles
+      lastObstacleIn = obstacle_detection;
+    else if (outliersIn == checkFalse) // If our iterations see no obstacles after seeing obstacles
+      lastObstacleIn = obstacle_detection;
 
      //Update LCM 
-    obstacleMessage.bearing = lastObstacle.leftBearing; //update LCM bearing field
-    obstacleMessage.rightBearing = lastObstacle.rightBearing;
-    if(lastObstacle.distance <= obstacle_detection.distance)
-      obstacleMessage.distance = (lastObstacle.distance/1000); //update LCM distance field
+    obstacleMessageIn.bearing = lastObstacleIn.leftBearing; //update LCM bearing field
+    obstacleMessageIn.rightBearing = lastObstacleIn.rightBearing;
+    if(lastObstacleIn.distance <= obstacle_detection.distance)
+      obstacleMessageIn.distance = (lastObstacleIn.distance/1000); //update LCM distance field
     else
-      obstacleMessage.distance = (obstacle_detection.distance/1000); //update LCM distance field
+      obstacleMessageIn.distance = (obstacle_detection.distance/1000); //update LCM distance field
     cerr << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Path Sent: " << obstacleMessage.bearing << "\n";
 
   #if PERCEPTION_DEBUG
       //Update Processed 3D Viewer
-      viewer->updatePointCloud(pointcloud.pt_cloud_ptr);
-      viewer->spinOnce(20);
-      cerr<<"Downsampled W: " <<pointcloud.pt_cloud_ptr->width<<" Downsampled H: "<<pointcloud.pt_cloud_ptr->height<<endl;
+      viewerIn->updatePointCloud(pointCloudIn.pt_cloud_ptr);
+      viewerIn->spinOnce(20);
+      cerr<<"Downsampled W: " <<pointCloudIn.pt_cloud_ptr->width<<" Downsampled H: "<<pointCloudIn.pt_cloud_ptr->height<<endl;
   #endif
     
   #endif
@@ -169,7 +169,7 @@ int main() {
     #endif
   }
 
-  thread ARTagThread(ARTagProcessing, ref(rgb, src, depth_img, detector, arTags, cam));
+  thread ARTagThread(ARTagProcessing, ref(rgb, src, depth_img, detector, tagPair, cam, arTags));
   thread PCLThread(PCLProcessing, ref(pointcloud, viewer, viewer_original, outliers, lastObstacle, obstacleMessage));
   ARTagThread.join();
   PCLThread.join();
