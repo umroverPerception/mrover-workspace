@@ -15,7 +15,7 @@ void ARTagProcessing(Mat &rgbIn, Mat &srcIn, Mat &depthImgIn, TagDetector &detec
   arTagsIn[0].distance = -1;
   arTagsIn[1].distance = -1;
   #if AR_DETECTION
-      tagPairIn = detector.findARTags(srcIn, depthImgIn, rgbIn);
+      tagPairIn = detectorIn.findARTags(srcIn, depthImgIn, rgbIn);
       #if AR_RECORD
         camIn.record_ar(rgbIn);
       #endif
@@ -31,8 +31,9 @@ void ARTagProcessing(Mat &rgbIn, Mat &srcIn, Mat &depthImgIn, TagDetector &detec
 }
 
 // PCL Thread function
-void PCLProcessing(PCL &pointCloudIn, shared_ptr<pcl::visualization::PCLVisualizer> &viewerIn, shared_ptr<pcl::visualization::PCLVisualizer> &viewerOriginalIn
-                    deque<bool> &outliersIn,  obstacle_return &lastObstacleIn, rover_msgs::Obstacle &obstacleMessageIn) {
+void PCLProcessing(PCL &pointCloudIn, shared_ptr<pcl::visualization::PCLVisualizer> &viewerIn, shared_ptr<pcl::visualization::PCLVisualizer> &viewerOriginalIn,
+                    deque<bool> &outliersIn,  obstacle_return &lastObstacleIn, rover_msgs::Obstacle &obstacleMessageIn,
+                    deque <bool> &checkTrueIn, deque <bool> &checkFalseIn) {
   
   #if OBSTACLE_DETECTION && !WRITE_CURR_FRAME_TO_DISK
     
@@ -55,9 +56,9 @@ void PCLProcessing(PCL &pointCloudIn, shared_ptr<pcl::visualization::PCLVisualiz
     else 
         outliersIn.push_front(false); //obstacle is not detected
 
-    if(outliersIn == checkTrue) //If past iterations see obstacles
+    if(outliersIn == checkTrueIn) //If past iterations see obstacles
       lastObstacleIn = obstacle_detection;
-    else if (outliersIn == checkFalse) // If our iterations see no obstacles after seeing obstacles
+    else if (outliersIn == checkFalseIn) // If our iterations see no obstacles after seeing obstacles
       lastObstacleIn = obstacle_detection;
 
      //Update LCM 
@@ -172,8 +173,9 @@ int main() {
   }
 
   // Launch the two threads
-  thread ARTagThread(ARTagProcessing, ref(rgb, src, depth_img, detector, tagPair, cam, arTags));
-  thread PCLThread(PCLProcessing, ref(pointcloud, viewer, viewer_original, outliers, lastObstacle, obstacleMessage));
+  thread ARTagThread(ARTagProcessing, rgb, src, depth_img, detector, tagPair, cam, arTags);
+  thread PCLThread(PCLProcessing, pointcloud, viewer, viewer_original, outliers, lastObstacle, obstacleMessage,
+                    checkTrue, checkFalse);
   ARTagThread.join();
   PCLThread.join();
   
