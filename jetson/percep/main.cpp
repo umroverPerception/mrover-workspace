@@ -9,6 +9,7 @@ using namespace cv;
 using namespace std;
 using namespace std::chrono_literals;
 
+// AR Tag processing thread function
 void ARTagProcessing(Mat &rgbIn, Mat &srcIn, Mat &depthImgIn, TagDetector &detectorIn, pair<Tag, Tag> &tagPairIn, 
                       Camera &camIn, rover_msgs::Target *&arTagsIn) {
   arTagsIn[0].distance = -1;
@@ -29,6 +30,7 @@ void ARTagProcessing(Mat &rgbIn, Mat &srcIn, Mat &depthImgIn, TagDetector &detec
   #endif
 }
 
+// PCL Thread function
 void PCLProcessing(PCL &pointCloudIn, shared_ptr<pcl::visualization::PCLVisualizer> &viewerIn, shared_ptr<pcl::visualization::PCLVisualizer> &viewerOriginalIn
                     deque<bool> &outliersIn,  obstacle_return &lastObstacleIn, rover_msgs::Obstacle &obstacleMessageIn) {
   
