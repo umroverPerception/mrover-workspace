@@ -68,7 +68,7 @@ void PCLProcessing(PCL &pointCloudIn, shared_ptr<pcl::visualization::PCLVisualiz
       obstacleMessageIn.distance = (lastObstacleIn.distance/1000); //update LCM distance field
     else
       obstacleMessageIn.distance = (obstacle_detection.distance/1000); //update LCM distance field
-    cerr << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Path Sent: " << obstacleMessage.bearing << "\n";
+    cerr << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Path Sent: " << obstacleMessageIn.bearing << "\n";
 
   #if PERCEPTION_DEBUG
       //Update Processed 3D Viewer
@@ -170,12 +170,11 @@ int main() {
         cam.write_curr_frame_to_disk(rgb_copy, depth_copy, pointcloud.pt_cloud_ptr, iterations);
       }
     #endif
-  }
 
   // Launch the two threads
-  thread ARTagThread(ARTagProcessing, rgb, src, depth_img, detector, tagPair, cam, arTags);
-  thread PCLThread(PCLProcessing, pointcloud, viewer, viewer_original, outliers, lastObstacle, obstacleMessage,
-                    checkTrue, checkFalse);
+  thread ARTagThread(ARTagProcessing, ref(rgb), ref(src), ref(depth_img), ref(detector), ref(tagPair), ref(cam), ref(arTags));
+  thread PCLThread(PCLProcessing, ref(pointcloud), ref(viewer), ref(viewer_original), ref(outliers), ref(lastObstacle), 
+                    ref(obstacleMessage), ref(checkTrue), ref(checkFalse));
   ARTagThread.join();
   PCLThread.join();
   
