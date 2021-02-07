@@ -147,6 +147,7 @@ int main() {
 
 /* --- Main Processing Stuff --- */
   while (true) {
+    auto grabStart = std::chrono::high_resolution_clock::now();
     //Check to see if we were able to grab the frame
     if (!cam.grab()) break;
 
@@ -250,6 +251,9 @@ int main() {
     #endif
     
     ++iterations;
+    auto bigEnd = std::chrono::high_resolution_clock::now();
+    auto loopDur= std::chrono::duration_cast<std::chrono::microseconds>(bigEnd - grabStart); 
+    cout << "FPS Iteration: " << (loopDur.count()/1.0e3) << " \n";
   }
 
 
