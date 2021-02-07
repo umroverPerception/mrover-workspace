@@ -255,7 +255,7 @@ int main() {
     auto loopDur= std::chrono::duration_cast<std::chrono::microseconds>(bigEnd - grabStart); 
     cout << "FPS Iteration: " << (loopDur.count()/1.0e3) << " \n";
   }
-
+  auto loopEnd = std::chrono::high_resolution_clock::now();
 
 /* --- Wrap Things Up --- */
   #if OBSTACLE_DETECTION && PERCEPTION_DEBUG
