@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <deque>
 #include <thread>
+#include <fstream>
 
 using namespace cv;
 using namespace std;
@@ -81,6 +82,8 @@ void PCLProcessing(PCL &pointCloudIn, shared_ptr<pcl::visualization::PCLVisualiz
 }
 
 int main() {
+  ofstream fout;
+  fout.open("output.txt", std::ofstream::app);
 
   /* --- Camera Initializations --- */
   Camera cam;
@@ -253,10 +256,10 @@ int main() {
     ++iterations;
     auto bigEnd = std::chrono::high_resolution_clock::now();
     auto loopDur= std::chrono::duration_cast<std::chrono::microseconds>(bigEnd - grabStart); 
+    fout << "FPS Iteration: " << (loopDur.count()/1.0e3) << " \n";
     cout << "FPS Iteration: " << (loopDur.count()/1.0e3) << " \n";
   }
-  auto loopEnd = std::chrono::high_resolution_clock::now();
-
+ 
 /* --- Wrap Things Up --- */
   #if OBSTACLE_DETECTION && PERCEPTION_DEBUG
     viewer->close();
