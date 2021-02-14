@@ -83,7 +83,7 @@ void PCLProcessing(PCL &pointCloudIn, shared_ptr<pcl::visualization::PCLVisualiz
 
 int main() {
   ofstream fout;
-  fout.open("output.txt", std::ofstream::app);
+  fout.open("fpsdata.txt", ios::out);
 
   /* --- Camera Initializations --- */
   Camera cam;
@@ -176,14 +176,18 @@ int main() {
     #endif
 
   // Launch the two threads
-  thread ARTagThread(ARTagProcessing, ref(rgb), ref(src), ref(depth_img), ref(detector), ref(tagPair), ref(cam), ref(arTags));
+  //thread ARTagThread(ARTagProcessing, ref(rgb), ref(src), ref(depth_img), ref(detector), ref(tagPair), ref(cam), ref(arTags));
+  auto grabStart2 = std::chrono::high_resolution_clock::now();
   thread PCLThread(PCLProcessing, ref(pointcloud), ref(viewer), ref(viewer_original), ref(outliers), ref(lastObstacle), 
                     ref(obstacleMessage), ref(checkTrue), ref(checkFalse));
-  ARTagThread.join();
-  PCLThread.join();
+  auto bigEnd2 = std::chrono::high_resolution_clock::now();
+    auto loopDur2 = std::chrono::duration_cast<std::chrono::microseconds>(bigEnd2 - grabStart2); 
+    fout << (loopDur2.count()/1.0e3) << " \n";
+  //ARTagThread.join();
+  //PCLThread.join();
   
 /* --- AR Tag Processing --- */
-    /* arTags[0].distance = -1;
+     arTags[0].distance = -1;
     arTags[1].distance = -1;
     #if AR_DETECTION
       tagPair = detector.findARTags(src, depth_img, rgb);
@@ -198,8 +202,13 @@ int main() {
       waitKey(1);  
     #endif
 
-    #endif */
+    #endif 
 
+    auto grabStart3 = std::chrono::high_resolution_clock::now();
+    PCLThread.join();
+    auto bigEnd3 = std::chrono::high_resolution_clock::now();
+    auto loopDur3 = std::chrono::duration_cast<std::chrono::microseconds>(bigEnd3 - grabStart3); 
+    fout << (loopDur3.count()/1.0e3) << " \n";
 /* --- Point Cloud Processing --- */
     /* #if OBSTACLE_DETECTION && !WRITE_CURR_FRAME_TO_DISK
     
@@ -256,9 +265,10 @@ int main() {
     ++iterations;
     auto bigEnd = std::chrono::high_resolution_clock::now();
     auto loopDur= std::chrono::duration_cast<std::chrono::microseconds>(bigEnd - grabStart); 
-    fout << "FPS Iteration: " << (loopDur.count()/1.0e3) << " \n";
-    cout << "FPS Iteration: " << (loopDur.count()/1.0e3) << " \n";
+    fout << (loopDur.count()/1.0e3) << " \n\n";
+    fout.flush();
   }
+  fout.close();
  
 /* --- Wrap Things Up --- */
   #if OBSTACLE_DETECTION && PERCEPTION_DEBUG
