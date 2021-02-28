@@ -1,29 +1,33 @@
 #pragma once
 
 #include <vector>
-#include <cmath>`
-
-#define OCCUPANCY_MAP_HEIGHT 10000
-#define OCCUPANCY_MAP_WIDTH 10000
+#include <cmath>
 
 class OccupancyMap {
     private:
-        const double CONVERSION_FACTOR = 0.004;
+        double CONVERSION_FACTOR = 0.004;
         const double INITIALIZE_VECTOR_PROBABILITY = 0.5;
-        std::vector<char> test(OCCUPANCY_MAP_HEIGHT, 0.5);
-        
+        std::vector<std::vector<char> > occupancyMap;
+        double occupancyMapHeight;
+        double occupancyMapWidth;
+
         
     public:
-        std::vector<std::vector<char> > occupancyMap(OCCUPANCY_MAP_HEIGHT, std::vector<char> (OCCUPANCY_MAP_WIDTH, std::static_cast<char>(128)));
+        //default constructor for occupancy map
+        OccupancyMap();
 
-        OccupancyMap() {
-            std::vector<int> lol(4,4);
-        }
-        char doubleToChar(double input) {
-            return ceil(input / CONVERSION_FACTOR);
-        }
+        //converts double to char
+        char doubleToChar(double input);
         
-        double charToDouble(char input) {
-            return input * CONVERSION_FACTOR;
-        }
+        //converts char to double
+        double charToDouble(char input);
+
+        //gets height of occupancyMap
+        int getHeightOfMap();
+
+        //gets width of occupancyMap
+        int getWidthOfOccupancyMap();
+
+        //fills occupancyMap with a given char "toFillWith"
+        void fillOccupanyMap(std::vector<std::vector<char> > &occupancyMap, char toFillWith);
 };
