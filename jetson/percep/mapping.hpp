@@ -20,7 +20,7 @@ public:
     OccupancyMap();
 
     //constructor with given length and width
-    OccupancyMap(int length, int width, char charToFill);
+    OccupancyMap(int length, int width, double doubleToFill);
 
     double &operator()(int height, int width);
 

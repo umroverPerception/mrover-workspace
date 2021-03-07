@@ -6,20 +6,17 @@
 #include <vector>
 #include <cmath>
 
-OccupancyMap::OccupancyMap() {
-    occupancyMapHeight = DEFAULT_OCCUPANCY_MAP_HEIGHT;
-    occupancyMapWidth = DEFAULT_OCCUPANCY_MAP_WIDTH;
-    occupancyMap.resize(occupancyMapHeight);
-    for (std::size_t i = 0; i < occupancyMap.size(); ++i) {
-        occupancyMap[i].resize(occupancyMapWidth);
-    }
-}
-
-OccupancyMap::OccupancyMap(int height, int width, char charToFill) : occupancyMapHeight(height), occupancyMapWidth(width), charToFill(static_cast<char>(128)) {
+OccupancyMap::OccupancyMap(int height, int width, double doubleToFill) : occupancyMapHeight(height), occupancyMapWidth(width) {
     occupancyMap.resize(occupancyMapHeight);
     for (std::size_t i = 0; i < occupancyMap.size(); ++i) {
         occupancyMap[i].resize(occupancyMapWidth);
     } 
+    
+    charToFill = static_cast<char>(doubleToFill);
+}
+
+OccupancyMap::OccupancyMap() {
+    OcccupancyMap(DEFAULT_OCCUPANCY_MAP_HEIGHT, DEFAULT_OCCUPANCY_MAP_WIDTH, 0.5);
 }
 
 void OccupancyMap::fillOccupanyMap() {
