@@ -1,4 +1,4 @@
-project('cuda dependency', 'cuda')
+project('simple', 'cuda', version : '1.0.0')
 
-subdir('modules')
-subdir('version_reqs')
+exe = executable('prog', 'prog.cu')
+test('cudatest', exe)
