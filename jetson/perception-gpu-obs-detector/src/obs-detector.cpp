@@ -18,7 +18,7 @@ ObsDetector::ObsDetector(DataSource source, OperationMode mode, ViewerType viewe
     if(mode != OperationMode::SILENT && viewer == ViewerType::PCLV) {
         pcl::PointCloud<pcl::PointXYZRGB>::Ptr pc_pcl(new pcl::PointCloud<pcl::PointXYZRGB>);
         pclViewer = createRGBVisualizer(pc_pcl);
-        pclViewer->registerKeyboardCallback(&ObsDetector::pclKeyCallback, *this);
+       // pclViewer->registerKeyboardCallback(&ObsDetector::pclKeyCallback, *this);
     } else if(mode != OperationMode::SILENT && viewer == ViewerType::GL) {
         int argc = 1;
         char *argv[1] = {(char*)"Window"};
