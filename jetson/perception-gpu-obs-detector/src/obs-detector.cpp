@@ -42,7 +42,7 @@ void ObsDetector::pclKeyCallback(const pcl::visualization::KeyboardEvent &event,
 void ObsDetector::setupParamaters(std::string parameterFile) {
     //Operating resolution
     cloud_res = sl::Resolution(320/2, 180/2);
-    readDir = "../data";
+    readDir = "/home/ashmg/mrover-workspace/jetson/perception-gpu-obs-detector/data";
 
     //Zed params
     init_params.coordinate_units = sl::UNIT::MILLIMETER;
@@ -93,11 +93,11 @@ void ObsDetector::update(sl::Mat &frame) {
     pc = getRawCloud(frame);
 
     // Processing 
-    passZ->run(pc);
+   // passZ->run(pc);
     //std::cout << "pre ransac:" << pc.size << endl;
-    ransacPlane->computeModel(pc, true);
+   // ransacPlane->computeModel(pc, true);
     //std::cout << "post ransac:" << pc.size << endl;
-    obstacles = ece->extractClusters(pc); 
+   // obstacles = ece->extractClusters(pc); 
 
     // Rendering
     if(mode != OperationMode::SILENT) {
@@ -159,7 +159,7 @@ void ObsDetector::startRecording(std::string directory) {
 
 
 int main() {
-    ObsDetector obs(DataSource::FILESYSTEM, OperationMode::DEBUG, ViewerType::GL);
+    ObsDetector obs(DataSource::FILESYSTEM, OperationMode::DEBUG, ViewerType::PCLV);
     //obs.startRecording("test-record3");
     //obs.update();
     std::thread viewerTick( [&]{while(true) { obs.update();} });
