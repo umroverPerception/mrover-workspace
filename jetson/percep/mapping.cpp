@@ -6,39 +6,41 @@
 #include <vector>
 #include <cmath>
 
-OccupancyMap::OccupancyMap(int height, int width, double doubleToFill) : occupancyMapHeight(height), occupancyMapWidth(width) {
-    occupancyMap.resize(occupancyMapHeight);
+OccupancyMap::OccupancyMap(int height, int width) : occupancyMapHeight(height), occupancyMapWidth(width) {
+    /*occupancyMap.resize(occupancyMapHeight);
     for (std::size_t i = 0; i < occupancyMap.size(); ++i) {
         occupancyMap[i].resize(occupancyMapWidth);
     } 
     
-    charToFill = static_cast<char>(doubleToFill);
+    charToFill = static_cast<char>(doubleToFill);*/
+    occupancyMap = occupancyMap(occupancyMapHeight, std::vector(occupancyMapWidth, 0));
 }
 
 OccupancyMap::OccupancyMap() {
-    OcccupancyMap(DEFAULT_OCCUPANCY_MAP_HEIGHT, DEFAULT_OCCUPANCY_MAP_WIDTH, 0.5);
+    //OcccupancyMap(DEFAULT_OCCUPANCY_MAP_HEIGHT, DEFAULT_OCCUPANCY_MAP_WIDTH, 0.5);
+    occupancyMap = occupancyMap(DEFAULT_OCCUPANCY_MAP_HEIGHT, std::vector(DEFAULT_OCCUPANCY_MAP_WIDTH, 0));
 }
 
-void OccupancyMap::fillOccupanyMap() {
+/*void OccupancyMap::fillOccupanyMap() {
     for(std::size_t height = 0; width < occupancyMapHeight; height++) {
         for(std::size_t width = 0; width < occupancyMapWidth; width++) {
             occupancyMap[height][width] = charToFill;
         }
     }
-}
-
+}*/
+/*
 double& OccupancyMap::operator()(int row, int col) {
     return occupancyMap[row][col] * CONVERSION_FACTOR;
 }
 
 double& OccupancyMap::operator=(double &value) {
     return ceil(value / CONVERSION_FACTOR);
-}
+}*/
 
 Mapping::Mapping() {
     //defaultCellDistanceRepresentation
-    cellDistance = 0.3; //0.3 meters
-    occupancyMap = new OccupancyMap();
+    //cellDistance = 0.3; //0.3 meters
+    OccupancyMap occupanceMap;
     previousOdometry = new Odometry();
     roverXCoordsInOccupancyMap = 4999;
     roverXCoordsInOccupancyMap = 4999;
@@ -75,8 +77,8 @@ void Mapping::updatePositionInOccupancyMap(Odometry &currentOdometry) {
             changeInPositionHeight = sin(hangeInBearingFromPreviousPosition - 270.0);
         }
 
-        roverXCoordsInOccupancyMap += ceil(changeInPositionWidth/cellDistance);
-        roverYCoordsInOccupancyMap += ceil(changeInPositionHeight/cellDistance);
+        roverXCoordsInOccupancyMap += ceil(changeInPositionWidth/CELL_DISTANCE);
+        roverYCoordsInOccupancyMap += ceil(changeInPositionHeight/CELL_DISTANCE);
         
         //then update odometry
         previousOdometry = currentOdometry;

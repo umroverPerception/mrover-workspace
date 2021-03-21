@@ -6,25 +6,28 @@
 
 const std::size_t DEFAULT_OCCUPANCY_MAP_HEIGHT = 10000;
 const std::size_t DEFAULT_OCCUPANCY_MAP_WIDTH = 10000;
-const double CONVERSION_FACTOR = 0.004;
+const double CELL_DISTANCE = 0.3 //0.3 meters or 3 ft
+const int MAX_FILTER_LENGTH = 7 //7 meters
+//const double CONVERSION_FACTOR = 0.004;
 
 class OccupancyMap {
 private:
-    std::vector<std::vector<char> > occupancyMap;
+    //std::vector<std::vector<char> > occupancyMap;
+    std::vector<std::vector<float> > occupancyMap;
     size_t occupancyMapHeight, occupancyMapWidth;
-    char charToFill;
+    //char charToFill;
     
-    void fillOccupancyMap();
+    //void fillOccupancyMap();
 public:
     //default constructor for occupancy map
     OccupancyMap();
 
     //constructor with given length and width
-    OccupancyMap(int length, int width, double doubleToFill);
+    OccupancyMap(int length, int width);
 
-    double &operator()(int height, int width);
+    //double &operator()(int height, int width);
 
-    double &operator=(double &value);
+    //double &operator=(double &value);
 }
 
 class Mapping {
@@ -38,6 +41,8 @@ public:
     Mapping();
 
     void updatePositionInOccupancyMap(Odometry &currentOdometry);
+    
+    void 
 }
 
 /*class OccupancyMap {
