@@ -83,27 +83,28 @@ void ObsDetector::update() {
 // Call this directly with ZED GPU Memory
 void ObsDetector::update(sl::Mat &frame) {
     // Get a copy if debug is enabled
+    /*
     sl::Mat orig; 
     if(mode != OperationMode::SILENT) {
         frame.copyTo(orig, sl::COPY_TYPE::GPU_GPU);
-    }
+    }*/
 
     // Convert ZED format into CUDA compatible 
     GPU_Cloud_F4 pc; 
     pc = getRawCloud(frame);
 
     // Processing 
-   // passZ->run(pc);
-    //std::cout << "pre ransac:" << pc.size << endl;
-   // ransacPlane->computeModel(pc, true);
-    //std::cout << "post ransac:" << pc.size << endl;
-   // obstacles = ece->extractClusters(pc); 
+    passZ->run(pc);
+    std::cout << "pre ransac:" << pc.size << endl;
+    ransacPlane->computeModel(pc, true);
+    std::cout << "post ransac:" << pc.size << endl;
+    obstacles = ece->extractClusters(pc); 
 
     // Rendering
     if(mode != OperationMode::SILENT) {
         clearStale(pc, cloud_res.area());
         if(viewer == ViewerType::GL) {
-            glViewer.updatePointCloud(orig);
+           // glViewer.updatePointCloud(orig);
         } else {
            pcl::PointCloud<pcl::PointXYZRGB>::Ptr pc_pcl(new pcl::PointCloud<pcl::PointXYZRGB>);
            ZedToPcl(pc_pcl, frame);
@@ -162,10 +163,10 @@ int main() {
     ObsDetector obs(DataSource::FILESYSTEM, OperationMode::DEBUG, ViewerType::PCLV);
     //obs.startRecording("test-record3");
     //obs.update();
-    std::thread viewerTick( [&]{while(true) { obs.update();} });
+    //std::thread viewerTick( [&]{while(true) { obs.update();} });
     
     while(true) {
-        //obs.update();
+        obs.update();
         obs.spinViewer();
     }
 
