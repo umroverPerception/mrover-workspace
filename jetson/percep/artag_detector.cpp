@@ -54,13 +54,71 @@ Point2f TagDetector::getAverageTagCoordinateFromCorners(const vector<Point2f> &c
     // of the passed-in tag
     Point2f avgCoord;
     for (auto &corner : corners) {
+        cout << "corner's x: " << corner.x << ", corner's y: " << corner.y << endl;
         avgCoord.x += corner.x;
         avgCoord.y += corner.y;
     }
     avgCoord.x /= corners.size();
     avgCoord.y /= corners.size();
+    cout << "x center: " << avgCoord.x << endl;
+    cout << "y center: " << avgCoord.y << endl;
+    int xMin = max(corners[0].x,corners[3].x);
+    int xMax = min(corners[1].x,corners[2].x);
+    int yMin = max(corners[0].y,corners[1].y);
+    int yMax = min(corners[2].y,corners[3].y);
+    Point2f point1;
+    point1.x = avgCoord.x;
+    point1.y = (avgCoord.y + yMin)/2;
+    cout << "point1 x: " << point1.x << ", point1 y: " << point1.y << endl;
+    //coordinates.push_back(point1);
+    Point2f point2;
+    point2.x = (avgCoord.x + xMax)/2;
+    point2.y = avgCoord.y;
+    cout << "point2 x: " << point2.x << ", point2 y: " << point2.y << endl;
+    //coordinates.push_back(point2);
+    Point2f point3;
+    point3.x = avgCoord.x;
+    point3.y = (avgCoord.y + yMax)/2;
+    cout << "point3 x: " << point3.x << ", point3 y: " << point3.y << endl;
+    //coordinates.push_back(point3);
+    Point2f point4;
+    point4.x = (avgCoord.x + xMin)/2;
+    point4.y = avgCoord.y;
+    cout << "point4 x: " << point4.x << ", point4 y: " << point4.y << endl;
+    //coordinates.push_back(point4);
+    //return coordinates;
     return avgCoord;
 }
+
+// void TagDetector::getMoreCoordinates(const vector<Point2f> &corners) {
+//     //vector<Point2f> coordinates;
+//     Point2f avgCoord = getAverageTagCoordinateFromCorners(corners);
+//     int xMin = max(corners[0].x,corners[3].x);
+//     int xMax = min(corners[1].x,corners[2].x);
+//     int yMin = max(corners[0].y,corners[1].y);
+//     int yMax = min(corners[2].y,corners[3].y);
+//     Point2f point1;
+//     point1.x = avgCoord.x;
+//     point1.y = (avgCoord.y + yMin)/2;
+//     cout << "point1 x: " << point1.x << ", point1 y: " << point1.y << endl;
+//     //coordinates.push_back(point1);
+//     Point2f point2;
+//     point2.x = (avgCoord.x + xMax)/2;
+//     point2.y = avgCoord.y;
+//     cout << "point2 x: " << point2.x << ", point2 y: " << point2.y << endl;
+//     //coordinates.push_back(point2);
+//     Point2f point3;
+//     point3.x = avgCoord.x;
+//     point3.y = (avgCoord.y + yMax)/2;
+//     cout << "point3 x: " << point3.x << ", point3 y: " << point3.y << endl;
+//     //coordinates.push_back(point3);
+//     Point2f point4;
+//     point2.x = (avgCoord.x + xMin)/2;
+//     point2.y = avgCoord.y;
+//     cout << "point4 x: " << point4.x << ", point4 y: " << point4.y << endl;
+//     //coordinates.push_back(point4);
+//     //return coordinates;
+// }
 
 pair<Tag, Tag> TagDetector::findARTags(Mat &src, Mat &depth_src, Mat &rgb) {  //detects AR tags in source Mat and outputs Tag objects for use in LCM
     // RETURN:
@@ -100,6 +158,7 @@ cv::aruco::drawDetectedMarkers(rgb, corners, ids);
     } else if (ids.size() == 1) {  // exactly one tag found
         discoveredTags.first.id = ids[0];
         discoveredTags.first.loc = getAverageTagCoordinateFromCorners(corners[0]);
+        //getMoreCoordinates(corners[0]);
         // set second tag to invalid object with tag as -1
         discoveredTags.second.id = DEFAULT_TAG_VAL;
         discoveredTags.second.loc = Point2f();
@@ -107,8 +166,10 @@ cv::aruco::drawDetectedMarkers(rgb, corners, ids);
         Tag t0, t1;
         t0.id = ids[0];
         t0.loc = getAverageTagCoordinateFromCorners(corners[0]);
+        //getMoreCoordinates(corners[0]);
         t1.id = ids[1];
         t1.loc = getAverageTagCoordinateFromCorners(corners[1]);
+        //getMoreCoordinates(corners[1]);
         if (t0.loc.x < t1.loc.x) {  //if tag 0 is left of tag 1, put t0 first
             discoveredTags.first = t0;
             discoveredTags.second = t1;
@@ -121,8 +182,10 @@ cv::aruco::drawDetectedMarkers(rgb, corners, ids);
         Tag t0, t1;
         t0.id = ids[0];
         t0.loc = getAverageTagCoordinateFromCorners(corners[0]);
+        //getMoreCoordinates(corners[0]);
         t1.id = ids[ids.size() - 1];
         t1.loc = getAverageTagCoordinateFromCorners(corners[ids.size() - 1]);
+        //getMoreCoordinates(corners[ids.size() - 1]);
         if (t0.loc.x < t1.loc.x) {  //if tag 0 is left of tag 1, put t0 first
             discoveredTags.first = t0;
             discoveredTags.second = t1;
