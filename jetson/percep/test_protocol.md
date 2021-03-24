@@ -1,3 +1,6 @@
+## Description
+TODO: Add several sentences explaining this PR here. 
+
 ## Compile Test
 - [ ] Offline Debug: ` ./jarvis build jetson/percep -o with_zed=false ar_detection=true obs_detection=true perception_debug=true `
   - [ ] No compiler errors or warnings
@@ -6,6 +9,8 @@
 - [ ] ZED Debug: ` ./jarvis build jetson/percep -o with_zed=true ar_detection=true obs_detection=true perception_debug=true `
   - [ ] No compiler errors, only ZED warnings
 - [ ] ZED Silent: ` ./jarvis build jetson/percep -o with_zed=true ar_detection=true obs_detection=true perception_debug=false `
+   - [ ] No compiler errors, only ZED warnings
+- [ ] Image Capture: ` ./jarvis build jetson/percep -o with_zed=true write_frame=true data_folder='/home/<username>/folder/'`
    - [ ] No compiler errors, only ZED warnings
 
 ## Offline Debug Test
@@ -32,9 +37,12 @@
 
 ## Offline Silent Test
 - [ ] `./jarvis build jetson/percep -o with_zed=false ar_detection=true obs_detection=true perception_debug=false`
-- [ ] Run `time ./jarvis exec jetson/percep` against test_case1 image set
-- [ ] Run `time ./jarvis exec jetson/percep` against test_case2 image set
-- [ ] User value is less than or equal to \<TODO Determine Value\>
+- [ ] Run `time ./jarvis exec jetson/percep` against test1 image set on the cluster
+  - Benchmark Time: We want the value of real time here however, since we don't have a script this is dependent on how quickly you can type in the address, so either we need to change the address to be a command line argument or we create a script to run all of this for us, so it is done consistently and in the manner that we want every time
+  - Recorded Time: <TODO Fill in this Value>
+- [ ] Run `time ./jarvis exec jetson/percep` against test2 image set on the cluster
+  - Benchmark Time: 
+  - Recorded Time: <TODO Fill in this Value>
 
 ## Unit Test
 - [ ] ` ./jarvis build jetson/percep -o with_zed=true ar_detection=true obs_detection=true perception_debug=true `
@@ -54,7 +62,7 @@
   - [ ] AR Tag ID is the correct ID
   - [ ] Obstacles with large width are detected
   - [ ] Short obstacles are detected
-  - [ ] FPS values don't exceed \<TODO find this value in Issue #552\>
+  - [ ] FPS values don't drop below \<TODO find this value in Issue #552\>
   - [ ] Obstacle.lcm in /obstacle is populated correctly
   - [ ] TargetList.lcm in /target_list is populated correctly
 

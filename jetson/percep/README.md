@@ -52,6 +52,12 @@
 
 ## Handy Configurations:
 
+### Online Debug
+    ./jarvis build jetson/percep -o with_zed=false obs_detection=true ar_detection=true perception_debug=true
+
+### Outdoor Debug  
+    ./jarvis build jetson/percep -o with_zed=true obs_detection=true ar_detection=true perception_debug=true 
+
 ### Record Data from ZED
     ./jarvis build jetson/percep -o with_zed=true write_frame=true data_folder='/home/<username>/folder/'
 
