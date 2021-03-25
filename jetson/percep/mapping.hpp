@@ -35,6 +35,7 @@ private:
     OccupancyMap map;
     Odometry previousOdometry;
     int roverXCoordsInOccupancyMap, roverYCoordsInOccupancyMap;
+    double orientationAngle;
     double cellDistance;
 
 public:
@@ -42,7 +43,9 @@ public:
 
     void updatePositionInOccupancyMap(Odometry &currentOdometry);
     
-    void 
+    void updateOrientation (double &orientationAngle);
+
+    void getMapArea();
 }
 
 /*class OccupancyMap {

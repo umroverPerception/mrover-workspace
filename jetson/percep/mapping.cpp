@@ -84,6 +84,38 @@ void Mapping::updatePositionInOccupancyMap(Odometry &currentOdometry) {
         previousOdometry = currentOdometry;
 }
 
+void Mapping::updateOrientation(double &currentAngle) {
+    orientationAngle = currentAngle;
+}
+
+void Mapping::getMapArea(double angle, double FOV) {
+    int rowStart = 0;
+    int rowEnd = 0;
+    int colStart = 0;
+    int colEnd = 0;
+    if (orientationAngle >= 0.0 && orientationAngle < 45.0) {
+        rowStart = roverYCoordsInOccupancyMap + ceil(cos(orientationAngle - ())/CELL_DISTANCE);
+        rowEnd = roverYCoordsInOccupancyMap - ceil(cos(135.0 - orientationAngle)/CELL_DISTANCE);
+
+        colStart = roverXCoordsInOccupancyMap;
+        colEnd = roverXCoordsInOccupancyMap + ceil(MAX_FILTER_LENGTH/CELL_DISTANCE);
+    }
+    else if (orientationAngle == 45.0) {
+        rowStart = roverYCoordsInOccupancyMap + ceil(MAX_FILTER_LENGTH/CELL_DISTANCE);
+        rowEnd = overYCoordsInOccupancyMap;
+
+        colStart = roverXCoordsInOccupancyMap;
+        colEnd = roverXCoordsInOccupancyMap + ceil(MAX_FILTER_LENGTH/CELL_DISTANCE);
+    }
+    else if (orientationAngle > 45.0  orientationAngle < 135.0) {
+        rowStart = roverYCoordsInOccupancyMap + ceil(MAX_FILTER_LENGTH/CELL_DISTANCE);
+        rowEnd = overYCoordsInOccupancyMap;
+
+        colStart = roverXCoordsInOccupancyMap - ceil(cos(135.0 - orientationAngle)/CELL_DISTANCE);
+        colEnd = roverXCoordsInOccupancyMap + ceil(cos(45.0 - orientationAngle)/CELL_DISTANCE)
+    }
+    
+}
 /*char OccupancyMap::doubleToChar(double &input) {
     return ceil(input / CONVERSION_FACTOR);
 }
