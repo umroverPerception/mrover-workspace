@@ -10,6 +10,7 @@ using namespace cv;
 
 struct Tag {
     Point2f loc;
+    vector<Point2f> extraPoints;
     int id;
 };
 
