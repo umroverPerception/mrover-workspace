@@ -74,6 +74,9 @@ int main() {
   cam.record_ar_init();
   #endif
 
+#if PERCEPTION_DEBUG
+  Display display("Console Display");
+#endif
 
 /* --- Main Processing Stuff --- */
   while (true) {
