@@ -1,4 +1,3 @@
-import Adafruit_BBIO.UART as UART
 import serial
 import asyncio
 import math
@@ -10,8 +9,6 @@ from rover_msgs import IMUData
 class IMU_Manager():
 
     def __init__(self):
-        UART.setup("UART4")
-
         # Mapping NMEA messages to their handlers
         self.NMEA_TAGS_MAPPER = {
             "PCHRS": self.pchrs_handler,
@@ -22,7 +19,7 @@ class IMU_Manager():
     def __enter__(self):
 
         self.ser = serial.Serial(
-            port='/dev/ttyS4',
+            port='/dev/ttyTHS0',
             baudrate=115200,
             parity=serial.PARITY_NONE,
             stopbits=serial.STOPBITS_ONE,
