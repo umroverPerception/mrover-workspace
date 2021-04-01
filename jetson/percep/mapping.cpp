@@ -88,12 +88,18 @@ void Mapping::updateOrientation(double &currentAngle) {
     orientationAngle = currentAngle;
 }
 
-void Mapping::getMapArea(double angle, double FOV) {
-    int rowStart = 0;
-    int rowEnd = 0;
-    int colStart = 0;
-    int colEnd = 0;
-    if (orientationAngle >= 0.0 && orientationAngle < 45.0) {
+void Mapping::getMapArea(double &angle, double &FOV) {
+
+    if (angle  < 0) {
+        angle = 360.0 - (90.0 - angle);
+    }
+    else {
+        angle = 90.0 - angle;
+    }
+
+    
+    
+    /*if (orientationAngle >= 0.0 && orientationAngle < 45.0) {
         rowStart = roverYCoordsInOccupancyMap + ceil(cos(orientationAngle - ())/CELL_DISTANCE);
         rowEnd = roverYCoordsInOccupancyMap - ceil(cos(135.0 - orientationAngle)/CELL_DISTANCE);
 
@@ -113,7 +119,7 @@ void Mapping::getMapArea(double angle, double FOV) {
 
         colStart = roverXCoordsInOccupancyMap - ceil(cos(135.0 - orientationAngle)/CELL_DISTANCE);
         colEnd = roverXCoordsInOccupancyMap + ceil(cos(45.0 - orientationAngle)/CELL_DISTANCE)
-    }
+    }*/
     
 }
 /*char OccupancyMap::doubleToChar(double &input) {

@@ -46,6 +46,8 @@ public:
     void updateOrientation (double &orientationAngle);
 
     void getMapArea();
+
+    void getMapArea(double &angle, double &FOV);
 }
 
 /*class OccupancyMap {
