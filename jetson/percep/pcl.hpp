@@ -89,9 +89,6 @@ class PCL {
         
         //Finds the four corners of the clustered obstacles
         void FindInterestPoints(std::vector<pcl::PointIndices> &cluster_indices, std::vector<std::vector<int>> &interest_points);
-
-        //Inverse Sensor Model
-        void InverseSensorModel(Mapping &occupancyGrid);
         
         //Finds a clear path given the obstacle corners
         double FindClearPath(const std::vector<std::vector<int>> &interest_points,

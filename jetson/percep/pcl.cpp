@@ -1,5 +1,6 @@
 #include "pcl.hpp"
 #include "perception.hpp"
+#include "mapping.hpp"
 
 #if OBSTACLE_DETECTION
 

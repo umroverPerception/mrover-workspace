@@ -6,28 +6,63 @@
 
 const std::size_t DEFAULT_OCCUPANCY_MAP_HEIGHT = 10000;
 const std::size_t DEFAULT_OCCUPANCY_MAP_WIDTH = 10000;
-const double CELL_DISTANCE = 0.3 //0.3 meters or 3 ft
+
+const double DEFAULT_FOV = 90.0;
+
+const double CELL_DISTANCE = 0.4 //0.4 meters
 const int MAX_FILTER_LENGTH = 7 //7 meters
-//const double CONVERSION_FACTOR = 0.004;
 
 class OccupancyMap {
 private:
-    //std::vector<std::vector<char> > occupancyMap;
+    //Vector of vectors that stores the log odds of occupacy for each cell as a float.
     std::vector<std::vector<float> > occupancyMap;
-    size_t occupancyMapHeight, occupancyMapWidth;
-    //char charToFill;
     
-    //void fillOccupancyMap();
 public:
-    //default constructor for occupancy map
+    //Default Constructor for OccupancyMap Class, resizes the vector of vectors to the default map height and width.
     OccupancyMap();
 
-    //constructor with given length and width
+    //Overloaded Constructor for OccupancyMap Class, resizes the vector of vectors to the inputed height and width.
     OccupancyMap(int length, int width);
+}
 
-    //double &operator()(int height, int width);
+class MapSegmentation {
+private:
+    enum class Quadrant {
+        QuadrantOne,
+        QuadrantTwo,
+        QuadrantThree,
+        QuadrantFour
+    };
 
-    //double &operator=(double &value);
+    double heading, upperFOV, lowerFOV;
+    /* [quadrant] -> rowStart, colStart, rowEnd, colEnd... This vector can have either 8 or 12 elements depending on how
+    many quadrants  the total FOV would take up */
+    std::vector<int> indexCorners;
+    Quadrant headingQuadrant, upperFOVQuadrant, lowerFOVQuadrant;
+
+    //Given an angle, this function determines what Quadrant a cell is in
+    Quadrant getQuadrant(double &angleIn);
+
+    //Quandrant one index calculations
+    void calcQuadrantOne(double &angle, char &key);
+
+    //Quandrant two index calculations
+    void calcQuadrantTwo(double &angle, char &key);
+
+    //Quandrant three index calculations
+    void calcQuadrantThree(double &angle, char &key);
+
+    //Quandrant four index calculations
+    void calcQuadrantFour(double &angle, char &key);
+
+    //calculates the segmentation for each quadrant and fills the indexCorners vector
+    void fillIndexCorners();
+public:
+    //Default Constructor for MapSegmentation Class.
+    MapSegmentation(double &headingAngle);
+
+    //returns the indexCorners vector
+    std::vector<int> getIndexCorners();
 }
 
 class Mapping {
@@ -37,9 +72,10 @@ private:
     int roverXCoordsInOccupancyMap, roverYCoordsInOccupancyMap;
     double orientationAngle;
     double cellDistance;
+    bool occupied;
 
 public:
-    Mapping();
+    Mapping() : occupied(false);
 
     void updatePositionInOccupancyMap(Odometry &currentOdometry);
     
@@ -48,6 +84,8 @@ public:
     void getMapArea();
 
     void getMapArea(double &angle, double &FOV);
+
+    void updateOccupancy (size_t xIndex, size_t yIndex);
 }
 
 /*class OccupancyMap {

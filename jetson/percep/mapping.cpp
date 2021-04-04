@@ -6,40 +6,89 @@
 #include <vector>
 #include <cmath>
 
-OccupancyMap::OccupancyMap(int height, int width) : occupancyMapHeight(height), occupancyMapWidth(width) {
-    /*occupancyMap.resize(occupancyMapHeight);
-    for (std::size_t i = 0; i < occupancyMap.size(); ++i) {
-        occupancyMap[i].resize(occupancyMapWidth);
-    } 
-    
-    charToFill = static_cast<char>(doubleToFill);*/
-    occupancyMap = occupancyMap(occupancyMapHeight, std::vector(occupancyMapWidth, 0));
-}
-
 OccupancyMap::OccupancyMap() {
-    //OcccupancyMap(DEFAULT_OCCUPANCY_MAP_HEIGHT, DEFAULT_OCCUPANCY_MAP_WIDTH, 0.5);
-    occupancyMap = occupancyMap(DEFAULT_OCCUPANCY_MAP_HEIGHT, std::vector(DEFAULT_OCCUPANCY_MAP_WIDTH, 0));
+    occupancyMap = occupancyMap(DEFAULT_OCCUPANCY_MAP_HEIGHT, std::vector(DEFAULT_OCCUPANCY_MAP_WIDTH, 0.5));
 }
 
-/*void OccupancyMap::fillOccupanyMap() {
-    for(std::size_t height = 0; width < occupancyMapHeight; height++) {
-        for(std::size_t width = 0; width < occupancyMapWidth; width++) {
-            occupancyMap[height][width] = charToFill;
-        }
+OccupancyMap::OccupancyMap(int height, int width) {
+    occupancyMap = occupancyMap(height, std::vector(width, 0.5));
+}
+
+MapSegmentation::Quadrant MapSegmentation::getQuadrant(double &angleIn) {
+    if (angleIn >= 0.0 && angleIn < 90.0) {
+        return QuadrantOne;
     }
-}*/
-/*
-double& OccupancyMap::operator()(int row, int col) {
-    return occupancyMap[row][col] * CONVERSION_FACTOR;
+    else if (angleIn >= 90.0 && angleIn < 180.0) {
+        return QuadrantTwo;
+    }
+    else if (angleIn >= 180.0 && angleIn < 270.0) {
+        return QuadrantThree;
+    }
+    else if (angleIn >= 270.0 && angleIn < 360.0) {
+        return QuadrantFour;
+    }
 }
 
-double& OccupancyMap::operator=(double &value) {
-    return ceil(value / CONVERSION_FACTOR);
-}*/
+MapSegmentation::MapSegementation(double &headingAngle) : heading(headinAngle) {
+    headingQuadrant = getQuadrant(heading);
+
+    upperFOV = heading + (DEFAULT_FOV/2.0);
+    if (upperFOV >= 360.0) {
+        upperFOV = upperFOV - 360.0;
+    }
+    upperFOVQuadrant = getQuadrant(upperFOV);
+
+
+    lowerFOV = heading - (DEFAULT_FOV/2.0);
+    if (upperFOV < 0.0) {
+        upperFOV = upperFOV + 360.0;
+    }
+    lowerFOVQuadrant = getQuadrant(lowerFOV);
+}
+
+void MapSegmentation::caclulateQuadOne(double &angle, char &key) {
+    if (key == 'u') {
+        indexCorners.push_back(ceil(MAX_FILTER_LENGTH * cos(90.0 - angle)));
+        indexCorners.push_back(0);
+        indexCorners.push_back(0);
+        indexCorners.push_back(MAX_FILTER_LENGTH);
+    }
+    else if (key == 'h') {
+        indexCorners.push_back(MAX_FILTER_LENGTH);
+        indexCorners.push_back(0);
+        indexCorners.push_back(0);
+        indexCorners.push_back(MAX_FILTER_LENGTH);
+    }
+    else if (key == 'l') {
+        indexCorners.push_back(MAX_FILTER_LENGTH);
+        indexCorners.push_back(0);
+        indexCorners.push_back(0);
+        indexCorners.push_back(ceil(MAX_FILTER_LENGTH * cos(angle)));
+    }
+}
+
+void MapSegmentation::caclulateQuadTwo(double &angle, char &key) {
+    if (key == 'u') {
+        indexCorners.push_back(MAX_FILTER_LENGTH);
+        indexCorners.push_back((-1) * ceil(MAX_FILTER_LENGTH * cos(180.0 - angle)));
+        indexCorners.push_back(0);
+        indexCorners.push_back(0);
+    }
+    else if (key == 'h') {
+        indexCorners.push_back(MAX_FILTER_LENGTH);
+        indexCorners.push_back(MAX_FILTER_LENGTH);
+        indexCorners.push_back(0);
+        indexCorners.push_back(0);
+    }
+    else if (key == 'l') {
+        indexCorners.push_back((-1) * ceil(MAX_FILTER_LENGTH * cos(angle - 90.0)));
+        indexCorners.push_back(MAX_FILTER_LENGTH);
+        indexCorners.push_back(0);
+        indexCorners.push_back(0);
+    }
+}
 
 Mapping::Mapping() {
-    //defaultCellDistanceRepresentation
-    //cellDistance = 0.3; //0.3 meters
     OccupancyMap occupanceMap;
     previousOdometry = new Odometry();
     roverXCoordsInOccupancyMap = 4999;
@@ -90,16 +139,14 @@ void Mapping::updateOrientation(double &currentAngle) {
 
 void Mapping::getMapArea(double &angle, double &FOV) {
 
-    if (angle  < 0) {
+    /*if (angle  < 0) {
         angle = 360.0 - (90.0 - angle);
     }
     else {
         angle = 90.0 - angle;
-    }
+    }*/
 
-    
-    
-    /*if (orientationAngle >= 0.0 && orientationAngle < 45.0) {
+    if (orientationAngle >= 0.0 && orientationAngle < 45.0) {
         rowStart = roverYCoordsInOccupancyMap + ceil(cos(orientationAngle - ())/CELL_DISTANCE);
         rowEnd = roverYCoordsInOccupancyMap - ceil(cos(135.0 - orientationAngle)/CELL_DISTANCE);
 
@@ -119,9 +166,19 @@ void Mapping::getMapArea(double &angle, double &FOV) {
 
         colStart = roverXCoordsInOccupancyMap - ceil(cos(135.0 - orientationAngle)/CELL_DISTANCE);
         colEnd = roverXCoordsInOccupancyMap + ceil(cos(45.0 - orientationAngle)/CELL_DISTANCE)
-    }*/
+    }
     
 }
+
+void Mapping::updateOccupancy (size_t xIndex, size_t yIndex) {
+    if (occupied) {
+        map[xIndex][yIndex] = map[xIndex][yIndex] + (0.65/0.35);
+    }
+    else {
+        map[xIndex][yIndex] = map[xIndex][yIndex] + (0.65/0.35); 
+    }
+}
+
 /*char OccupancyMap::doubleToChar(double &input) {
     return ceil(input / CONVERSION_FACTOR);
 }
