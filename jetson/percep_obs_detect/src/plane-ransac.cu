@@ -1,6 +1,7 @@
 #include "plane-ransac.hpp"
 #include "common.hpp"
 #include <stdlib.h>
+#include <thrust/extrema.h>
 
 __device__ int ceilDivGPU(int a, int b) {
     return (a + b - 1) / b;
@@ -183,7 +184,7 @@ __global__ void selectOptimalRansacModel(GPU_Cloud_F4 pc, float* inlierCounts, i
     }
 }
 */
-__global__ void getOptimalModelPoints(float* selection, int idx) {
+__global__ void getOptimalModelPoints(GPU_Cloud_F4 pc, float* selection, int idx, int* modelPoints) {
     int point = threadIdx.x / 3; 
     int axis = threadIdx.x % 3; 
     sl::float3 pt = pc.data[modelPoints[idx + point]];
@@ -194,7 +195,7 @@ void RansacPlane::selectOptimalModel() {
     float* maxCount = thrust::max_element(thrust::device, inlierCounts, inlierCounts + iterations);
     int maxIdx = maxCount - inlierCounts;
     cudaMemcpy(optimalModelIndex, &maxIdx , sizeof(int), cudaMemcpyHostToDevice);
-    getOptimalModelPoints<<<1, 9>>>(selection, idx);
+    getOptimalModelPoints<<<1, 9>>>(pc, selection, maxIdx, modelPoints);
     checkStatus(cudaDeviceSynchronize());
 }
 
@@ -392,7 +393,8 @@ RansacPlane::Plane RansacPlane::computeModel(GPU_Cloud_F4 pc) {
     int blocks = iterations;
     int threads = MAX_THREADS;
     ransacKernel<<<blocks, threads>>>(pc, inlierCounts, modelPoints, threshold, axis, cos(epsilon*3.1415/180));
-    selectOptimalRansacModel<<<1, MAX_THREADS>>>(pc, inlierCounts, modelPoints, selection, iterations, optimalModelIndex);
+    //selectOptimalRansacModel<<<1, MAX_THREADS>>>(pc, inlierCounts, modelPoints, selection, iterations, optimalModelIndex);
+    selectOptimalModel();
     computeInliers<<<1, threads>>>(pc, optimalModelIndex, modelPoints, removalRadius, axis);
 
     //might be able to use memcpyAsync() here, double check
@@ -422,8 +424,8 @@ RansacPlane::Plane RansacPlane::computeModel(GPU_Cloud_F4 &pc, bool flag) {
     int blocks = iterations;
     int threads = MAX_THREADS;
     ransacKernel<<<blocks, threads>>>(pc, inlierCounts, modelPoints, threshold, axis, cos(epsilon*3.1415/180));
-    selectOptimalRansacModel<<<1, MAX_THREADS>>>(pc, inlierCounts, modelPoints, selection, iterations, optimalModelIndex);
-    
+    //selectOptimalRansacModel<<<1, MAX_THREADS>>>(pc, inlierCounts, modelPoints, selection, iterations, optimalModelIndex);
+    selectOptimalModel();
     int* size;
     cudaMalloc(&size, sizeof(int));
     cudaMemset(size, 0, sizeof(int));

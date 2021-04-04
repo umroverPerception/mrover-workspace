@@ -1,0 +1,1094 @@
+Phoenix already installed, skipping.
+RapidJson already installed, skipping.
+LCM already installed, skipping.
+pip dependencies already installed, skipping.
+Done.
+- building dependency rover_msgs
+Building LCM package
+rover_msgs unchanged, skipping.
+Done
+Building C++ package
+Compiling C++ project...
+/usr/local/lib/x86_64-linux-gnu/pkgconfig:/usr/local/lib/pkgconfig:/usr/local/share/pkgconfig:/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig
+The Meson build system
+Version: 0.57.1
+Source dir: /home/amanch/perceptionRover/mrover-workspace/jetson/percep_obs_detect
+Build dir: /home/amanch/.mrover/scratch/jetson_percep_obs_detect
+Build type: native build
+Project name: percep_obs_detect
+Project version: undefined
+C++ compiler for the host machine: c++ (gcc 7.5.0 "c++ (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0")
+C++ linker for the host machine: c++ ld.bfd 2.30
+Cuda compiler for the host machine: nvcc (nvcc 10.0.130)
+Cuda linker for the host machine: nvcc nvlink 10.0.130
+Host machine cpu family: x86_64
+Host machine cpu: x86_64
+Found pkg-config: /usr/bin/pkg-config (0.29.1)
+Run-time dependency lcm found: YES 1.3.1
+Build targets in project: 1
+
+Found ninja-1.8.2 at /usr/bin/ninja
+[1/10] Compiling C++ object percep_obs_detect.p/src_GLViewer.cpp.o
+In file included from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/GLViewer.hpp:7:0,
+                 from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/GLViewer.cpp:1:
+/usr/local/zed/include/sl/Camera.hpp:94:2: warning: #warning ("'Debug' builds are not supported since this library was built in 'Release', 'RelWithDebInfo' should be preferred to avoid crashes and memory issues") [-Wcpp]
+ #warning("'Debug' builds are not supported since this library was built in 'Release', 'RelWithDebInfo' should be preferred to avoid crashes and memory issues")
+  ^~~~~~~
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/GLViewer.cpp:200:5: warning: "/*" within comment [-Wcomment]
+     /*
+      
+In file included from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/GLViewer.hpp:7:0,
+                 from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/GLViewer.cpp:1:
+/usr/local/zed/include/sl/Camera.hpp: In constructor 'sl::InitParameters::InitParameters(sl::RESOLUTION, int, bool, sl::DEPTH_MODE, sl::UNIT, sl::COORDINATE_SYSTEM, bool, int, float, float, bool, int, bool, sl::String, int, CUcontext, sl::InputType, sl::String, bool, bool)':
+/usr/local/zed/include/sl/Camera.hpp:5397:14: warning: 'sl::InitParameters::sdk_verbose' will be initialized after [-Wreorder]
+         bool sdk_verbose;
+              ^~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5388:18: warning:   'CUdevice sl::InitParameters::sdk_gpu_id' [-Wreorder]
+         CUdevice sdk_gpu_id;
+                  ^~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5499:9: warning:   when initialized here [-Wreorder]
+         InitParameters(RESOLUTION camera_resolution_ = RESOLUTION::HD720,
+         ^~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5388:18: warning: 'sl::InitParameters::sdk_gpu_id' will be initialized after [-Wreorder]
+         CUdevice sdk_gpu_id;
+                  ^~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5357:15: warning:   'float sl::InitParameters::depth_minimum_distance' [-Wreorder]
+         float depth_minimum_distance;
+               ^~~~~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5499:9: warning:   when initialized here [-Wreorder]
+         InitParameters(RESOLUTION camera_resolution_ = RESOLUTION::HD720,
+         ^~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5365:15: warning: 'sl::InitParameters::depth_maximum_distance' will be initialized after [-Wreorder]
+         float depth_maximum_distance;
+               ^~~~~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5308:14: warning:   'bool sl::InitParameters::camera_disable_self_calib' [-Wreorder]
+         bool camera_disable_self_calib;
+              ^~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5499:9: warning:   when initialized here [-Wreorder]
+         InitParameters(RESOLUTION camera_resolution_ = RESOLUTION::HD720,
+         ^~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5308:14: warning: 'sl::InitParameters::camera_disable_self_calib' will be initialized after [-Wreorder]
+         bool camera_disable_self_calib;
+              ^~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5298:13: warning:   'int sl::InitParameters::camera_image_flip' [-Wreorder]
+         int camera_image_flip;
+             ^~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5499:9: warning:   when initialized here [-Wreorder]
+         InitParameters(RESOLUTION camera_resolution_ = RESOLUTION::HD720,
+         ^~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5407:16: warning: 'sl::InitParameters::sdk_verbose_log_file' will be initialized after [-Wreorder]
+         String sdk_verbose_log_file;
+                ^~~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5342:13: warning:   'int sl::InitParameters::depth_stabilization' [-Wreorder]
+         int depth_stabilization;
+             ^~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5499:9: warning:   when initialized here [-Wreorder]
+         InitParameters(RESOLUTION camera_resolution_ = RESOLUTION::HD720,
+         ^~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp: In constructor 'sl::RuntimeParameters::RuntimeParameters(sl::SENSING_MODE, bool, int, int, sl::REFERENCE_FRAME)':
+/usr/local/zed/include/sl/Camera.hpp:5637:44: warning: 'sl::RuntimeParameters::texture_confidence_threshold' will be initialized after [-Wreorder]
+         int texture_confidence_threshold = 100;
+                                            ^~~
+/usr/local/zed/include/sl/Camera.hpp:5598:25: warning:   'sl::REFERENCE_FRAME sl::RuntimeParameters::measure3D_reference_frame' [-Wreorder]
+         REFERENCE_FRAME measure3D_reference_frame;
+                         ^~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5642:9: warning:   when initialized here [-Wreorder]
+         RuntimeParameters(SENSING_MODE sensing_mode_ = SENSING_MODE::STANDARD,
+         ^~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5650:63: warning: 'sl::RuntimeParameters::textureness_confidence_threshold' is deprecated: use texture_confidence_threshold instead [-Wdeprecated-declarations]
+         , measure3D_reference_frame(measure3D_reference_frame_) {
+                                                               ^
+/usr/local/zed/include/sl/Camera.hpp:5627:48: note: declared here
+         int textureness_confidence_threshold = 100;
+                                                ^~~
+/usr/local/zed/include/sl/Camera.hpp:5650:63: warning: 'sl::RuntimeParameters::textureness_confidence_threshold' is deprecated: use texture_confidence_threshold instead [-Wdeprecated-declarations]
+         , measure3D_reference_frame(measure3D_reference_frame_) {
+                                                               ^
+/usr/local/zed/include/sl/Camera.hpp:5627:48: note: declared here
+         int textureness_confidence_threshold = 100;
+                                                ^~~
+/usr/local/zed/include/sl/Camera.hpp: In constructor 'sl::PositionalTrackingParameters::PositionalTrackingParameters(sl::Transform, bool, bool, sl::String, bool, bool, bool)':
+/usr/local/zed/include/sl/Camera.hpp:5728:16: warning: 'sl::PositionalTrackingParameters::area_file_path' will be initialized after [-Wreorder]
+         String area_file_path;
+                ^~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5717:14: warning:   'bool sl::PositionalTrackingParameters::set_floor_as_origin' [-Wreorder]
+         bool set_floor_as_origin;
+              ^~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5747:9: warning:   when initialized here [-Wreorder]
+         PositionalTrackingParameters(Transform init_pos = Transform(), bool _enable_memory = true, bool _enable_pose_smoothing = false, String _area_path = String(),
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/GLViewer.cpp: At global scope:
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/GLViewer.cpp:34:1: warning: ISO C++ forbids converting a string constant to 'GLchar* {aka char*}' [-Wwrite-strings]
+ "}";
+ ^~~
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/GLViewer.cpp:42:1: warning: ISO C++ forbids converting a string constant to 'GLchar* {aka char*}' [-Wwrite-strings]
+ "}";
+ ^~~
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/GLViewer.cpp: In function 'void updateObjectBoxes(int, float*, float*, float*, float*, float*, float*)':
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/GLViewer.cpp:142:22: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     for(int i = 0; i < objectBoxes.size(); i++) delete objectBoxes[i];
+                    ~~^~~~~~~~~~~~~~~~~~~~
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/GLViewer.cpp: In member function 'void GLViewer::draw()':
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/GLViewer.cpp:382:22: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     for(int i = 0; i < objectBoxes.size(); i++) {
+                    ~~^~~~~~~~~~~~~~~~~~~~
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/GLViewer.cpp: At global scope:
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/GLViewer.cpp:676:1: warning: ISO C++ forbids converting a string constant to 'GLchar* {aka char*}' [-Wwrite-strings]
+ "}";
+ ^~~
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/GLViewer.cpp:684:1: warning: ISO C++ forbids converting a string constant to 'GLchar* {aka char*}' [-Wwrite-strings]
+ "}";
+ ^~~
+[2/10] Compiling Cuda object percep_obs_detect.p/src_find-clear.cu.o
+In file included from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/common.hpp:1:0,
+                 from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/find-clear.cu:1:
+/usr/local/zed/include/sl/Camera.hpp:94:2: warning: #warning ("'Debug' builds are not supported since this library was built in 'Release', 'RelWithDebInfo' should be preferred to avoid crashes and memory issues") [-Wcpp]
+ #warning("'Debug' builds are not supported since this library was built in 'Release', 'RelWithDebInfo' should be preferred to avoid crashes and memory issues")
+  ^~~~~~~
+/usr/local/zed/include/sl/Camera.hpp(4779): warning: type qualifier on return type is meaningless
+
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/common.hpp(62): warning: missing return statement at end of non-void function "CompareFloat4::operator()"
+
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/find-clear.cu(19): warning: invalid narrowing conversion from "double" to "float"
+
+In file included from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/common.hpp:1:0,
+                 from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/find-clear.cu:1:
+/usr/local/zed/include/sl/Camera.hpp:94:2: warning: #warning ("'Debug' builds are not supported since this library was built in 'Release', 'RelWithDebInfo' should be preferred to avoid crashes and memory issues") [-Wcpp]
+ #warning("'Debug' builds are not supported since this library was built in 'Release', 'RelWithDebInfo' should be preferred to avoid crashes and memory issues")
+  ^~~~~~~
+/usr/local/zed/include/sl/Camera.hpp(4779): warning: type qualifier on return type is meaningless
+
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/common.hpp(62): warning: missing return statement at end of non-void function "CompareFloat4::operator()"
+
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/find-clear.cu(19): warning: invalid narrowing conversion from "double" to "float"
+
+/usr/local/zed/include/sl/Camera.hpp: In constructor 'sl::RuntimeParameters::RuntimeParameters(sl::SENSING_MODE, bool, int, int, sl::REFERENCE_FRAME)':
+/usr/local/zed/include/sl/Camera.hpp:5645:273: warning: 'sl::RuntimeParameters::textureness_confidence_threshold' is deprecated: use texture_confidence_threshold instead [-Wdeprecated-declarations]
+                 REFERENCE_FRAME measure3D_reference_frame_ = REFERENCE_FRAME::CAMERA)
+                                                                                                                                                                                                                                                                                 ^
+/usr/local/zed/include/sl/Camera.hpp:5627:36: note: declared here
+         int textureness_confidence_threshold = 100;
+                                    ^~~
+/usr/local/zed/include/sl/Camera.hpp:5645:273: warning: 'sl::RuntimeParameters::textureness_confidence_threshold' is deprecated: use texture_confidence_threshold instead [-Wdeprecated-declarations]
+                 REFERENCE_FRAME measure3D_reference_frame_ = REFERENCE_FRAME::CAMERA)
+                                                                                                                                                                                                                                                                                 ^
+/usr/local/zed/include/sl/Camera.hpp:5627:36: note: declared here
+         int textureness_confidence_threshold = 100;
+                                    ^~~
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/find-clear.cu: In constructor 'compareLine::compareLine(float, int)':
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/find-clear.cu:18:74: warning: narrowing conversion of 'tan(((((double)angle_in) * 3.1415920000000002e+0) / (double)180))' from 'double' to 'float' inside { } [-Wnarrowing]
+     __device__ compareLine(float angle_in, int xInt_in) : xIntercept{xInt_in},
+                                                                       ~~~^~~~~                                        
+[3/10] Compiling Cuda object percep_obs_detect.p/src_pass-through.cu.o
+In file included from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/pass-through.hpp:2:0,
+                 from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/pass-through.cu:1:
+/usr/local/zed/include/sl/Camera.hpp:94:2: warning: #warning ("'Debug' builds are not supported since this library was built in 'Release', 'RelWithDebInfo' should be preferred to avoid crashes and memory issues") [-Wcpp]
+ #warning("'Debug' builds are not supported since this library was built in 'Release', 'RelWithDebInfo' should be preferred to avoid crashes and memory issues")
+  ^~~~~~~
+/usr/local/zed/include/sl/Camera.hpp(4779): warning: type qualifier on return type is meaningless
+
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/common.hpp(62): warning: missing return statement at end of non-void function "CompareFloat4::operator()"
+
+In file included from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/pass-through.hpp:2:0,
+                 from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/pass-through.cu:1:
+/usr/local/zed/include/sl/Camera.hpp:94:2: warning: #warning ("'Debug' builds are not supported since this library was built in 'Release', 'RelWithDebInfo' should be preferred to avoid crashes and memory issues") [-Wcpp]
+ #warning("'Debug' builds are not supported since this library was built in 'Release', 'RelWithDebInfo' should be preferred to avoid crashes and memory issues")
+  ^~~~~~~
+/usr/local/zed/include/sl/Camera.hpp(4779): warning: type qualifier on return type is meaningless
+
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/common.hpp(62): warning: missing return statement at end of non-void function "CompareFloat4::operator()"
+
+/usr/local/zed/include/sl/Camera.hpp: In constructor 'sl::RuntimeParameters::RuntimeParameters(sl::SENSING_MODE, bool, int, int, sl::REFERENCE_FRAME)':
+/usr/local/zed/include/sl/Camera.hpp:5645:273: warning: 'sl::RuntimeParameters::textureness_confidence_threshold' is deprecated: use texture_confidence_threshold instead [-Wdeprecated-declarations]
+                 REFERENCE_FRAME measure3D_reference_frame_ = REFERENCE_FRAME::CAMERA)
+                                                                                                                                                                                                                                                                                 ^
+/usr/local/zed/include/sl/Camera.hpp:5627:36: note: declared here
+         int textureness_confidence_threshold = 100;
+                                    ^~~
+/usr/local/zed/include/sl/Camera.hpp:5645:273: warning: 'sl::RuntimeParameters::textureness_confidence_threshold' is deprecated: use texture_confidence_threshold instead [-Wdeprecated-declarations]
+                 REFERENCE_FRAME measure3D_reference_frame_ = REFERENCE_FRAME::CAMERA)
+                                                                                                                                                                                                                                                                                 ^
+/usr/local/zed/include/sl/Camera.hpp:5627:36: note: declared here
+         int textureness_confidence_threshold = 100;
+                                    ^~~
+[4/10] Compiling Cuda object percep_obs_detect.p/src_plane-ransac.cu.o
+In file included from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/common.hpp:1:0,
+                 from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/plane-ransac.hpp:3,
+                 from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/plane-ransac.cu:1:
+/usr/local/zed/include/sl/Camera.hpp:94:2: warning: #warning ("'Debug' builds are not supported since this library was built in 'Release', 'RelWithDebInfo' should be preferred to avoid crashes and memory issues") [-Wcpp]
+ #warning("'Debug' builds are not supported since this library was built in 'Release', 'RelWithDebInfo' should be preferred to avoid crashes and memory issues")
+  ^~~~~~~
+/usr/local/zed/include/sl/Camera.hpp(4779): warning: type qualifier on return type is meaningless
+
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/common.hpp(62): warning: missing return statement at end of non-void function "CompareFloat4::operator()"
+
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/plane-ransac.cu(253): warning: variable "abgr" was declared but never referenced
+
+In file included from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/common.hpp:1:0,
+                 from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/plane-ransac.hpp:3,
+                 from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/plane-ransac.cu:1:
+/usr/local/zed/include/sl/Camera.hpp:94:2: warning: #warning ("'Debug' builds are not supported since this library was built in 'Release', 'RelWithDebInfo' should be preferred to avoid crashes and memory issues") [-Wcpp]
+ #warning("'Debug' builds are not supported since this library was built in 'Release', 'RelWithDebInfo' should be preferred to avoid crashes and memory issues")
+  ^~~~~~~
+/usr/local/zed/include/sl/Camera.hpp(4779): warning: type qualifier on return type is meaningless
+
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/common.hpp(62): warning: missing return statement at end of non-void function "CompareFloat4::operator()"
+
+/usr/local/zed/include/sl/Camera.hpp: In constructor 'sl::RuntimeParameters::RuntimeParameters(sl::SENSING_MODE, bool, int, int, sl::REFERENCE_FRAME)':
+/usr/local/zed/include/sl/Camera.hpp:5645:273: warning: 'sl::RuntimeParameters::textureness_confidence_threshold' is deprecated: use texture_confidence_threshold instead [-Wdeprecated-declarations]
+                 REFERENCE_FRAME measure3D_reference_frame_ = REFERENCE_FRAME::CAMERA)
+                                                                                                                                                                                                                                                                                 ^
+/usr/local/zed/include/sl/Camera.hpp:5627:36: note: declared here
+         int textureness_confidence_threshold = 100;
+                                    ^~~
+/usr/local/zed/include/sl/Camera.hpp:5645:273: warning: 'sl::RuntimeParameters::textureness_confidence_threshold' is deprecated: use texture_confidence_threshold instead [-Wdeprecated-declarations]
+                 REFERENCE_FRAME measure3D_reference_frame_ = REFERENCE_FRAME::CAMERA)
+                                                                                                                                                                                                                                                                                 ^
+/usr/local/zed/include/sl/Camera.hpp:5627:36: note: declared here
+         int textureness_confidence_threshold = 100;
+                                    ^~~
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/plane-ransac.cu: In constructor 'RansacPlane::RansacPlane(sl::float3, float, int, float, int, float)':
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/plane-ransac.cu:338:1: warning: 'RansacPlane::pc' is initialized with itself [-Winit-self]
+ RansacPlane::RansacPlane(sl::float3 axis, float epsilon, int iterations, float threshold, int pcSize, float removalRadius)
+ ^~~~~~~~~~~
+[5/10] Compiling C++ object percep_obs_detect.p/src_pcl.cpp.o
+In file included from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/pcl.cpp:22:0:
+/usr/local/zed/include/sl/Camera.hpp:94:2: warning: #warning ("'Debug' builds are not supported since this library was built in 'Release', 'RelWithDebInfo' should be preferred to avoid crashes and memory issues") [-Wcpp]
+ #warning("'Debug' builds are not supported since this library was built in 'Release', 'RelWithDebInfo' should be preferred to avoid crashes and memory issues")
+  ^~~~~~~
+In file included from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/pcl.cpp:22:0:
+/usr/local/zed/include/sl/Camera.hpp: In constructor 'sl::InitParameters::InitParameters(sl::RESOLUTION, int, bool, sl::DEPTH_MODE, sl::UNIT, sl::COORDINATE_SYSTEM, bool, int, float, float, bool, int, bool, sl::String, int, CUcontext, sl::InputType, sl::String, bool, bool)':
+/usr/local/zed/include/sl/Camera.hpp:5397:14: warning: 'sl::InitParameters::sdk_verbose' will be initialized after [-Wreorder]
+         bool sdk_verbose;
+              ^~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5388:18: warning:   'CUdevice sl::InitParameters::sdk_gpu_id' [-Wreorder]
+         CUdevice sdk_gpu_id;
+                  ^~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5499:9: warning:   when initialized here [-Wreorder]
+         InitParameters(RESOLUTION camera_resolution_ = RESOLUTION::HD720,
+         ^~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5388:18: warning: 'sl::InitParameters::sdk_gpu_id' will be initialized after [-Wreorder]
+         CUdevice sdk_gpu_id;
+                  ^~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5357:15: warning:   'float sl::InitParameters::depth_minimum_distance' [-Wreorder]
+         float depth_minimum_distance;
+               ^~~~~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5499:9: warning:   when initialized here [-Wreorder]
+         InitParameters(RESOLUTION camera_resolution_ = RESOLUTION::HD720,
+         ^~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5365:15: warning: 'sl::InitParameters::depth_maximum_distance' will be initialized after [-Wreorder]
+         float depth_maximum_distance;
+               ^~~~~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5308:14: warning:   'bool sl::InitParameters::camera_disable_self_calib' [-Wreorder]
+         bool camera_disable_self_calib;
+              ^~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5499:9: warning:   when initialized here [-Wreorder]
+         InitParameters(RESOLUTION camera_resolution_ = RESOLUTION::HD720,
+         ^~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5308:14: warning: 'sl::InitParameters::camera_disable_self_calib' will be initialized after [-Wreorder]
+         bool camera_disable_self_calib;
+              ^~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5298:13: warning:   'int sl::InitParameters::camera_image_flip' [-Wreorder]
+         int camera_image_flip;
+             ^~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5499:9: warning:   when initialized here [-Wreorder]
+         InitParameters(RESOLUTION camera_resolution_ = RESOLUTION::HD720,
+         ^~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5407:16: warning: 'sl::InitParameters::sdk_verbose_log_file' will be initialized after [-Wreorder]
+         String sdk_verbose_log_file;
+                ^~~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5342:13: warning:   'int sl::InitParameters::depth_stabilization' [-Wreorder]
+         int depth_stabilization;
+             ^~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5499:9: warning:   when initialized here [-Wreorder]
+         InitParameters(RESOLUTION camera_resolution_ = RESOLUTION::HD720,
+         ^~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp: In constructor 'sl::RuntimeParameters::RuntimeParameters(sl::SENSING_MODE, bool, int, int, sl::REFERENCE_FRAME)':
+/usr/local/zed/include/sl/Camera.hpp:5637:44: warning: 'sl::RuntimeParameters::texture_confidence_threshold' will be initialized after [-Wreorder]
+         int texture_confidence_threshold = 100;
+                                            ^~~
+/usr/local/zed/include/sl/Camera.hpp:5598:25: warning:   'sl::REFERENCE_FRAME sl::RuntimeParameters::measure3D_reference_frame' [-Wreorder]
+         REFERENCE_FRAME measure3D_reference_frame;
+                         ^~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5642:9: warning:   when initialized here [-Wreorder]
+         RuntimeParameters(SENSING_MODE sensing_mode_ = SENSING_MODE::STANDARD,
+         ^~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5650:63: warning: 'sl::RuntimeParameters::textureness_confidence_threshold' is deprecated: use texture_confidence_threshold instead [-Wdeprecated-declarations]
+         , measure3D_reference_frame(measure3D_reference_frame_) {
+                                                               ^
+/usr/local/zed/include/sl/Camera.hpp:5627:48: note: declared here
+         int textureness_confidence_threshold = 100;
+                                                ^~~
+/usr/local/zed/include/sl/Camera.hpp:5650:63: warning: 'sl::RuntimeParameters::textureness_confidence_threshold' is deprecated: use texture_confidence_threshold instead [-Wdeprecated-declarations]
+         , measure3D_reference_frame(measure3D_reference_frame_) {
+                                                               ^
+/usr/local/zed/include/sl/Camera.hpp:5627:48: note: declared here
+         int textureness_confidence_threshold = 100;
+                                                ^~~
+/usr/local/zed/include/sl/Camera.hpp: In constructor 'sl::PositionalTrackingParameters::PositionalTrackingParameters(sl::Transform, bool, bool, sl::String, bool, bool, bool)':
+/usr/local/zed/include/sl/Camera.hpp:5728:16: warning: 'sl::PositionalTrackingParameters::area_file_path' will be initialized after [-Wreorder]
+         String area_file_path;
+                ^~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5717:14: warning:   'bool sl::PositionalTrackingParameters::set_floor_as_origin' [-Wreorder]
+         bool set_floor_as_origin;
+              ^~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5747:9: warning:   when initialized here [-Wreorder]
+         PositionalTrackingParameters(Transform init_pos = Transform(), bool _enable_memory = true, bool _enable_pose_smoothing = false, String _area_path = String(),
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[6/10] Compiling C++ object percep_obs_detect.p/src_obs-detector.cpp.o
+In file included from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/obs-detector.h:2:0,
+                 from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/obs-detector.cpp:1:
+/usr/local/zed/include/sl/Camera.hpp:94:2: warning: #warning ("'Debug' builds are not supported since this library was built in 'Release', 'RelWithDebInfo' should be preferred to avoid crashes and memory issues") [-Wcpp]
+ #warning("'Debug' builds are not supported since this library was built in 'Release', 'RelWithDebInfo' should be preferred to avoid crashes and memory issues")
+  ^~~~~~~
+In file included from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/obs-detector.h:2:0,
+                 from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/obs-detector.cpp:1:
+/usr/local/zed/include/sl/Camera.hpp: In constructor 'sl::InitParameters::InitParameters(sl::RESOLUTION, int, bool, sl::DEPTH_MODE, sl::UNIT, sl::COORDINATE_SYSTEM, bool, int, float, float, bool, int, bool, sl::String, int, CUcontext, sl::InputType, sl::String, bool, bool)':
+/usr/local/zed/include/sl/Camera.hpp:5397:14: warning: 'sl::InitParameters::sdk_verbose' will be initialized after [-Wreorder]
+         bool sdk_verbose;
+              ^~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5388:18: warning:   'CUdevice sl::InitParameters::sdk_gpu_id' [-Wreorder]
+         CUdevice sdk_gpu_id;
+                  ^~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5499:9: warning:   when initialized here [-Wreorder]
+         InitParameters(RESOLUTION camera_resolution_ = RESOLUTION::HD720,
+         ^~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5388:18: warning: 'sl::InitParameters::sdk_gpu_id' will be initialized after [-Wreorder]
+         CUdevice sdk_gpu_id;
+                  ^~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5357:15: warning:   'float sl::InitParameters::depth_minimum_distance' [-Wreorder]
+         float depth_minimum_distance;
+               ^~~~~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5499:9: warning:   when initialized here [-Wreorder]
+         InitParameters(RESOLUTION camera_resolution_ = RESOLUTION::HD720,
+         ^~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5365:15: warning: 'sl::InitParameters::depth_maximum_distance' will be initialized after [-Wreorder]
+         float depth_maximum_distance;
+               ^~~~~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5308:14: warning:   'bool sl::InitParameters::camera_disable_self_calib' [-Wreorder]
+         bool camera_disable_self_calib;
+              ^~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5499:9: warning:   when initialized here [-Wreorder]
+         InitParameters(RESOLUTION camera_resolution_ = RESOLUTION::HD720,
+         ^~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5308:14: warning: 'sl::InitParameters::camera_disable_self_calib' will be initialized after [-Wreorder]
+         bool camera_disable_self_calib;
+              ^~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5298:13: warning:   'int sl::InitParameters::camera_image_flip' [-Wreorder]
+         int camera_image_flip;
+             ^~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5499:9: warning:   when initialized here [-Wreorder]
+         InitParameters(RESOLUTION camera_resolution_ = RESOLUTION::HD720,
+         ^~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5407:16: warning: 'sl::InitParameters::sdk_verbose_log_file' will be initialized after [-Wreorder]
+         String sdk_verbose_log_file;
+                ^~~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5342:13: warning:   'int sl::InitParameters::depth_stabilization' [-Wreorder]
+         int depth_stabilization;
+             ^~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5499:9: warning:   when initialized here [-Wreorder]
+         InitParameters(RESOLUTION camera_resolution_ = RESOLUTION::HD720,
+         ^~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp: In constructor 'sl::RuntimeParameters::RuntimeParameters(sl::SENSING_MODE, bool, int, int, sl::REFERENCE_FRAME)':
+/usr/local/zed/include/sl/Camera.hpp:5637:44: warning: 'sl::RuntimeParameters::texture_confidence_threshold' will be initialized after [-Wreorder]
+         int texture_confidence_threshold = 100;
+                                            ^~~
+/usr/local/zed/include/sl/Camera.hpp:5598:25: warning:   'sl::REFERENCE_FRAME sl::RuntimeParameters::measure3D_reference_frame' [-Wreorder]
+         REFERENCE_FRAME measure3D_reference_frame;
+                         ^~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5642:9: warning:   when initialized here [-Wreorder]
+         RuntimeParameters(SENSING_MODE sensing_mode_ = SENSING_MODE::STANDARD,
+         ^~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5650:63: warning: 'sl::RuntimeParameters::textureness_confidence_threshold' is deprecated: use texture_confidence_threshold instead [-Wdeprecated-declarations]
+         , measure3D_reference_frame(measure3D_reference_frame_) {
+                                                               ^
+/usr/local/zed/include/sl/Camera.hpp:5627:48: note: declared here
+         int textureness_confidence_threshold = 100;
+                                                ^~~
+/usr/local/zed/include/sl/Camera.hpp:5650:63: warning: 'sl::RuntimeParameters::textureness_confidence_threshold' is deprecated: use texture_confidence_threshold instead [-Wdeprecated-declarations]
+         , measure3D_reference_frame(measure3D_reference_frame_) {
+                                                               ^
+/usr/local/zed/include/sl/Camera.hpp:5627:48: note: declared here
+         int textureness_confidence_threshold = 100;
+                                                ^~~
+/usr/local/zed/include/sl/Camera.hpp: In constructor 'sl::PositionalTrackingParameters::PositionalTrackingParameters(sl::Transform, bool, bool, sl::String, bool, bool, bool)':
+/usr/local/zed/include/sl/Camera.hpp:5728:16: warning: 'sl::PositionalTrackingParameters::area_file_path' will be initialized after [-Wreorder]
+         String area_file_path;
+                ^~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5717:14: warning:   'bool sl::PositionalTrackingParameters::set_floor_as_origin' [-Wreorder]
+         bool set_floor_as_origin;
+              ^~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:5747:9: warning:   when initialized here [-Wreorder]
+         PositionalTrackingParameters(Transform init_pos = Transform(), bool _enable_memory = true, bool _enable_pose_smoothing = false, String _area_path = String(),
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/obs-detector.h:3:0,
+                 from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/obs-detector.cpp:1:
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/recorder.hpp: In constructor 'Recorder::Recorder(std::__cxx11::string)':
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/recorder.hpp:51:16: warning: 'Recorder::dir' will be initialized after [-Wreorder]
+         string dir;
+                ^~~
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/recorder.hpp:50:13: warning:   'int Recorder::frameNum' [-Wreorder]
+         int frameNum;
+             ^~~~~~~~
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/recorder.hpp:21:9: warning:   when initialized here [-Wreorder]
+         Recorder(string dir) : dir(dir), frameNum(0) {
+         ^~~~~~~~
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/recorder.hpp: In member function 'void Recorder::writeFrame(sl::Mat&)':
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/recorder.hpp:34:30: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+             for(int r = 0; r < cpuFrame.getHeight(); r++) {
+                            ~~^~~~~~~~~~~~~~~~~~~~~~
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/recorder.hpp:35:34: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+                 for(int c = 0; c < cpuFrame.getWidth(); c++) {
+                                ~~^~~~~~~~~~~~~~~~~~~~~
+In file included from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/obs-detector.h:2:0,
+                 from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/obs-detector.cpp:1:
+/usr/local/zed/include/sl/Camera.hpp: In destructor 'sl::CameraInformation::~CameraInformation()':
+/usr/local/zed/include/sl/Camera.hpp:3186:12: warning: 'sl::CameraInformation::calibration_parameters' is deprecated: Use camera_configuration.calibration_parameters instead [-Wdeprecated-declarations]
+     struct CameraInformation {
+            ^~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:3193:136: note: declared here
+         /*@cond SHOWHIDDEN*/SL_DEPRECATED("Use camera_configuration.calibration_parameters instead")/*@endcond*/ CalibrationParameters calibration_parameters; /**< \deprecated see CameraConfiguration::calibration_parameters, Intrinsic and Extrinsic stereo parameters for rectified/undistorded images (default).*/
+                                                                                                                                        ^~~~~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:3186:12: warning: 'sl::CameraInformation::calibration_parameters' is deprecated: Use camera_configuration.calibration_parameters instead [-Wdeprecated-declarations]
+     struct CameraInformation {
+            ^~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:3193:136: note: declared here
+         /*@cond SHOWHIDDEN*/SL_DEPRECATED("Use camera_configuration.calibration_parameters instead")/*@endcond*/ CalibrationParameters calibration_parameters; /**< \deprecated see CameraConfiguration::calibration_parameters, Intrinsic and Extrinsic stereo parameters for rectified/undistorded images (default).*/
+                                                                                                                                        ^~~~~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:3186:12: warning: 'sl::CameraInformation::calibration_parameters_raw' is deprecated: Use camera_configuration.calibration_parameters_raw instead [-Wdeprecated-declarations]
+     struct CameraInformation {
+            ^~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:3194:140: note: declared here
+         /*@cond SHOWHIDDEN*/SL_DEPRECATED("Use camera_configuration.calibration_parameters_raw instead")/*@endcond*/ CalibrationParameters calibration_parameters_raw; /**< \deprecated see CameraConfiguration::calibration_parameters_raw, Intrinsic and Extrinsic stereo parameters for original images (unrectified/distorded).*/
+                                                                                                                                            ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:3186:12: warning: 'sl::CameraInformation::calibration_parameters_raw' is deprecated: Use camera_configuration.calibration_parameters_raw instead [-Wdeprecated-declarations]
+     struct CameraInformation {
+            ^~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:3194:140: note: declared here
+         /*@cond SHOWHIDDEN*/SL_DEPRECATED("Use camera_configuration.calibration_parameters_raw instead")/*@endcond*/ CalibrationParameters calibration_parameters_raw; /**< \deprecated see CameraConfiguration::calibration_parameters_raw, Intrinsic and Extrinsic stereo parameters for original images (unrectified/distorded).*/
+                                                                                                                                            ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:3186:12: warning: 'sl::CameraInformation::camera_imu_transform' is deprecated: Use sensors_configuration.camera_imu_transform instead [-Wdeprecated-declarations]
+     struct CameraInformation {
+            ^~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:3195:127: note: declared here
+         /*@cond SHOWHIDDEN*/SL_DEPRECATED("Use sensors_configuration.camera_imu_transform instead")/*@endcond*/ sl::Transform camera_imu_transform; /**< \deprecated see SensorsConfiguration::camera_imu_transform, IMU to Left camera transform matrix, that contains rotation and translation between IMU frame and camera frame.*/
+                                                                                                                               ^~~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:3186:12: warning: 'sl::CameraInformation::camera_imu_transform' is deprecated: Use sensors_configuration.camera_imu_transform instead [-Wdeprecated-declarations]
+     struct CameraInformation {
+            ^~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:3195:127: note: declared here
+         /*@cond SHOWHIDDEN*/SL_DEPRECATED("Use sensors_configuration.camera_imu_transform instead")/*@endcond*/ sl::Transform camera_imu_transform; /**< \deprecated see SensorsConfiguration::camera_imu_transform, IMU to Left camera transform matrix, that contains rotation and translation between IMU frame and camera frame.*/
+                                                                                                                               ^~~~~~~~~~~~~~~~~~~~
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/obs-detector.cpp: In constructor 'ObsDetector::ObsDetector(DataSource, OperationMode, ViewerType)':
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/obs-detector.cpp:14:64: note: synthesized method 'sl::CameraInformation::~CameraInformation()' first required here 
+         auto camera_config = zed.getCameraInformation(cloud_res).camera_configuration;
+                                                                ^
+In file included from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/obs-detector.h:2:0,
+                 from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/obs-detector.cpp:1:
+/usr/local/zed/include/sl/Camera.hpp: In constructor 'sl::CalibrationParameters::CalibrationParameters(sl::CalibrationParameters&&)':
+/usr/local/zed/include/sl/Camera.hpp:3108:59: warning: 'sl::CalibrationParameters::R' is deprecated: Use stereo_transform.getRotationMatrix instead [-Wdeprecated-declarations]
+     struct /*@cond SHOWHIDDEN*/SL_CORE_EXPORT/*@endcond*/ CalibrationParameters {
+                                                           ^~~~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:3115:112: note: declared here
+         /*@cond SHOWHIDDEN*/SL_DEPRECATED("Use stereo_transform.getRotationMatrix instead")/*@endcond*/ float3 R; /**< \deprecated see stereo_transform, Rotation on its own (using Rodrigues' transformation) of the right sensor. The left is considered as the reference. Defined as 'tilt', 'convergence' and 'roll'. Using a \ref Rotation, you can use \ref Rotation::setRotationVector(R) to convert into other representations.*/
+                                                                                                                ^
+/usr/local/zed/include/sl/Camera.hpp:3108:59: warning: 'sl::CalibrationParameters::R' is deprecated: Use stereo_transform.getRotationMatrix instead [-Wdeprecated-declarations]
+     struct /*@cond SHOWHIDDEN*/SL_CORE_EXPORT/*@endcond*/ CalibrationParameters {
+                                                           ^~~~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:3115:112: note: declared here
+         /*@cond SHOWHIDDEN*/SL_DEPRECATED("Use stereo_transform.getRotationMatrix instead")/*@endcond*/ float3 R; /**< \deprecated see stereo_transform, Rotation on its own (using Rodrigues' transformation) of the right sensor. The left is considered as the reference. Defined as 'tilt', 'convergence' and 'roll'. Using a \ref Rotation, you can use \ref Rotation::setRotationVector(R) to convert into other representations.*/
+                                                                                                                ^
+/usr/local/zed/include/sl/Camera.hpp:3108:59: warning: 'sl::CalibrationParameters::T' is deprecated: Use stereo_transform.getTranslation instead [-Wdeprecated-declarations]
+     struct /*@cond SHOWHIDDEN*/SL_CORE_EXPORT/*@endcond*/ CalibrationParameters {
+                                                           ^~~~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:3116:109: note: declared here
+         /*@cond SHOWHIDDEN*/SL_DEPRECATED("Use stereo_transform.getTranslation instead")/*@endcond*/ float3 T; /**< \deprecated see stereo_transform,  Translation between the two sensors. T.x is the distance between the two cameras (baseline) in the sl::UNIT chosen during sl::Camera::open (mm, cm, meters, inches...).*/
+                                                                                                             ^
+/usr/local/zed/include/sl/Camera.hpp:3108:59: warning: 'sl::CalibrationParameters::T' is deprecated: Use stereo_transform.getTranslation instead [-Wdeprecated-declarations]
+     struct /*@cond SHOWHIDDEN*/SL_CORE_EXPORT/*@endcond*/ CalibrationParameters {
+                                                           ^~~~~~~~~~~~~~~~~~~~~
+/usr/local/zed/include/sl/Camera.hpp:3116:109: note: declared here
+         /*@cond SHOWHIDDEN*/SL_DEPRECATED("Use stereo_transform.getTranslation instead")/*@endcond*/ float3 T; /**< \deprecated see stereo_transform,  Translation between the two sensors. T.x is the distance between the two cameras (baseline) in the sl::UNIT chosen during sl::Camera::open (mm, cm, meters, inches...).*/
+                                                                                                             ^
+/usr/local/zed/include/sl/Camera.hpp: In constructor 'sl::CameraConfiguration::CameraConfiguration(sl::CameraConfiguration&&)':
+/usr/local/zed/include/sl/Camera.hpp:3169:12: note: synthesized method 'sl::CalibrationParameters::CalibrationParameters(sl::CalibrationParameters&&)' first required here 
+     struct CameraConfiguration {
+            ^~~~~~~~~~~~~~~~~~~
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/obs-detector.cpp: In constructor 'ObsDetector::ObsDetector(DataSource, OperationMode, ViewerType)':
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/obs-detector.cpp:14:66: note: synthesized method 'sl::CameraConfiguration::CameraConfiguration(sl::CameraConfiguration&&)' first required here 
+         auto camera_config = zed.getCameraInformation(cloud_res).camera_configuration;
+                                                                  ^~~~~~~~~~~~~~~~~~~~
+[7/10] Compiling Cuda object percep_obs_detect.p/src_voxel-grid.cu.o
+In file included from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/common.hpp:1:0,
+                 from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/voxel-grid.hpp:1,
+                 from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/voxel-grid.cu:1:
+/usr/local/zed/include/sl/Camera.hpp:94:2: warning: #warning ("'Debug' builds are not supported since this library was built in 'Release', 'RelWithDebInfo' should be preferred to avoid crashes and memory issues") [-Wcpp]
+ #warning("'Debug' builds are not supported since this library was built in 'Release', 'RelWithDebInfo' should be preferred to avoid crashes and memory issues")
+  ^~~~~~~
+/usr/local/zed/include/sl/Camera.hpp(4779): warning: type qualifier on return type is meaningless
+
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/common.hpp(62): warning: missing return statement at end of non-void function "CompareFloat4::operator()"
+
+In file included from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/common.hpp:1:0,
+                 from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/voxel-grid.hpp:1,
+                 from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/voxel-grid.cu:1:
+/usr/local/zed/include/sl/Camera.hpp:94:2: warning: #warning ("'Debug' builds are not supported since this library was built in 'Release', 'RelWithDebInfo' should be preferred to avoid crashes and memory issues") [-Wcpp]
+ #warning("'Debug' builds are not supported since this library was built in 'Release', 'RelWithDebInfo' should be preferred to avoid crashes and memory issues")
+  ^~~~~~~
+/usr/local/zed/include/sl/Camera.hpp(4779): warning: type qualifier on return type is meaningless
+
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/common.hpp(62): warning: missing return statement at end of non-void function "CompareFloat4::operator()"
+
+/usr/local/zed/include/sl/Camera.hpp: In constructor 'sl::RuntimeParameters::RuntimeParameters(sl::SENSING_MODE, bool, int, int, sl::REFERENCE_FRAME)':
+/usr/local/zed/include/sl/Camera.hpp:5645:273: warning: 'sl::RuntimeParameters::textureness_confidence_threshold' is deprecated: use texture_confidence_threshold instead [-Wdeprecated-declarations]
+                 REFERENCE_FRAME measure3D_reference_frame_ = REFERENCE_FRAME::CAMERA)
+                                                                                                                                                                                                                                                                                 ^
+/usr/local/zed/include/sl/Camera.hpp:5627:36: note: declared here
+         int textureness_confidence_threshold = 100;
+                                    ^~~
+/usr/local/zed/include/sl/Camera.hpp:5645:273: warning: 'sl::RuntimeParameters::textureness_confidence_threshold' is deprecated: use texture_confidence_threshold instead [-Wdeprecated-declarations]
+                 REFERENCE_FRAME measure3D_reference_frame_ = REFERENCE_FRAME::CAMERA)
+                                                                                                                                                                                                                                                                                 ^
+/usr/local/zed/include/sl/Camera.hpp:5627:36: note: declared here
+         int textureness_confidence_threshold = 100;
+                                    ^~~
+[8/10] Compiling Cuda object percep_obs_detect.p/src_euclidean-cluster.cu.o
+In file included from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/common.hpp:1:0,
+                 from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/euclidean-cluster.hpp:3,
+                 from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/euclidean-cluster.cu:1:
+/usr/local/zed/include/sl/Camera.hpp:94:2: warning: #warning ("'Debug' builds are not supported since this library was built in 'Release', 'RelWithDebInfo' should be preferred to avoid crashes and memory issues") [-Wcpp]
+ #warning("'Debug' builds are not supported since this library was built in 'Release', 'RelWithDebInfo' should be preferred to avoid crashes and memory issues")
+  ^~~~~~~
+/usr/local/zed/include/sl/Camera.hpp(4779): warning: type qualifier on return type is meaningless
+
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/common.hpp(62): warning: missing return statement at end of non-void function "CompareFloat4::operator()"
+
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/euclidean-cluster.cu(92): warning: variable "totalBinsSearch" was declared but never referenced
+
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/euclidean-cluster.cu(173): warning: variable "totalBinsSearch" was declared but never referenced
+
+In file included from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/common.hpp:1:0,
+                 from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/euclidean-cluster.hpp:3,
+                 from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/euclidean-cluster.cu:1:
+/usr/local/zed/include/sl/Camera.hpp:94:2: warning: #warning ("'Debug' builds are not supported since this library was built in 'Release', 'RelWithDebInfo' should be preferred to avoid crashes and memory issues") [-Wcpp]
+ #warning("'Debug' builds are not supported since this library was built in 'Release', 'RelWithDebInfo' should be preferred to avoid crashes and memory issues")
+  ^~~~~~~
+/usr/local/zed/include/sl/Camera.hpp(4779): warning: type qualifier on return type is meaningless
+
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/common.hpp(62): warning: missing return statement at end of non-void function "CompareFloat4::operator()"
+
+/usr/local/zed/include/sl/Camera.hpp: In constructor 'sl::RuntimeParameters::RuntimeParameters(sl::SENSING_MODE, bool, int, int, sl::REFERENCE_FRAME)':
+/usr/local/zed/include/sl/Camera.hpp:5645:273: warning: 'sl::RuntimeParameters::textureness_confidence_threshold' is deprecated: use texture_confidence_threshold instead [-Wdeprecated-declarations]
+                 REFERENCE_FRAME measure3D_reference_frame_ = REFERENCE_FRAME::CAMERA)
+                                                                                                                                                                                                                                                                                 ^
+/usr/local/zed/include/sl/Camera.hpp:5627:36: note: declared here
+         int textureness_confidence_threshold = 100;
+                                    ^~~
+/usr/local/zed/include/sl/Camera.hpp:5645:273: warning: 'sl::RuntimeParameters::textureness_confidence_threshold' is deprecated: use texture_confidence_threshold instead [-Wdeprecated-declarations]
+                 REFERENCE_FRAME measure3D_reference_frame_ = REFERENCE_FRAME::CAMERA)
+                                                                                                                                                                                                                                                                                 ^
+/usr/local/zed/include/sl/Camera.hpp:5627:36: note: declared here
+         int textureness_confidence_threshold = 100;
+                                    ^~~
+[9/10] Compiling Cuda object percep_obs_detect.p/src_common.cu.o
+In file included from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/common.hpp:1:0,
+                 from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/common.cu:1:
+/usr/local/zed/include/sl/Camera.hpp:94:2: warning: #warning ("'Debug' builds are not supported since this library was built in 'Release', 'RelWithDebInfo' should be preferred to avoid crashes and memory issues") [-Wcpp]
+ #warning("'Debug' builds are not supported since this library was built in 'Release', 'RelWithDebInfo' should be preferred to avoid crashes and memory issues")
+  ^~~~~~~
+In file included from /usr/local/include/eigen3/Eigen/Core:257:0,
+                 from /usr/local/include/pcl-1.11/pcl/memory.h:48,
+                 from /usr/local/include/pcl-1.11/pcl/pcl_base.h:46,
+                 from /usr/local/include/pcl-1.11/pcl/common/common.h:40,
+                 from /usr/local/include/pcl-1.11/pcl/common/common_headers.h:38,
+                 from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/common.cu:5:
+/usr/local/cuda/include/host_defines.h:54:2: warning: #warning "host_defines.h is an internal header file and must not be used directly.  This file will be removed in a future CUDA release.  Please use cuda_runtime_api.h or cuda_runtime.h instead." [-Wcpp]
+ #warning "host_defines.h is an internal header file and must not be used directly.  This file will be removed in a future CUDA release.  Please use cuda_runtime_api.h or cuda_runtime.h instead."
+  ^~~~~~~
+/usr/local/zed/include/sl/Camera.hpp(4779): warning: type qualifier on return type is meaningless
+
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/common.hpp(62): warning: missing return statement at end of non-void function "CompareFloat4::operator()"
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1903): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1903): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1908): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1908): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1928): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1928): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1928): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1928): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1935): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1954): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1954): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1954): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1954): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1954): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1954): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1954): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1974): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1974): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1974): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1974): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1974): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1974): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1974): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1974): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1984): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1984): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1984): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1984): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1984): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1984): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1984): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1984): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1994): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1994): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1994): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1994): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2011): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2011): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2011): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2017): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2017): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2022): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2026): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2026): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2026): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2026): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2026): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2034): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2038): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2042): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2042): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2042): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2042): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2042): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2050): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2050): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2050): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2050): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2050): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2050): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2050): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2050): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2050): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2050): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2050): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2064): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2064): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2064): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2064): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2064): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2064): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2064): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2064): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2075): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2079): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2079): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2084): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2084): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2089): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2089): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2094): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2094): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2099): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2103): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2103): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2103): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2109): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2113): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2117): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2121): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2125): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2129): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2133): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2137): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2141): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2141): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2141): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2147): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2147): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2147): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2147): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2154): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2154): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2154): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2154): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2154): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2154): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2154): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2154): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2154): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2154): warning: offsetof applied to non-POD types is nonstandard
+
+In file included from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/common.hpp:1:0,
+                 from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/common.cu:1:
+/usr/local/zed/include/sl/Camera.hpp:94:2: warning: #warning ("'Debug' builds are not supported since this library was built in 'Release', 'RelWithDebInfo' should be preferred to avoid crashes and memory issues") [-Wcpp]
+ #warning("'Debug' builds are not supported since this library was built in 'Release', 'RelWithDebInfo' should be preferred to avoid crashes and memory issues")
+  ^~~~~~~
+In file included from /usr/local/include/eigen3/Eigen/Core:257:0,
+                 from /usr/local/include/pcl-1.11/pcl/memory.h:48,
+                 from /usr/local/include/pcl-1.11/pcl/pcl_base.h:46,
+                 from /usr/local/include/pcl-1.11/pcl/common/common.h:40,
+                 from /usr/local/include/pcl-1.11/pcl/common/common_headers.h:38,
+                 from ../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/src/common.cu:5:
+/usr/local/cuda/include/host_defines.h:54:2: warning: #warning "host_defines.h is an internal header file and must not be used directly.  This file will be removed in a future CUDA release.  Please use cuda_runtime_api.h or cuda_runtime.h instead." [-Wcpp]
+ #warning "host_defines.h is an internal header file and must not be used directly.  This file will be removed in a future CUDA release.  Please use cuda_runtime_api.h or cuda_runtime.h instead."
+  ^~~~~~~
+/usr/local/zed/include/sl/Camera.hpp(4779): warning: type qualifier on return type is meaningless
+
+../../../perceptionRover/mrover-workspace/jetson/percep_obs_detect/include/common.hpp(62): warning: missing return statement at end of non-void function "CompareFloat4::operator()"
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1903): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1903): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1908): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1908): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1928): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1928): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1928): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1928): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1935): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1954): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1954): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1954): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1954): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1954): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1954): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1954): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1974): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1974): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1974): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1974): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1974): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1974): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1974): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1974): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1984): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1984): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1984): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1984): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1984): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1984): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1984): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1984): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1994): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1994): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1994): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(1994): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2011): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2011): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2011): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2017): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2017): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2022): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2026): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2026): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2026): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2026): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2026): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2034): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2038): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2042): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2042): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2042): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2042): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2042): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2050): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2050): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2050): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2050): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2050): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2050): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2050): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2050): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2050): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2050): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2050): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2064): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2064): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2064): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2064): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2064): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2064): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2064): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2064): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2075): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2079): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2079): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2084): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2084): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2089): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2089): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2094): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2094): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2099): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2103): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2103): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2103): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2109): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2113): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2117): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2121): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2125): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2129): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2133): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2137): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2141): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2141): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2141): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2147): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2147): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2147): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2147): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2154): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2154): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2154): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2154): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2154): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2154): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2154): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2154): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2154): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/include/pcl-1.11/pcl/impl/point_types.hpp(2154): warning: offsetof applied to non-POD types is nonstandard
+
+/usr/local/zed/include/sl/Camera.hpp: In constructor 'sl::RuntimeParameters::RuntimeParameters(sl::SENSING_MODE, bool, int, int, sl::REFERENCE_FRAME)':
+/usr/local/zed/include/sl/Camera.hpp:5645:273: warning: 'sl::RuntimeParameters::textureness_confidence_threshold' is deprecated: use texture_confidence_threshold instead [-Wdeprecated-declarations]
+                 REFERENCE_FRAME measure3D_reference_frame_ = REFERENCE_FRAME::CAMERA)
+                                                                                                                                                                                                                                                                                 ^
+/usr/local/zed/include/sl/Camera.hpp:5627:36: note: declared here
+         int textureness_confidence_threshold = 100;
+                                    ^~~
+/usr/local/zed/include/sl/Camera.hpp:5645:273: warning: 'sl::RuntimeParameters::textureness_confidence_threshold' is deprecated: use texture_confidence_threshold instead [-Wdeprecated-declarations]
+                 REFERENCE_FRAME measure3D_reference_frame_ = REFERENCE_FRAME::CAMERA)
+                                                                                                                                                                                                                                                                                 ^
+/usr/local/zed/include/sl/Camera.hpp:5627:36: note: declared here
+         int textureness_confidence_threshold = 100;
+                                    ^~~
+[10/10] Linking target percep_obs_detect
+Testing...
+[0/1] Running all tests.
+No tests defined.
+Installing...
+[0/1] Installing files.
+Installing percep_obs_detect to /home/amanch/.mrover/build_env/bin
+Done
