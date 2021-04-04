@@ -132,6 +132,7 @@ EFFECTS:
     - Outputs the points of this model 
 */
 // optimalMOdel out = { p1.x, p1.y, p1.z, p2.x, p2.y, p2.z, p3.x, p3.y, p3.z}
+/*
 __global__ void selectOptimalRansacModel(GPU_Cloud_F4 pc, float* inlierCounts, int* modelPoints, float* optimalModelOut, int iterations, int* optimalModelIndex) {
     
     __shared__ float inlierCountsLocal[MAX_THREADS];
@@ -180,6 +181,21 @@ __global__ void selectOptimalRansacModel(GPU_Cloud_F4 pc, float* inlierCounts, i
             *optimalModelIndex = modelIndiciesLocal[0];
         } else *optimalModelIndex = -1;
     }
+}
+*/
+__global__ void getOptimalModelPoints(float* selection, int idx) {
+    int point = threadIdx.x / 3; 
+    int axis = threadIdx.x % 3; 
+    sl::float3 pt = pc.data[modelPoints[idx + point]];
+    selection[threadIdx.x] = pt[axis];
+}
+
+void RansacPlane::selectOptimalModel() {
+    float* maxCount = thrust::max_element(thrust::device, inlierCounts, inlierCounts + iterations);
+    int maxIdx = maxCount - inlierCounts;
+    cudaMemcpy(optimalModelIndex, &maxIdx , sizeof(int), cudaMemcpyHostToDevice);
+    getOptimalModelPoints<<<1, 9>>>(selection, idx);
+    checkStatus(cudaDeviceSynchronize());
 }
 
 // this kernel is for DEBUGGING only. It will get the list of inliers so they can 

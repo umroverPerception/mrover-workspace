@@ -48,6 +48,7 @@ class RansacPlane {
          */
         Plane computeModel(GPU_Cloud_F4 &pc, bool flag);
 
+
     private:
         //user given model parms
         GPU_Cloud_F4 pc;
@@ -68,5 +69,6 @@ class RansacPlane {
         float* selectedModel;
         //int* inlierList;
         
+        void selectOptimalModel();
 
 };
