@@ -1,0 +1,6 @@
+[third_party]
+rapidjson=False
+phoenix=False
+
+[pip_deps]
+jetson=False

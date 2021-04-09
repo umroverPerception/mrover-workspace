@@ -1,0 +1,7 @@
+package rover_msgs;
+
+struct NavStatus {
+	string nav_state_name;
+	int32_t completed_wps;
+	int32_t total_wps;
+}

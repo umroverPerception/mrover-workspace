@@ -1,0 +1,23 @@
+---
+- hosts: all
+  become: yes
+  vars:
+      ubuntu_release: bionic
+      devbox_username: vagrant
+      ansible_python_interpreter: /usr/bin/python3
+  roles:
+  - jetson_dev
+  - base_station_dev
+  - cv_dev
+  - pis_dev
+  tasks:
+  - name: Configure bashrc
+    copy:
+        src: files/devbox/bashrc
+        dest: "/home/{{ devbox_username }}/.bashrc"
+    become: no
+  - name: Set up groups
+    user:
+        name: "{{ devbox_username }}"
+        groups: plugdev
+        append: yes

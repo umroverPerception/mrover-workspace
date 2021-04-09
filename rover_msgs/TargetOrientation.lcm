@@ -1,0 +1,11 @@
+package rover_msgs;
+
+struct TargetOrientation {
+    float x;
+    float y;
+    float z;
+    float alpha;
+    float beta;
+    float gamma;
+    boolean use_orientation;
+}

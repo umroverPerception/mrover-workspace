@@ -1,0 +1,70 @@
+{
+	"bearingPid":
+	{
+		"kP": 0.1,
+		"kI": 0.01,
+		"kD": 0.0055
+	},
+
+	"distancePid":
+	{
+		"kP": 0.2,
+		"kI": 0,
+		"kD": 0
+	},
+
+	"joystick":
+	{
+		"bearingPower": 0.5,
+		"drivingPower": 1.0,
+		"dampen": -1.0
+	},
+
+	"navThresholds":
+	{
+		"turningBearing": 20,
+		"drivingBearing": 50,
+		"waypointDistance": 2.0,
+		"targetDistance": 1.0,
+		"minTurningEffort": 0.25,
+		"gateCenteredAngleDiff": 20,
+		"obstacleDistanceThreshold": 2.5
+	},
+
+	"roverMeasurements":
+	{
+		"width": 1.5
+	},
+
+	"computerVision":
+	{
+		"visionDistance": 3.0,
+		"fieldOfViewAngle": 110,
+		"fieldOfViewSafeAngle": 100
+	},
+
+	"lcmChannels":
+	{
+		"navStatusChannel": "/nav_status",
+		"repeaterDropInitChannel": "/rr_drop_init",
+		"repeaterDropCompleteChannel": "/rr_drop_complete",
+		"joystickChannel": "/autonomous",
+		"zedGimbalCommand": "/zed_gimbal_cmd",
+		"zedGimbalPosition": "/zed_gimbal_data"
+	},
+
+	"radioRepeaterThresholds":
+	{
+		"signalStrengthCutOff": 30.0,
+		"lowSignalWaitTime": 3
+	},
+
+	"search":
+	{
+		"order": [0, 1],
+		"numSearches": 2,
+		"bailThresh": 10.0,
+		"searchWaitStepSize": 90.0,
+		"searchWaitTime": 1.0
+	}
+}

@@ -1,0 +1,8 @@
+package rover_msgs;
+
+struct RGB {
+	string id;
+	float r;
+	float g;
+	float b;
+}

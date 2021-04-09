@@ -1,0 +1,10 @@
+package rover_msgs;
+
+struct TargetAngles {
+    float joint_a;
+    float joint_b;
+    float joint_c;
+    float joint_d;
+    float joint_e;
+    float joint_f;
+}

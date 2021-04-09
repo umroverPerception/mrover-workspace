@@ -1,0 +1,11 @@
+package rover_msgs;
+
+struct SAMotors {
+    double carriage;
+    double four_bar;
+    double front_drill;
+    double back_drill;
+    double micro_x;
+    double micro_y;
+    double micro_z;
+}

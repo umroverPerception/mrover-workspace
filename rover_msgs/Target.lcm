@@ -1,0 +1,7 @@
+package rover_msgs;
+
+struct Target {
+	double distance;
+	double bearing; // from straight ahead
+	int32_t id;
+}

@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: yes
+  vars:
+      ubuntu_release: bionic
+      ansible_python_interpreter: /usr/bin/python3
+  roles:
+  - jetson_dev
+  - base_station_dev
+  - cv_dev
+  - pis_dev
