@@ -124,7 +124,7 @@ __global__ void findClearPathKernel(float* minXG, float* maxXG, float* minZG, fl
     //Checks if either of the points is between the two lines
     if(((leftLine(maxX, minZ) > -1 && rightLine(maxX, minZ) < 1) || //check if maxX is between right and left
        (leftLine(minX, minZ) > -1 && rightLine(minX, minZ) < 1) || //Check if minX is between right and left
-       (leftLine(minX, minZ, maxX, minZ) || rightLine(minZ, minZ, maxX, minZ))) && !(maxZ < 0.01)) { //check if lines intersect line seg
+       (leftLine(minX, minZ, maxX, minZ) || rightLine(minX, minZ, maxX, minZ))) && !(maxZ < 0.01)) { //check if lines intersect line seg
         obstacle = true;
     }
 

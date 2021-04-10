@@ -546,13 +546,19 @@ EuclideanClusterExtractor::ObsReturn EuclideanClusterExtractor::extractClusters(
     int* leftCPU;
     int* rightCPU; 
 
+    interestPoints  = (int**) malloc(sizeof(int*)*4);
+    interestPoints[0] = minX;
+    interestPoints[1] = maxX;
+    interestPoints[2] = minZ;
+    interestPoints[3] = maxZ;
+
     leftCPU = (int*) malloc(sizeof(int));
     rightCPU = (int*) malloc(sizeof(int));
 
     cudaMalloc(&leftBearing, sizeof(float));
     cudaMalloc(&rightBearing, sizeof(float));
     
-    //Laucnh kernels to find clear paths using mins and max cluster arrasy
+    //Laucnh kernels to find clear paths using mins and max cluster arrays
     findClearPathKernel<<<1, MAX_THREADS>>>(minX, maxX, minZ, maxZ, numClustersOrig, leftBearing, rightBearing);
     checkStatus(cudaGetLastError());
     cudaDeviceSynchronize();

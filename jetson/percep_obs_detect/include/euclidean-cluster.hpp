@@ -20,12 +20,8 @@ class EuclideanClusterExtractor {
             float* minY;
             float* maxY;
             float* minZ;
-            float* maxZ;
-            
+            float* maxZ;   
         };
-
-        int bearingRight;
-        int bearingLeft;
  
         /**
          * \brief EuclideanClusterExtractor constructor 
@@ -45,6 +41,8 @@ class EuclideanClusterExtractor {
          */
         ObsReturn extractClusters(GPU_Cloud_F4 pc, Bins &bins);
 
+        int** interestPoints; //Array of GPU pointers to interest points of obstacles 
+        
     private:
         //user given model parms
         GPU_Cloud_F4 pc;
