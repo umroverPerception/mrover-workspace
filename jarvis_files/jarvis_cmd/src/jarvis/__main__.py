@@ -3,7 +3,7 @@ import sys
 from buildsys import WorkspaceContext
 from invoke.exceptions import UnexpectedExit
 
-from .build import build_dir, clean, build_deps, build_all
+from .build import build_dir, clean, build_deps, build_all, test
 
 
 def clean_dir_name(d):
@@ -49,6 +49,7 @@ def main():
     parser_test.add_argument('-o', '--option', nargs='+', dest='build_opts',
                               help='A build option to pass to the underlying '
                               'build system')
+    parser_test.add_argument('testType', help='Type of test to be run')
 
     args = parser.parse_args()
 
@@ -66,7 +67,7 @@ def main():
         elif args.subcommand_name == 'dep':
             build_deps(ctx)
         elif args.subcommand_name == 'test':
-            test(ctx)
+            test(ctx, d, opts, testType)
 
     except UnexpectedExit as e:
         sys.exit(e.result.exited)
