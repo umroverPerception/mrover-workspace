@@ -38,7 +38,7 @@ MapSegmentation::Quadrant MapSegmentation::getQuadrant(double &angleIn) {
     }
 }
 
-MapSegmentation::MapSegementation(double &headingAngle) : heading(headinAngle) {
+MapSegmentation::MapSegmentation(double &headingAngle) : heading(headinAngle) {
     headingQuadrant = getQuadrant(heading);
 
     upperFOV = heading + (DEFAULT_FOV/2.0);
