@@ -42,6 +42,14 @@ def main():
     subcommands.add_parser('upgrade',
                            help='Re-installs the Jarvis CLI')
 
+    parser_test = subcommands.add_parser('test', 
+                            help='Outputs code timing statistics')
+    parser_test.add_argument('dir', 
+                            help='The directory to build')
+    parser_test.add_argument('-o', '--option', nargs='+', dest='build_opts',
+                              help='A build option to pass to the underlying '
+                              'build system')
+
     args = parser.parse_args()
 
     try:
@@ -57,6 +65,9 @@ def main():
             clean(ctx)
         elif args.subcommand_name == 'dep':
             build_deps(ctx)
+        elif args.subcommand_name == 'test':
+            test(ctx)
+
     except UnexpectedExit as e:
         sys.exit(e.result.exited)
 

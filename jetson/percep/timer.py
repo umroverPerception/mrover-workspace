@@ -23,7 +23,7 @@ count = 0
 
 #open file that will have data about program run
 #print("Timing test")
-file = open("testOutput.txt")
+file = open("timerInput.txt")
 lines = file.readlines()
 
 # parse data
