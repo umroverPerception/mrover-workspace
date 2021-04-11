@@ -236,6 +236,43 @@ void PCL::FindInterestPoints(std::vector<pcl::PointIndices> &cluster_indices,
 
 }
 
+double PCL::findObstacleCornersHelper(double &x, double &z, double &heading) {
+    if (x >= 0.0) {
+        double theta = asin(x/y);
+        return (heading + theta);
+    }
+    if (x < 0.0) {
+        double theta = asin((-1.0 * x)/y);
+        return heading = theta;
+    }
+}
+
+std::vector<int> PCL::findObstacleCorners(std::vector<std::vector<int>> &interest_points, double &headingAngle) {
+    std::vector<int> obstacleCorners;
+    for (int i = 0; i < (int) interest_points.size(); ++i) {
+        auto leftmost = pt_cloud_ptr->points[interest_points[i][0]];
+        auto rightmost = pt_cloud_ptr->points[interest_points[i][1]];
+        auto closest = pt_cloud_ptr->points[interest_points[i][4]];
+        auto furthest = pt_cloud_ptr->points[interest_points[i][5]];
+
+        //row start
+        double leftmostAngle = findObstacleCorners(leftmost.x, leftmost.z, headingAngle);
+        obstacleCorners.push_back(ceil(leftmost.z * sin(leftmostAngle)));
+
+        //col start
+        double closestAngle = findObstacleCorners(closest.x, closest.z, headingAngle);
+        obstacleCorners.push_back(ceil(closest.z * cos(closestAngle)));
+
+        //row end
+        double rightmostAngle = findObstacleCorners(rightmost.x, rightmost.z, headingAngle);
+        obstacleCorners.push_back(ceil(rightmost.z * sin(righmostAngle)));
+
+        //col end
+        double furthestAngle = findObstacleCorners(furthest.x, furthest.z, headingAngle);
+        obstacleCorners.push_back(ceil(furthest.z * cos(furthestAngle)));
+    }
+}
+
 /* --- Get Angle Off Center--- */
 //This function finds the angle off center the
 //line that passes through both these points is

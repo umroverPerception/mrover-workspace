@@ -89,6 +89,12 @@ class PCL {
         
         //Finds the four corners of the clustered obstacles
         void FindInterestPoints(std::vector<pcl::PointIndices> &cluster_indices, std::vector<std::vector<int>> &interest_points);
+
+        //Finds corner indexes of the obstacles on the occuapncy map
+        std::vector<int> findObstacleCorners(std::vector<std::vector<int>> &interest_points, double &headingAngle);
+
+        //findObstacleConers helper function, returns the angle from the x axis to the z value
+        double findObstacleCornersHelper(double &x, double &z, double &heading);
         
         //Finds a clear path given the obstacle corners
         double FindClearPath(const std::vector<std::vector<int>> &interest_points,

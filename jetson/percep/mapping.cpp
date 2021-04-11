@@ -76,15 +76,103 @@ void MapSegmentation::caclulateQuadTwo(double &angle, char &key) {
     }
     else if (key == 'h') {
         indexCorners.push_back(MAX_FILTER_LENGTH);
-        indexCorners.push_back(MAX_FILTER_LENGTH);
+        indexCorners.push_back((-1) * MAX_FILTER_LENGTH);
         indexCorners.push_back(0);
         indexCorners.push_back(0);
     }
     else if (key == 'l') {
-        indexCorners.push_back((-1) * ceil(MAX_FILTER_LENGTH * cos(angle - 90.0)));
+        indexCorners.push_back(ceil(MAX_FILTER_LENGTH * cos(angle - 90.0)));
+        indexCorners.push_back((-1) * MAX_FILTER_LENGTH);
+        indexCorners.push_back(0);
+        indexCorners.push_back(0);
+    }
+}
+
+void MappingSegmentation::calulateQuadThree(double &angle, char &key) {
+    if (key == 'u') {
+        indexCorners.push_back(0);
+        indexCorners.push_back((-1) * MAX_FILTER_LENGTH);
+        indexCorners.push_back((-1) * ceil(MAX_FILTER_LENGTH * cos(360.0 - angle));
+        indexCorners.push_back(0);
+    }
+    else if (key == 'h') {
+        indexCorners.push_back(0);
+        indexCorners.push_back((-1) * MAX_FILTER_LENGTH);
+        indexCorners.push_back((-1) * MAX_FILTER_LENGTH);
+        indexCorners.push_back(0);
+    }
+    else if (key == 'l') {
+        indexCorners.push_back(0);
+        indexCorners.push_back((-1) * ceil(MAX_FILTER_LENGTH * cos(angle - 270.0));
+        indexCorners.push_back((-1) * MAX_FILTER_LENGTH);
+        indexCorners.push_back(0);
+    }
+}
+
+void MappingSegmentation::caclulateQuadFour(double &angle, char &key) {
+    if (key == 'u') {
+        indexCorners.push_back(0);
+        indexCorners.push_back(0);
+        indexCorners.push_back((-1) * MAX_FILTER_LENGTH);
+        indexCorners.push_back(ceil(MAX_FILTER_LENGTH * cos(360.0 - angle));
+    }
+    else if (key == 'h') {
+        indexCorners.push_back(0);
+        indexCorners.push_back(0);
+        indexCorners.push_back((-1) * MAX_FILTER_LENGTH);
         indexCorners.push_back(MAX_FILTER_LENGTH);
+    }
+    else if (key == 'l') {
         indexCorners.push_back(0);
         indexCorners.push_back(0);
+        indexCorners.push_back((-1) * ceil(MAX_FILTER_LENGTH * cos(angle - 270.0);
+        indexCorners.push_back(MAX_FILTER_LENGTH);
+    }
+}
+
+void MapSegmentation::fillIndexCorners() {
+    //upperFOV
+    if (upperFOVQuadrant = QuadrantOne) {
+        caclulateQuadOne(upperFOV, 'u');
+    }
+    else if (upperFOVQuadrant = QuadrantTwo) {
+        caclulateQuadTwo(upperFOV, 'u');
+    }
+    else if (upperFOVQuadrant = QuadrantThree) {
+        caclulateQuadThree(upperFOV, 'u');
+    }
+    else if (upperFOVQuadrant = QuadrantFour) {
+        caclulateQuadFour(upperFOV, 'u');
+    }
+
+    //lowerFOV
+    if (lowerFOVQuadrant = QuadrantOne) {
+        caclulateQuadOne(lowerFOV, 'l');
+    }
+    else if (lowerFOVQuadrant = QuadrantTwo) {
+        caclulateQuadTwo(lowerFOV, 'l');
+    }
+    else if (lowerFOVQuadrant = QuadrantThree) {
+        caclulateQuadThree(lowerFOV, 'l');
+    }
+    else if (lowerFOVQuadrant = QuadrantFour) {
+        caclulateQuadFour(lowerFOV, 'l');
+    }
+
+    //heading
+    if ((lowerFOVQuadrant != headingQuadrant) && (upperQuadrant != headingQuadrant)) {
+        if (headingQuadrant = QuadrantOne) {
+        caclulateQuadOne(heading, 'h');
+    }
+    else if (headingQuadrant = QuadrantTwo) {
+        caclulateQuadTwo(heading, 'h');
+    }
+    else if (headingQuadrant = QuadrantThree) {
+        caclulateQuadThree(heading, 'h');
+    }
+    else if (headingQuadrant = QuadrantFour) {
+        caclulateQuadFour(heading, 'h');
+    }
     }
 }
 
@@ -134,7 +222,18 @@ void Mapping::updatePositionInOccupancyMap(Odometry &currentOdometry) {
 }
 
 void Mapping::updateOrientation(double &currentAngle) {
-    orientationAngle = currentAngle;
+    if (currentAngle >= 0.0 && currentAngle < 90.0) {
+        orientationAngle = 90.0 - currentAngle;
+    }
+    else if (currentAngle >= 90.0 && currentAngle < 180.0) {
+        orientationAngle = (90.0 - currentAngle) + 360.0;
+    }
+    else if (currentAngle < 0.0 && currentAngle >= -90.0) {
+        orientationAngle = (-1 * currentAngle) + 90.0;
+    }
+    else if (currentAngle < -90.0 && currentAngle >= -180.0) {
+        orientationAngle = (-1 * currentAngle) + 90.0;
+    }
 }
 
 void Mapping::getMapArea(double &angle, double &FOV) {
@@ -178,47 +277,3 @@ void Mapping::updateOccupancy (size_t xIndex, size_t yIndex) {
         map[xIndex][yIndex] = map[xIndex][yIndex] + (0.65/0.35); 
     }
 }
-
-/*char OccupancyMap::doubleToChar(double &input) {
-    return ceil(input / CONVERSION_FACTOR);
-}
-        
-double OccupancyMap::charToDouble(char &input) {
-    return input * CONVERSION_FACTOR;
-}
-
-int OccupancyMap::getMapHeight() {
-    return occupancyMapHeight;
-}
-
-int OccupancyMap::getMapWidth() {
-    return occupancyMapWidth;
-}
-
-void OccupancyMap::fillOccupanyMap(char &toFillWith) {
-    for(std::size_t row = 0; row < occupancyMap.size(); ++row) {
-        for(std::size_t col = 0; col < occupancyMap[row].size(); ++col) {
-            occupancyMap[row][col] = toFillWith;
-        }
-    }
-}
-
-double OccupancyMap::convertDegreesToMeters(double degrees) {
-    return degrees * DEGREES_TO_METERS_CONVERSION_FACTOR;
-}
-double OccupancyMap::changeInLatitudeMeters(double currentLatitude) {
-    return convertDegreesToMeters(previousLatitude - currentLatitude);
-}
-
-double OccupancyMap::changeInLongitudeMeters(double currentLongitude); {
-    return convertDegreesToMeters(previousLongitude - currentLongitude);
-}
-
-void updatePosition() {
-    currentPositionInOccupancyMapHeight =+ round(changeInLatitudeMeters(currentLatitude));
-    currentPositionInOccupancyMapLength =+ round(changeInLongitudeMeters(currentLongitude));
-}
-
-int getCurrentPositionInOccupancyMapHeight() return currentPositionInOccupancyMapHeight;
-int getCurrentPositionInOccupancyMapLength() return currentPositionInOccupancyMapLength;
-*/

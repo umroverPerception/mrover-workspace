@@ -59,7 +59,7 @@ private:
     void fillIndexCorners();
 public:
     //Default Constructor for MapSegmentation Class.
-    MapSegmentation(double &headingAngle);
+    MapSegmentation();
 
     //returns the indexCorners vector
     std::vector<int> getIndexCorners();
