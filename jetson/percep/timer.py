@@ -15,20 +15,29 @@ and should then seamlessly provide timing output for our code.
 '''
 
 import statistics as stat
-import numpy as np
+
+functions = []
+times = []
+segs = []
+count = 0
 
 #open file that will have data about program run
-print("Timing test")
+#print("Timing test")
 file = open("testOutput.txt")
 lines = file.readlines()
 
 # parse data
 for line in lines:
-    seg = line.split() 
-for i in range(0, len(seg), 2):
-    fileNames.append(seg[i])
-for i in range(1, len(seg), 2):
-    times.append(seg[i])
+    segs.append(line.split())
+
+for seg in segs:
+    functions.append(seg[0])
+    times.append(float(seg[1]))
+
+for time in times:
+    print(time)
+for function in functions:
+    print(function)
 
 # find mean, median, standard deviation of times
 totalTime = sum(times)
@@ -36,10 +45,16 @@ medianTime = stat.median(times)
 meanTime = stat.mean(times)
 stdevTime = stat.stdev(times)
 
-print("Total time to run: %d s" % totalTime)
-print("Mean: %d s" % meanTime)
-print("Median: %d s" % medianTime)
-print("StDev: %d s" % stdevTime)
+print("Total time to run: %.2f s " % totalTime)
+print("Mean: %.2f s" % round(meanTime,2))
+print("Median: %.2f s" % round(medianTime,2))
+print("StDev: %.2f s" % round(stdevTime,2))
+
+out = open("timerOutput.txt", "w")
+out.write("Total time to run: %.2f s \n" % totalTime) 
+out.write("Mean: %.2f s \n" % round(meanTime,2))
+out.write("Median: %.2f s \n" % round(medianTime,2))
+out.write("StDev: %.2f s \n" % round(stdevTime,2))
 
 # function_name time
 # writing information to the file
