@@ -1,5 +1,7 @@
 #include "camera.hpp"
 #include "perception.hpp"
+#include "rover_msgs/Odometry.hpp"
+
 
 #if OBSTACLE_DETECTION
   #include <pcl/common/common_headers.h>
@@ -366,7 +368,7 @@ void Camera::Impl::dataCloud(pcl::PointCloud<pcl::PointXYZRGB>::Ptr &p_pcl_point
 #endif
 
 Camera::Camera() : impl_{new Camera::Impl}, rgb_foldername{""},
-                   depth_foldername{""}, pcl_foldername{""} {}
+                   depth_foldername{""}, pcl_foldername{""}, lcm_foldername{""} {}
 
 Camera::~Camera() {
 	delete this->impl_;
@@ -403,6 +405,8 @@ void Camera::disk_record_init() {
     string mkdir_depth =  std::string("mkdir -p ") + depth_foldername;
     pcl_foldername = DEFAULT_ONLINE_DATA_FOLDER "pcl/";
     string mkdir_pcl = std::string("mkdir -p ") + pcl_foldername;
+    lcm_foldername = DEFAULT_ONLINE_DATA_FOLDER "lcm/";
+    string mkdir_lcm = std::string("mkdir -p ") + lcm_foldername;
 
     //creates new folder in the system
     if (-1 == system(mkdir_pcl.c_str()) || -1 == system( mkdir_rgb.c_str()) || -1 == system(mkdir_depth.c_str())) 
@@ -429,6 +433,16 @@ void Camera::write_curr_frame_to_disk(cv::Mat rgb, cv::Mat depth, pcl::PointClou
     pcl_write(pcl_foldername + fileName + std::string(".pcd"), p_pcl_point_cloud);
     cv::imwrite(rgb_foldername +  fileName + std::string(".jpg"), rgb );
     cv::imwrite(depth_foldername +  fileName + std::string(".exr"), depth );
+    cv::imwrite(lcm_foldername + fileName + std::string(".txt"), lcm)
+
+    ofstream output;
+    Odometry in;
+    output.open(lcm_foldername + fileName);
+    output << in.latitude_deg << endl;
+    output << in.latitude_min << endl;
+    output << in.longitude_deg << endl;
+    output << in.longitude_min << endl;
+    output << in.bearing_deg << endl;
 }
 
 #endif

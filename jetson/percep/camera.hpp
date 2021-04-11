@@ -1,6 +1,7 @@
 #pragma once
 #include <opencv2/opencv.hpp>
 #include "perception.hpp"
+#include fstream;
 
 #if OBSTACLE_DETECTION
 	#include <pcl/common/common_headers.h>
@@ -13,6 +14,7 @@ private:
 	std::string rgb_foldername;
 	std::string depth_foldername;
 	std::string pcl_foldername;
+	std::string lcm_foldername;
 
 	cv::VideoWriter vidWrite;
 	

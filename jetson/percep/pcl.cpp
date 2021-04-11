@@ -269,7 +269,7 @@ std::vector<int> PCL::findObstacleCorners(std::vector<std::vector<int>> &interes
 
         //col end
         double furthestAngle = findObstacleCorners(furthest.x, furthest.z, headingAngle);
-        obstacleCorners.push_back(ceil(furthest.z * cos(furthestAngle)));
+        obstacleCorners.push_back(ceil(furthest.z * cos(furthestAngle)))
     }
 }
 
