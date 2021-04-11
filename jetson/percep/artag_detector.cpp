@@ -60,37 +60,57 @@ Point2f TagDetector::getAverageTagCoordinateFromCorners(const vector<Point2f> &c
     }
     avgCoord.x /= corners.size();
     avgCoord.y /= corners.size();
-    cout << "average x: " << avgCoord.x << ", average y: " << avgCoord.y << endl;
+    //cout << "average x: " << avgCoord.x << ", average y: " << avgCoord.y << endl;
     return avgCoord;
 }
 
 vector<Point2f> TagDetector::getMoreCoordinates(const vector<Point2f> &corners) {
     vector<Point2f> coordinates;
     Point2f avgCoord = getAverageTagCoordinateFromCorners(corners);
-    int xMin = max(corners[0].x,corners[3].x);
-    int xMax = min(corners[1].x,corners[2].x);
-    int yMin = max(corners[0].y,corners[1].y);
-    int yMax = min(corners[2].y,corners[3].y);
+    int xMin = max(corners[0].x,corners[1].x);
+    int xMax = min(corners[2].x,corners[3].x);
+    int yMin = max(corners[1].y,corners[2].y);
+    int yMax = min(corners[0].y,corners[3].y);
     Point2f point1;
     point1.x = avgCoord.x;
     point1.y = (avgCoord.y + yMin)/2;
-    cout << "point1 x: " << point1.x << ", point1 y: " << point1.y << endl;
+    //cout << "point1 x: " << point1.x << ", point1 y: " << point1.y << endl;
     coordinates.push_back(point1);
     Point2f point2;
     point2.x = (avgCoord.x + xMax)/2;
     point2.y = avgCoord.y;
-    cout << "point2 x: " << point2.x << ", point2 y: " << point2.y << endl;
+    //cout << "point2 x: " << point2.x << ", point2 y: " << point2.y << endl;
     coordinates.push_back(point2);
     Point2f point3;
     point3.x = avgCoord.x;
     point3.y = (avgCoord.y + yMax)/2;
-    cout << "point3 x: " << point3.x << ", point3 y: " << point3.y << endl;
+    //cout << "point3 x: " << point3.x << ", point3 y: " << point3.y << endl;
     coordinates.push_back(point3);
     Point2f point4;
     point4.x = (avgCoord.x + xMin)/2;
     point4.y = avgCoord.y;
-    cout << "point4 x: " << point4.x << ", point4 y: " << point4.y << endl;
+    //cout << "point4 x: " << point4.x << ", point4 y: " << point4.y << endl;
     coordinates.push_back(point4);
+    Point2f point5;
+    point5.x = (avgCoord.x + xMin)/2;
+    point5.y = (avgCoord.y + yMin)/2;
+    //cout << "point5 x: " << point5.x << ", point5 y: " << point5.y << endl;
+    coordinates.push_back(point5);
+    Point2f point6;
+    point6.x = (avgCoord.x + xMax)/2;
+    point6.y = (avgCoord.y + yMin)/2;
+    //cout << "point6 x: " << point6.x << ", point6 y: " << point6.y << endl;
+    coordinates.push_back(point6);
+    Point2f point7;
+    point7.x = (avgCoord.x + xMax)/2;
+    point7.y = (avgCoord.y + yMax)/2;
+    //cout << "point7 x: " << point7.x << ", point7 y: " << point7.y << endl;
+    coordinates.push_back(point7);
+    Point2f point8;
+    point8.x = (avgCoord.x + xMin)/2;
+    point8.y = (avgCoord.y + yMax)/2;
+    //cout << "point8 x: " << point8.x << ", point8 y: " << point8.y << endl;
+    coordinates.push_back(point8);
     return coordinates;
 }
 
@@ -112,6 +132,48 @@ cv::aruco::drawDetectedMarkers(rgb, corners, ids);
 #if PERCEPTION_DEBUG
     // Draw detected tags
     cv::aruco::drawDetectedMarkers(rgb, corners, ids);
+    for (size_t i = 0; i < 1000; i++)
+    {
+        rgb.at<Vec3b>(300,i)[0] = 255;
+        rgb.at<Vec3b>(300,i)[1] = 255;
+        rgb.at<Vec3b>(300,i)[2] = 255;
+    }
+    for (size_t i = 0; i < 1000; i++)
+    {
+        rgb.at<Vec3b>(200,i)[0] = 255;
+        rgb.at<Vec3b>(200,i)[1] = 255;
+        rgb.at<Vec3b>(200,i)[2] = 255;
+    }
+    for (size_t i = 0; i < 1000; i++)
+    {
+        rgb.at<Vec3b>(400,i)[0] = 255;
+        rgb.at<Vec3b>(400,i)[1] = 255;
+        rgb.at<Vec3b>(400,i)[2] = 255;
+    }
+    for (size_t i = 0; i < 500; i++)
+    {
+        rgb.at<Vec3b>(i,500)[0] = 255;
+        rgb.at<Vec3b>(i,500)[1] = 255;
+        rgb.at<Vec3b>(i,500)[2] = 255;
+    }
+    for (size_t i = 0; i < 500; i++)
+    {
+        rgb.at<Vec3b>(i,700)[0] = 255;
+        rgb.at<Vec3b>(i,700)[1] = 255;
+        rgb.at<Vec3b>(i,700)[2] = 255;
+    }
+    for (size_t i = 0; i < 500; i++)
+    {
+        rgb.at<Vec3b>(i,1000)[0] = 255;
+        rgb.at<Vec3b>(i,1000)[1] = 255;
+        rgb.at<Vec3b>(i,1000)[2] = 255;
+    }
+    for (size_t i = 0; i < 500; i++)
+    {
+        rgb.at<Vec3b>(i,1200)[0] = 255;
+        rgb.at<Vec3b>(i,1200)[1] = 255;
+        rgb.at<Vec3b>(i,1200)[2] = 255;
+    }
     cv::imshow("AR Tags", rgb);
 
     // on click debugging for color
@@ -179,8 +241,8 @@ double TagDetector::getAngle(float xPixel, float wPixel){
 void TagDetector::updateDetectedTagInfo(rover_msgs::Target *arTags, pair<Tag, Tag> &tagPair, Mat &depth_img, Mat &src){
     struct tagPairs {
         vector<int> id;
-        vector<int> locx;
-        vector<int> locy;
+        vector<double> locx;
+        vector<double> locy;
         vector<int> buffer;
     }; 
     tagPairs tags;
@@ -188,28 +250,54 @@ void TagDetector::updateDetectedTagInfo(rover_msgs::Target *arTags, pair<Tag, Ta
     tags.id.push_back(tagPair.first.id);
     tags.locx.push_back(tagPair.first.loc.x);
     tags.locy.push_back(tagPair.first.loc.y);
+    for (size_t i = 0; i < tagPair.first.extraPoints.size(); i++)
+    {
+        tags.locx.push_back(tagPair.first.extraPoints[i].x);
+        tags.locy.push_back(tagPair.first.extraPoints[i].y);
+    }
     tags.id.push_back(tagPair.second.id);
     tags.locx.push_back(tagPair.second.loc.x);
     tags.locy.push_back(tagPair.second.loc.y);
+    for (size_t i = 0; i < tagPair.second.extraPoints.size(); i++)
+    {
+        tags.locx.push_back(tagPair.second.extraPoints[i].x);
+        tags.locy.push_back(tagPair.second.extraPoints[i].y);
+    }
     tags.buffer.push_back(0);
     tags.buffer.push_back(0);
 
-  for (uint i=0; i<2; i++) {
-    if(tags.id[i] == DEFAULT_TAG_VAL){//no tag found
-        if(tags.buffer[i] <= BUFFER_ITERATIONS){//send buffered tag until tag is found
-            ++tags.buffer[i];
+  for (uint i=0; i<18; i += 9) {
+    if(tags.id[i/9] == DEFAULT_TAG_VAL){//no tag found
+        if(tags.buffer[i/9] <= BUFFER_ITERATIONS){//send buffered tag until tag is found
+            ++tags.buffer[i/2];
         } else {//if still no tag found, set all stats to -1
-            arTags[i].distance = DEFAULT_TAG_VAL;
-            arTags[i].bearing = DEFAULT_TAG_VAL;
-            arTags[i].id = DEFAULT_TAG_VAL;
+            arTags[i/9].distance = DEFAULT_TAG_VAL;
+            arTags[i/9].bearing = DEFAULT_TAG_VAL;
+            arTags[i/9].id = DEFAULT_TAG_VAL;
         }
      } else {//tag found
-    if(!isnan(depth_img.at<float>(tags.locy.at(i), tags.locx.at(i)))) {
-        arTags[i].distance = depth_img.at<float>(tags.locy.at(i), tags.locx.at(i)) / MM_PER_M;
-    }
-        arTags[i].bearing = getAngle((int)tags.locx.at(i), src.cols);
-        arTags[i].id = tags.id.at(i);
-        tags.buffer[i] = 0;
+     vector<double> tagDistances;
+     double totalDistances;
+     double meanDistance;
+        for(int j = 0; j < 9; ++j) {
+        if(!isnan(depth_img.at<float>(tags.locy.at(i+j), tags.locx.at(i+j)))) {
+            tagDistances.push_back(depth_img.at<float>(tags.locy.at(i+j), tags.locx.at(i+j)) / MM_PER_M);
+            totalDistances += tagDistances[j];
+            cout << "Tag " << j+1 << " distance: " << tagDistances[j] << endl;
+        }
+        if (tagDistances.size() == 0)
+        {
+            meanDistance = DEFAULT_TAG_VAL;
+        }
+        else {
+            meanDistance = totalDistances/tagDistances.size();
+        }
+        
+        }
+        arTags[i/9].distance = meanDistance;
+        arTags[i/9].bearing = getAngle((int)tags.locx.at(i/9), src.cols);
+        arTags[i/9].id = tags.id.at(i/9);
+        tags.buffer[i/9] = 0;
    }
   }
 }
