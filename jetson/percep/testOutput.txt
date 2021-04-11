@@ -1,0 +1,6 @@
+artag 0.3 
+function1 0.4 
+artag2 0.6 
+tagReader 1.8
+artagReader 1.4
+function3 1.9
