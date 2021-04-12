@@ -34,7 +34,6 @@
 #include <pcl/point_types.h>
 #if PERCEPTION_DEBUG
   #include <pcl/visualization/pcl_visualizer.h>
-  #include "Timer.hpp"
 #endif
 #endif
 
