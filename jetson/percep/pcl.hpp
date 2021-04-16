@@ -1,6 +1,7 @@
 #if OBSTACLE_DETECTION
 #pragma once
 
+#include "display2.hpp"
 #include "perception.hpp"
 #include <pcl/common/common_headers.h>
 
@@ -30,7 +31,7 @@ class PCL {
     public:
 
     //Constructor
-    PCL() : 
+    PCL(Display* display_in) : 
         bearing{0}, distance{0}, detected{false},
         pt_cloud_ptr{new pcl::PointCloud<pcl::PointXYZRGB>} {
 
@@ -41,9 +42,11 @@ class PCL {
         cloudArea = PT_CLOUD_WIDTH*PT_CLOUD_HEIGHT;
         std::cerr << cloudArea<< endl;
         #endif
-
+        
+        display = display_in;
     };
 
+    Display* display;
     double bearing;
     double distance;
     bool detected;

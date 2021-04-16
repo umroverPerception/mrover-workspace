@@ -9,6 +9,12 @@ Display:: Display(string in_windowName) : windowName(in_windowName) {
     namedWindow(windowName);
     imshow(windowName, img);
     waitKey(30);
+
+    
+    timeLogsFile.open("time_logs.txt");
+    if(!timeLogsFile.is_open()){
+        cout << "Time Log file could not be open." << endl;
+    }
 }
 
 // Private member functions
@@ -41,6 +47,15 @@ void Display::show(){
     waitKey(1);
 }
 
+void Display::insert(string displayName, InsertType dataType, double outputVal){
+    if(dataType == InsertType::Text){
+        allData.insert({displayName, outputVal});
+    }
+    else if(dataType == InsertType::Time){
+        cout << "Timer cannot be called with decimal value. Either use "
+            << "current or duration as 3rd parameter\n";
+    }
+}
 
 void Display::insert(string displayName, InsertType dataType, Timer timerType){
     if(dataType == InsertType::Time){
@@ -62,6 +77,7 @@ void Display::insert(string displayName, InsertType dataType, Timer timerType){
             auto start = it->second;
             double time_diff = std::chrono::duration<double, std::ratio<1,1000>>(end - start).count();
             
+            timeLogsFile << it->first << ": " << time_diff << " ms" << endl;
 
             allData.insert({displayName, time_diff});
         }
@@ -80,5 +96,6 @@ void Display::clear(){
 // Destructor
 Display::~Display(){
     destroyWindow(windowName);
+    timeLogsFile.close();
 }
 

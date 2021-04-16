@@ -1,6 +1,7 @@
 #include "pcl.hpp"
 #include "perception.hpp"
 
+
 #if OBSTACLE_DETECTION
 /* --- Pass Through Filter --- */
 //Filters out all points with z values that aren't within a threshold
@@ -44,6 +45,8 @@ void PCL::DownsampleVoxelFilter() {
 //removes points completely from point cloud
 //Source: https://rb.gy/zx6ojh
 void PCL::RANSACSegmentation(string type) {
+    display->insert("RANSACS", display->time, display->current);
+
     #if PERCEPTION_DEBUG
         pcl::ScopeTime t ("RANSACSegmentation");
     #endif
@@ -83,6 +86,7 @@ void PCL::RANSACSegmentation(string type) {
         extract.filter(*pt_cloud_ptr);
     }
     
+    display->insert("RANSACS", display->time, display->duration);
 }
 
 /* --- Euclidian Cluster Extraction --- */

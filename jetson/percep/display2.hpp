@@ -5,6 +5,7 @@
 #include <map>
 #include <unordered_map>
 #include <ctime>
+#include <fstream>
 
 using namespace cv;
 using namespace std;
@@ -23,6 +24,7 @@ class Display{
   string windowName;
   map<string, double> allData;
   unordered_map<string, steady_clock::time_point> timerData;
+  fstream timeLogsFile;
 
   void clearDisplay();
 
@@ -36,7 +38,7 @@ class Display{
   
     void show();
 
-    void insert(string displayName, InsertType, double outputVal);
+    void insert(string displayName, InsertType dataType, double outputVal);
 
     void insert(string displayName, InsertType dataType, Timer timerType);
 

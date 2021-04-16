@@ -9,6 +9,8 @@ using namespace cv;
 using namespace std;
 using namespace std::chrono_literals;
 
+
+
 int main() {
   
   /* --- Camera Initializations --- */
@@ -43,10 +45,13 @@ int main() {
   int left_tag_buffer = 0;
   int right_tag_buffer = 0;
   
+
+  Display display("Console Display");
   /* --- Point Cloud Initializations --- */
   #if OBSTACLE_DETECTION
 
-  PCL pointcloud;
+
+  PCL pointcloud(&display);
 
   #if PERCEPTION_DEBUG
     /* --- Create PCL Visualizer --- */
@@ -76,13 +81,12 @@ int main() {
   #endif
 
 //#if PERCEPTION_DEBUG
-  Display display("Console Display");
+  
 //#endif
 
 /* --- Main Processing Stuff --- */
   while (true) {
     display.insert("FPS", display.time, display.current);
-
     //Check to see if we were able to grab the frame
     if (!cam.grab()) break;
 
@@ -111,7 +115,7 @@ int main() {
     arTags[0].distance = -1;
     arTags[1].distance = -1;
     #if AR_DETECTION
-      display.insert("AR_DETECT", display.time, display.current);
+      //display.insert("AR_DETECT", display.time, display.current);
 
       tagPair = detector.findARTags(src, depth_img, rgb);
       #if AR_RECORD
@@ -155,12 +159,11 @@ int main() {
       imshow("depth", src);
       waitKey(1);  
     #endif
-      display.insert("AR_DETECT", display.time, display.duration);
+      //display.insert("AR_DETECT", display.time, display.duration);
     #endif
 
 /* --- Point Cloud Processing --- */
     #if OBSTACLE_DETECTION && !WRITE_CURR_FRAME_TO_DISK
-    display.insert("PC_Processing", display.time, display.current);
     #if PERCEPTION_DEBUG
     //Update Original 3D Viewer
     viewer_original->updatePointCloud(pointcloud.pt_cloud_ptr);
@@ -199,7 +202,6 @@ int main() {
       viewer->spinOnce(20);
       cerr<<"Downsampled W: " <<pointcloud.pt_cloud_ptr->width<<" Downsampled H: "<<pointcloud.pt_cloud_ptr->height<<endl;
     #endif
-    display.insert("PC_Processing", display.time, display.duration);
     #endif
     
 /* --- Publish LCMs --- */

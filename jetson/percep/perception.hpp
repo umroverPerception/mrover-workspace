@@ -14,6 +14,7 @@
 #include <string>
 #include <chrono>
 #include <thread>
+//#include "display2.hpp"
 
 #if OBSTACLE_DETECTION
 /* --- PCL Includes --- */
@@ -124,7 +125,7 @@ class obstacle_return {
 
 };
 
-
+//Display display("Console Display");
 
 //ar tag detector class
 #include "artag_detector.hpp"
