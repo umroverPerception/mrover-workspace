@@ -9,6 +9,8 @@ from buildsys.meson import MesonBuilder
 from buildsys.shell import ShellBuilder
 from buildsys.config import ConfigBuilder
 
+from .timer import timerFunc
+
 from . import third_party
 from .hash import Hasher
 
@@ -171,14 +173,14 @@ def build_all(ctx, d, lint, opts, not_build):
     return len(failed_projects)
 
 def test(ctx, d, opts, testType):
-   if d == 'percep':
+    if d == 'jetson/percep':
         percep = 'jetson/percep'
         l = 'True'
         build_dir(ctx, 'jetson/percep', l, opts)
 
-        if testType == "timing"
-           # os.system("python timer.py")
-
-            my_dir = os.path.dirname(sys.argv[0])
-            os.system('%s %s' % (sys.executable, 
-                        os.path.join(my_dir, 'timer.py'))
+        if testType == 'timing': 
+            timerFunc()
+            #os.system("python timer.py")
+            #execfile('timer.py')
+            #my_dir = os.path.dirname(sys.argv[0])
+            #os.system('%s %s' % (sys.executable, os.path.join(my_dir, 'timer.py')))

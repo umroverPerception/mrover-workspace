@@ -67,7 +67,7 @@ def main():
         elif args.subcommand_name == 'dep':
             build_deps(ctx)
         elif args.subcommand_name == 'test':
-            test(ctx, d, opts, testType)
+            test(ctx, args.dir, args.build_opts, args.testType)
 
     except UnexpectedExit as e:
         sys.exit(e.result.exited)
