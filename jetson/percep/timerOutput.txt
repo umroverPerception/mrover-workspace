@@ -1,4 +1,4 @@
-Total time to run: 6.40s 
-Mean: 1.07s 
-Median: 1.00s 
-StDev: 0.72s 
+Total time to run: 6.40 s 
+Mean: 1.07 s 
+Median: 1.00 s 
+StDev: 0.72 s 
