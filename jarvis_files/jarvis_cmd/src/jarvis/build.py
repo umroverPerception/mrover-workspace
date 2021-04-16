@@ -169,3 +169,16 @@ def build_all(ctx, d, lint, opts, not_build):
     print("Successfully built: {} of {} project(s).".format(
         num_projects - len(failed_projects), num_projects))
     return len(failed_projects)
+
+def test(ctx, d, opts, testType):
+   if d == 'percep':
+        percep = 'jetson/percep'
+        l = 'True'
+        build_dir(ctx, 'jetson/percep', l, opts)
+
+        if testType == "timing"
+           # os.system("python timer.py")
+
+            my_dir = os.path.dirname(sys.argv[0])
+            os.system('%s %s' % (sys.executable, 
+                        os.path.join(my_dir, 'timer.py'))
