@@ -3,6 +3,9 @@
 
 #include <vector>
 #include "rover_msgs/Odometry.hpp"
+#include "mapping.hpp"
+
+using namespace rover_msgs;
 
 const std::size_t DEFAULT_OCCUPANCY_MAP_HEIGHT = 10000;
 const std::size_t DEFAULT_OCCUPANCY_MAP_WIDTH = 10000;

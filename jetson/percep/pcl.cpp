@@ -236,7 +236,7 @@ void PCL::FindInterestPoints(std::vector<pcl::PointIndices> &cluster_indices,
 
 }
 
-double PCL::findObstacleCornersHelper(float &x, float &z, float &heading) {
+double PCL::findObstacleCornersHelper(float &x, float &z, double &heading) {
     if (x >= 0.0) {
         double theta = asin(x/z);
         return (heading + theta);
@@ -247,7 +247,7 @@ double PCL::findObstacleCornersHelper(float &x, float &z, float &heading) {
     }
 }
 
-std::vector<int> PCL::findObstacleCorners(std::vector<std::vector<int>> &interest_points, float &headingAngle) {
+std::vector<int> PCL::findObstacleCorners(std::vector<std::vector<int>> &interest_points, double &headingAngle) {
     std::vector<int> obstacleCorners;
     for (int i = 0; i < (int) interest_points.size(); ++i) {
         auto leftmost = pt_cloud_ptr->points[interest_points[i][0]];
@@ -499,7 +499,7 @@ void PCL::pcl_obstacle_detection(shared_ptr<pcl::visualization::PCLVisualizer> v
     bearing = FindClearPath(interest_points, viewer); 
 
     //Map
-    double headingAngle = map.getHeadingAngle();
+    double headingAngle = map.getHeadingAngle(); //temporary
     std::vector<int> obstacles = findObstacleCorners(interest_points, headingAngle);
     map.updateOccupancyGrid(obstacles);
 }

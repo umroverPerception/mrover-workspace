@@ -1,11 +1,10 @@
-#include "mapping.hpp"
-#include "nav/utilities.hpp"
-#include "rover_msgs/Odometry.hpp"
-
 #include <iostream>
 #include <vector>
 #include <cmath>
 #include <cassert>
+#include "rover_msgs/Odometry.hpp"
+
+using namespace rover_msgs;
 
 MappingMath::cos(double &angleInDegrees) {
     return radianToDegree(cos(degreeToRadian(angleInDegrees, 0)));

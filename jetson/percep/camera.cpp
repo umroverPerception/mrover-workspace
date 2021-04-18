@@ -433,7 +433,7 @@ void Camera::write_curr_frame_to_disk(cv::Mat rgb, cv::Mat depth, pcl::PointClou
     pcl_write(pcl_foldername + fileName + std::string(".pcd"), p_pcl_point_cloud);
     cv::imwrite(rgb_foldername +  fileName + std::string(".jpg"), rgb );
     cv::imwrite(depth_foldername +  fileName + std::string(".exr"), depth );
-    cv::imwrite(lcm_foldername + fileName + std::string(".txt"), lcm)
+    cv::imwrite(lcm_foldername + fileName + std::string(".txt"), lcm);
 
     ofstream output;
     Odometry in;
