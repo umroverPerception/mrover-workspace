@@ -54,6 +54,7 @@ def timerFunc():
     print("Median: %.2f s" % round(medianTime,2))
     print("StDev: %.2f s" % round(stdevTime,2))
 
+    # writing information to the file
     fileName_out = os.path.join(fileDir, 'jetson/percep/timerOutput.txt')
     print(fileName_out)
     out = open(fileName_out, "w")
@@ -63,7 +64,6 @@ def timerFunc():
     out.write("StDev: %.2f s \n" % round(stdevTime,2))
 
     # function_name time
-    # writing information to the file
 
     # parse output file => ASHWIN'S SAMPLE CODE 
     '''print("integ check")
