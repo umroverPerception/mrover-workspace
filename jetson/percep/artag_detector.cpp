@@ -1,4 +1,5 @@
 #include "perception.hpp"
+#include <assert.h>
 
 static Mat HSV;
 static Mat DEPTH;
@@ -67,10 +68,10 @@ Point2f TagDetector::getAverageTagCoordinateFromCorners(const vector<Point2f> &c
 vector<Point2f> TagDetector::getMoreCoordinates(const vector<Point2f> &corners) {
     vector<Point2f> coordinates;
     Point2f avgCoord = getAverageTagCoordinateFromCorners(corners);
-    int xMin = max(corners[0].x,corners[1].x);
-    int xMax = min(corners[2].x,corners[3].x);
-    int yMin = max(corners[1].y,corners[2].y);
-    int yMax = min(corners[0].y,corners[3].y);
+    int xMin = max(corners[0].x,corners[3].x);
+    int xMax = min(corners[1].x,corners[2].x);
+    int yMin = max(corners[0].y,corners[1].y);
+    int yMax = min(corners[2].y,corners[3].y);
     Point2f point1;
     point1.x = avgCoord.x;
     point1.y = (avgCoord.y + yMin)/2;
@@ -132,48 +133,136 @@ cv::aruco::drawDetectedMarkers(rgb, corners, ids);
 #if PERCEPTION_DEBUG
     // Draw detected tags
     cv::aruco::drawDetectedMarkers(rgb, corners, ids);
-    for (size_t i = 0; i < 1000; i++)
+    if (corners.size() > 0)
     {
-        rgb.at<Vec3b>(300,i)[0] = 255;
-        rgb.at<Vec3b>(300,i)[1] = 255;
-        rgb.at<Vec3b>(300,i)[2] = 255;
+        vector<Point2f> morePoints = getMoreCoordinates(corners[0]);
+        for (size_t i = 0; i < morePoints[0].y; i++)
+        {
+            rgb.at<Vec3b>(i,morePoints[0].x)[0] = 255;
+            rgb.at<Vec3b>(i,morePoints[0].x)[1] = 255;
+            rgb.at<Vec3b>(i,morePoints[0].x)[2] = 255;
+        }
+        for (size_t i = morePoints[2].y; i < 1000; i++)
+        {
+            rgb.at<Vec3b>(i,morePoints[2].x)[0] = 255;
+            rgb.at<Vec3b>(i,morePoints[2].x)[1] = 255;
+            rgb.at<Vec3b>(i,morePoints[2].x)[2] = 255;
+        }
+        for (size_t i = 0; i < morePoints[3].x; i++)
+        {
+            rgb.at<Vec3b>(morePoints[3].y,i)[0] = 255;
+            rgb.at<Vec3b>(morePoints[3].y,i)[1] = 255;
+            rgb.at<Vec3b>(morePoints[3].y,i)[2] = 255;
+        }
+        for (size_t i = morePoints[1].x; i < 1000; i++)
+        {
+            rgb.at<Vec3b>(morePoints[1].y,i)[0] = 255;
+            rgb.at<Vec3b>(morePoints[1].y,i)[1] = 255;
+            rgb.at<Vec3b>(morePoints[1].y,i)[2] = 255;
+        }
+        for (size_t i = 0; i < morePoints[4].y; i++)
+        {
+            rgb.at<Vec3b>(i,morePoints[4].x)[0] = 255;
+            rgb.at<Vec3b>(i,morePoints[4].x)[1] = 0;
+            rgb.at<Vec3b>(i,morePoints[4].x)[2] = 0;
+        }
+        for (size_t i = 0; i < morePoints[4].x; i++)
+        {
+            rgb.at<Vec3b>(morePoints[4].y,i)[0] = 255;
+            rgb.at<Vec3b>(morePoints[4].y,i)[1] = 0;
+            rgb.at<Vec3b>(morePoints[4].y,i)[2] = 0;
+        }
+        for (size_t i = morePoints[6].y; i < 1000; i++)
+        {
+            rgb.at<Vec3b>(i,morePoints[6].x)[0] = 255;
+            rgb.at<Vec3b>(i,morePoints[6].x)[1] = 0;
+            rgb.at<Vec3b>(i,morePoints[6].x)[2] = 0;
+        }
+        for (size_t i = morePoints[6].x; i < 1000; i++)
+        {
+            rgb.at<Vec3b>(morePoints[6].y,i)[0] = 255;
+            rgb.at<Vec3b>(morePoints[6].y,i)[1] = 0;
+            rgb.at<Vec3b>(morePoints[6].y,i)[2] = 0;
+        }
+        for (size_t i = 0; i < morePoints[5].y; i++)
+        {
+            rgb.at<Vec3b>(i,morePoints[5].x)[0] = 255;
+            rgb.at<Vec3b>(i,morePoints[5].x)[1] = 0;
+            rgb.at<Vec3b>(i,morePoints[5].x)[2] = 0;
+        }
+        for (size_t i = morePoints[5].x; i < 1000; i++)
+        {
+            rgb.at<Vec3b>(morePoints[5].y,i)[0] = 255;
+            rgb.at<Vec3b>(morePoints[5].y,i)[1] = 0;
+            rgb.at<Vec3b>(morePoints[5].y,i)[2] = 0;
+        }
+        for (size_t i = morePoints[7].y; i < 1000; i++)
+        {
+            rgb.at<Vec3b>(i,morePoints[7].x)[0] = 255;
+            rgb.at<Vec3b>(i,morePoints[7].x)[1] = 0;
+            rgb.at<Vec3b>(i,morePoints[7].x)[2] = 0;
+        }
+        for (size_t i = 0; i < morePoints[7].x; i++)
+        {
+            rgb.at<Vec3b>(morePoints[7].y,i)[0] = 255;
+            rgb.at<Vec3b>(morePoints[7].y,i)[1] = 0;
+            rgb.at<Vec3b>(morePoints[7].y,i)[2] = 0;
+        }
+        
+        cout << morePoints << endl;
+        //cout << corners[0][0].x << endl;
+        // for (size_t i = 0; i < corners[0][0].y; i++)
+        // {
+        //     rgb.at<Vec3b>(i,corners[0][0].x)[0] = 255;
+        //     rgb.at<Vec3b>(i,corners[0][0].x)[1] = 255;
+        //     rgb.at<Vec3b>(i,corners[0][0].x)[2] = 255;
+        // }
+        // for (size_t i = 0; i < corners[0][0].x; i++)
+        // {
+        //     rgb.at<Vec3b>(corners[0][0].y,i)[0] = 255;
+        //     rgb.at<Vec3b>(corners[0][0].y,i)[1] = 255;
+        //     rgb.at<Vec3b>(corners[0][0].y,i)[2] = 255;
+        // }
+        // for (size_t i = 0; i < corners[0][1].y; i++)
+        // {
+        //     rgb.at<Vec3b>(i,corners[0][1].x)[0] = 255;
+        //     rgb.at<Vec3b>(i,corners[0][1].x)[1] = 0;
+        //     rgb.at<Vec3b>(i,corners[0][1].x)[2] = 0;
+        // }
+        // for (size_t i = corners[0][1].x; i < 1000; i++)
+        // {
+        //     rgb.at<Vec3b>(corners[0][1].y,i)[0] = 255;
+        //     rgb.at<Vec3b>(corners[0][1].y,i)[1] = 0;
+        //     rgb.at<Vec3b>(corners[0][1].y,i)[2] = 0;
+        // }
+        // for (size_t i = corners[0][2].y; i < 1000; i++)
+        // {
+        //     rgb.at<Vec3b>(i,corners[0][2].x)[0] = 0;
+        //     rgb.at<Vec3b>(i,corners[0][2].x)[1] = 255;
+        //     rgb.at<Vec3b>(i,corners[0][2].x)[2] = 0;
+        // }
+        // for (size_t i = corners[0][2].x; i < 1000; i++)
+        // {
+        //     rgb.at<Vec3b>(corners[0][2].y,i)[0] = 0;
+        //     rgb.at<Vec3b>(corners[0][2].y,i)[1] = 255;
+        //     rgb.at<Vec3b>(corners[0][2].y,i)[2] = 0;
+        // }
+        // for (size_t i = corners[0][2].y; i < 1000; i++)
+        // {
+        //     rgb.at<Vec3b>(i,corners[0][3].x)[0] = 0;
+        //     rgb.at<Vec3b>(i,corners[0][3].x)[1] = 0;
+        //     rgb.at<Vec3b>(i,corners[0][3].x)[2] = 255;
+        // }
+        // for (size_t i = 0; i < corners[0][2].x; i++)
+        // {
+        //     rgb.at<Vec3b>(corners[0][3].y,i)[0] = 0;
+        //     rgb.at<Vec3b>(corners[0][3].y,i)[1] = 0;
+        //     rgb.at<Vec3b>(corners[0][3].y,i)[2] = 255;
+        // }
     }
-    for (size_t i = 0; i < 1000; i++)
-    {
-        rgb.at<Vec3b>(200,i)[0] = 255;
-        rgb.at<Vec3b>(200,i)[1] = 255;
-        rgb.at<Vec3b>(200,i)[2] = 255;
-    }
-    for (size_t i = 0; i < 1000; i++)
-    {
-        rgb.at<Vec3b>(400,i)[0] = 255;
-        rgb.at<Vec3b>(400,i)[1] = 255;
-        rgb.at<Vec3b>(400,i)[2] = 255;
-    }
-    for (size_t i = 0; i < 500; i++)
-    {
-        rgb.at<Vec3b>(i,500)[0] = 255;
-        rgb.at<Vec3b>(i,500)[1] = 255;
-        rgb.at<Vec3b>(i,500)[2] = 255;
-    }
-    for (size_t i = 0; i < 500; i++)
-    {
-        rgb.at<Vec3b>(i,700)[0] = 255;
-        rgb.at<Vec3b>(i,700)[1] = 255;
-        rgb.at<Vec3b>(i,700)[2] = 255;
-    }
-    for (size_t i = 0; i < 500; i++)
-    {
-        rgb.at<Vec3b>(i,1000)[0] = 255;
-        rgb.at<Vec3b>(i,1000)[1] = 255;
-        rgb.at<Vec3b>(i,1000)[2] = 255;
-    }
-    for (size_t i = 0; i < 500; i++)
-    {
-        rgb.at<Vec3b>(i,1200)[0] = 255;
-        rgb.at<Vec3b>(i,1200)[1] = 255;
-        rgb.at<Vec3b>(i,1200)[2] = 255;
-    }
+    
+    
+   
     cv::imshow("AR Tags", rgb);
 
     // on click debugging for color
