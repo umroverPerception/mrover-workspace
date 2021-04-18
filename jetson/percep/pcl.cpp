@@ -236,18 +236,18 @@ void PCL::FindInterestPoints(std::vector<pcl::PointIndices> &cluster_indices,
 
 }
 
-double PCL::findObstacleCornersHelper(double &x, double &z, double &heading) {
+double PCL::findObstacleCornersHelper(float &x, float &z, float &heading) {
     if (x >= 0.0) {
-        double theta = asin(x/y);
+        double theta = asin(x/z);
         return (heading + theta);
     }
     if (x < 0.0) {
-        double theta = asin((-1.0 * x)/y);
+        double theta = asin((-1.0 * x)/z);
         return heading = theta;
     }
 }
 
-std::vector<int> PCL::findObstacleCorners(std::vector<std::vector<int>> &interest_points, double &headingAngle) {
+std::vector<int> PCL::findObstacleCorners(std::vector<std::vector<int>> &interest_points, float &headingAngle) {
     std::vector<int> obstacleCorners;
     for (int i = 0; i < (int) interest_points.size(); ++i) {
         auto leftmost = pt_cloud_ptr->points[interest_points[i][0]];
@@ -256,20 +256,20 @@ std::vector<int> PCL::findObstacleCorners(std::vector<std::vector<int>> &interes
         auto furthest = pt_cloud_ptr->points[interest_points[i][5]];
 
         //row start
-        double leftmostAngle = findObstacleCorners(leftmost.x, leftmost.z, headingAngle);
+        double leftmostAngle = findObstacleCornersHelper(leftmost.x, leftmost.z, headingAngle);
         obstacleCorners.push_back(ceil(leftmost.z * sin(leftmostAngle)));
 
         //col start
-        double closestAngle = findObstacleCorners(closest.x, closest.z, headingAngle);
+        double closestAngle = findObstacleCornersHelper(closest.x, closest.z, headingAngle);
         obstacleCorners.push_back(ceil(closest.z * cos(closestAngle)));
 
         //row end
-        double rightmostAngle = findObstacleCorners(rightmost.x, rightmost.z, headingAngle);
-        obstacleCorners.push_back(ceil(rightmost.z * sin(righmostAngle)));
+        double rightmostAngle = findObstacleCornersHelper(rightmost.x, rightmost.z, headingAngle);
+        obstacleCorners.push_back(ceil(rightmost.z * sin(rightmostAngle)));
 
         //col end
-        double furthestAngle = findObstacleCorners(furthest.x, furthest.z, headingAngle);
-        obstacleCorners.push_back(ceil(furthest.z * cos(furthestAngle)))
+        double furthestAngle = findObstacleCornersHelper(furthest.x, furthest.z, headingAngle);
+        obstacleCorners.push_back(ceil(furthest.z * cos(furthestAngle)));
     }
 }
 
@@ -497,6 +497,11 @@ void PCL::pcl_obstacle_detection(shared_ptr<pcl::visualization::PCLVisualizer> v
     std::vector<std::vector<int>> interest_points(cluster_indices.size(), vector<int> (6));
     FindInterestPoints(cluster_indices, interest_points);
     bearing = FindClearPath(interest_points, viewer); 
+
+    //Map
+    double headingAngle = map.getHeadingAngle();
+    std::vector<int> obstacles = findObstacleCorners(interest_points, headingAngle);
+    map.updateOccupancyGrid(obstacles);
 }
 
 

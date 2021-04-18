@@ -6,11 +6,13 @@
 
 const std::size_t DEFAULT_OCCUPANCY_MAP_HEIGHT = 10000;
 const std::size_t DEFAULT_OCCUPANCY_MAP_WIDTH = 10000;
+const float LOG_ODDS_OCCUPIED = 0.65;
+const float LOG_ODDS_UNOCCUPIED = 1 - LOG_ODDS_OCCUPIED;
 
 const double DEFAULT_FOV = 90.0;
 
-const double CELL_DISTANCE = 0.4 //0.4 meters
-const int MAX_FILTER_LENGTH = 7 //7 meters
+const double CELL_DISTANCE = 0.4; //0.4 meters
+const int MAX_FILTER_LENGTH = 7; //7 meters
 
 class OccupancyMap {
 private:
@@ -27,12 +29,7 @@ public:
 
 class MapSegmentation {
 private:
-    enum class Quadrant {
-        QuadrantOne,
-        QuadrantTwo,
-        QuadrantThree,
-        QuadrantFour
-    };
+    enum class Quadrant { QuadrantOne, QuadrantTwo, QuadrantThree, QuadrantFour };
 
     double heading, upperFOV, lowerFOV;
     /* [quadrant] -> rowStart, colStart, rowEnd, colEnd... This vector can have either 8 or 12 elements depending on how
@@ -43,7 +40,7 @@ private:
     //Given an angle, this function determines what Quadrant a cell is in
     Quadrant getQuadrant(double &angleIn);
 
-    //Quandrant one index calculations
+    /*//Quandrant one index calculations
     void calcQuadrantOne(double &angle, char &key);
 
     //Quandrant two index calculations
@@ -53,7 +50,7 @@ private:
     void calcQuadrantThree(double &angle, char &key);
 
     //Quandrant four index calculations
-    void calcQuadrantFour(double &angle, char &key);
+    void calcQuadrantFour(double &angle, char &key);*/
 
     //Quadrant calculator (optimized, not implemented yet)
     void calculateQuadrantCorners(double &angleInDegrees, char &key, Quadrant &quadrant);
@@ -66,6 +63,7 @@ public:
 
     //returns the indexCorners vector
     std::vector<int> getIndexCorners();
+
 };
 
 class Mapping {
@@ -82,12 +80,16 @@ private:
     
     void updateOrientation (double &orientationAngle);
 
+    void getMapArea();
+
+    void updateOccupancyValues (size_t xIndex, size_t yIndex, bool &occupied);
+
 public:
     Mapping();
 
-    void getMapArea();
+    double getHeadingAngle();
 
-    void updateOccupancy (size_t xIndex, size_t yIndex);
+    void updateOccupancyGrid(std::vector<int> &obstacleData);
 };
 
 
@@ -95,7 +97,7 @@ class MappingMath {
 public: 
     //custom math function for mapping
     //returns angle in degrees
-    double cos(&angleInRadians);
-    double sin(&angleInRadians)
+    double cos(double &angleInRadians);
+    double sin(double &angleInRadians);
 };
 #endif

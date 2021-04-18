@@ -1,5 +1,5 @@
 #include "mapping.hpp"
-#include "utilities.hpp"
+#include "nav/utilities.hpp"
 #include "rover_msgs/Odometry.hpp"
 
 #include <iostream>
@@ -58,60 +58,180 @@ MapSegmentation::MapSegmentation(double &headingAngle) : heading(headinAngle) {
 void MapSegmentation::calculateQuadrantCorners(double &angleInDegrees, char &key, Quadrant &quadrant) {
     for(int i = 0; i < 4; i++) {
         if(quadrant == QuadrantOne) {
-            if(i == 1 || i == 2) indexCorners.push_back(0);
+            if(i == 1 || i == 2) indexCorners[i] = 0;
             else if(key == 'u' && i == 0) {
-                indexCorners.push_back(ceil(MAX_FILTER_LENGTH * MappingMath::cos(90.0 - angle)));
+                indexCorners[i] = ceil(MAX_FILTER_LENGTH * MappingMath::cos(90.0 - angle));
             }
             else if(key== 'l' && i == 3) {
-                indexCorners.push_back(ceil(MAX_FILTER_LENGTH * MappingMath::cos(angle)));
+                indexCorners[i] = ceil(MAX_FILTER_LENGTH * MappingMath::cos(angle));
             }
             else {
-                indexCorners.push_back(MAX_FILTER_LENGTH);
+                indexCorners[i] = MAX_FILTER_LENGTH;
             }
         }
         else if(quadrant == QuadrantTwo) {
-            if(i == 2 || i == 3) indexCorners.push_back(0);
+            if(i == 2 || i == 3) indexCorners[i] = 0;
             else if(key == 'u' && i == 2) {
-                indexCorners.push_back((-1) * ceil(MAX_FILTER_LENGTH * MappingMath::cos(180.0 - angle)));
+                indexCorners[i] = ((-1) * ceil(MAX_FILTER_LENGTH * MappingMath::cos(180.0 - angle)));
             }
             else if( (key == 'h' && i == 2) || (key == 'l' && i == 2)) {
-                indexCorners.push_back((-1) * MAX_FILTER_LENGTH);
+                indexCorners[i] = ((-1) * MAX_FILTER_LENGTH);
             }
             else {
-                indexCorners.push_back(MAX_FILTER_LENGTH);
+                indexCorners[i] = MAX_FILTER_LENGTH;
             }
         }
         else if(quadrant == QuadrantThree) {
-            if(i == 0 || i == 3) indexCorners.push_back(0);
+            if(i == 0 || i == 3) indexCorners[i] = 0;
             else if(key == 'u' && i == 2) {
-                indexCorners.push_back((-1) * ceil(MAX_FILTER_LENGTH * MappingMath::cos(360.0 - angle));
+                indexCorners[i] = ((-1) * ceil(MAX_FILTER_LENGTH * MappingMath::cos(360.0 - angle));
             }
             else if(key == 'l' && i == 1) {
-                indexCorners.push_back((-1) * ceil(MAX_FILTER_LENGTH * MappingMath::cos(angle - 270.0));
+                indexCorners[i] = ((-1) * ceil(MAX_FILTER_LENGTH * MappingMath::cos(angle - 270.0));
             }
             else {
-                indexCorners.push_back((-1) * MAX_FILTER_LENGTH);
+                indexCorners[i] = ((-1) * MAX_FILTER_LENGTH);
             }
         }
         else {
-            if(i == 0 || i == 1) indexCorners.push_back(0);
+            if(i == 0 || i == 1) indexCorners[i] = 0;
             else if(key =='l' && i == 2) {
-                indexCorners.push_back((-1) * ceil(MAX_FILTER_LENGTH * MappingMath::cos(angle - 270.0);
+                indexCorners[i] = (-1) * ceil(MAX_FILTER_LENGTH * MappingMath::cos(angle - 270.0);
             }
             else if(key == 'u' && i == 3) {
-                indexCorners.push_back(ceil(MAX_FILTER_LENGTH * MappingMath::cos(360.0 - angle));
+                indexCorners[i] = (ceil(MAX_FILTER_LENGTH * MappingMath::cos(360.0 - angle));
             }
             else if(key == 'u' && i == 2) { 
-                indexCorners.push_back((-1) * MAX_FILTER_LENGTH);
+                indexCorners[i] = ((-1) * MAX_FILTER_LENGTH);
             }
             else {
-                indexCorners.push_back(MAX_FILTER_LENGTH);
+                indexCorners[i] = MAX_FILTER_LENGTH;
             }
         }
     }
 }
 
-void MapSegmentation::caclulateQuadOne(double &angle, char &key) {
+void MapSegmentation::fillIndexCorners() {
+    indexCorners.resize(8);
+
+    //upper FOV
+    calculateQuadrantCorners(upperFOV, 'h', upperFOVQuadrant);
+
+    //lowerFOV
+    calculateQuadrantCorners(lowerFOV, 'l', lowerFOVQuadrant);
+
+    //heading
+    if ((lowerFOVQuadrant != headingQuadrant) && (upperQuadrant != headingQuadrant)) {
+        calculateQuadrantCorners(heading, 'h', headingQuadrant);
+        indexCorners.resize(12);
+    }
+}
+
+std::vector<int> MapSegmentation::getIndexCorners() {
+    fillIndexCorners();
+    return indexCorners;
+}
+
+Mapping::Mapping() {
+    map();
+    roverXCoordsInOccupancyMap = 4999;
+    roverXCoordsInOccupancyMap = 4999;
+}
+
+void Mapping::updatePositionInOccupancyMap(Odometry &currentOdometry) {
+    double changeInDistanceFromPreviousPosition = 
+            estimateNoneuclid(currentOdometry, previousOdometry);
+        double changeInBearingFromPreviousPosition = 
+            calcBearing(currentOdometry, previousOdometry);
+        
+        while(changeInBearingFromPreviousPosition < 0) {
+            changeInBearingFromPreviousPosition += 360.0;
+        }
+
+        //if the bearing is between 0 and 90
+        if(changeInBearingFromPreviousPosition =< 90.0) {
+            changeInPositionWidth = changeInEuclideanDistanceFromPreviousPosition * 
+                MappingMath::cos(90.0 - changeInBearingFromPreviousPosition);
+            changeInPositionHeight = changeInEuclideanDistanceFromPreviousPosition * 
+                MappingMath::sin(90.0 - changeInBearingFromPreviousPosition);
+        }
+        //if bearing is between 90 - 180 
+        else if(changeInBearingFromPreviousPosition > 90.0 && changeInBearingFromPreviousPosition =< 180.0) {
+            changeInPositionWidth = MappingMath::cos(changeInBearingFromPreviousPosition - 90.0);
+            changeInPositionHeight = MappingMath::sin(changeInBearingFromPreviousPosition - 90.0);
+        }
+        else if(changeInBearingFromPreviousPosition > 180.0 && changeInBearingFromPreviousPosition =< 270.0) {
+            changeInPositionWidth = MappingMath::cos(270.0 - changeInBearingFromPreviousPosition); 
+            changeInPositionHeight = MappingMath::sin(270.0 - changeInBearingFromPreviousPosition);               
+        }
+        else {
+            changeInPositionWidth = MappingMath::cos(changeInBearingFromPreviousPosition - 270.0);
+            changeInPositionHeight = MappingMath::sin(hangeInBearingFromPreviousPosition - 270.0);
+        }
+
+        roverXCoordsInOccupancyMap += ceil(changeInPositionWidth/CELL_DISTANCE);
+        roverYCoordsInOccupancyMap += ceil(changeInPositionHeight/CELL_DISTANCE);
+        
+        //then update odometry
+        previousOdometry = currentOdometry;
+}
+
+void Mapping::updateOrientation(double &currentAngle) {
+    if (currentAngle >= 0.0 && currentAngle < 90.0) {
+        orientationAngle = 90.0 - currentAngle;
+    }
+    else if (currentAngle >= 90.0 && currentAngle < 180.0) {
+        orientationAngle = (90.0 - currentAngle) + 360.0;
+    }
+    else if (currentAngle < 0.0 && currentAngle >= -90.0) {
+        orientationAngle = (-1 * currentAngle) + 90.0;
+    }
+    else if (currentAngle < -90.0 && currentAngle >= -180.0) {
+        orientationAngle = (-1 * currentAngle) + 90.0;
+    }
+}
+
+void Mapping::getMapArea(){
+
+    updatePositionInOccupancyMap(odometry);
+    updateOrientation(odometry.bearing_in);
+
+    MapSegmentation segment(orientationAngle);
+    std::vector<int> mapArea = segment.getIndexCorners();
+}
+
+double Mapping::getHeadingAngle() {
+    return orientationAngle;
+}
+
+void Mapping::updateOccupancyGrid(std::vector<int> &obstacleData) {
+    /*
+    int rowLowerBound = obstacleData[0];
+    int columnLowerBound = obstacleData[1];
+    int rowUpperBound = obstacleData[2];
+    int columnUpperBound = obstacleData[3];
+    */
+   map.getMapArea();
+    for (std::size_t i = 0; i < obstacleData.size();  i += 4) {
+        for (int k = obstacleData[i]; k < obstacleData[i+2]; ++k) {
+            for (int j = obstacleData[i+1]; j < obstacleData[i+3]; ++j) {
+                updateOccupancyValues(k,j,true);
+            }
+        }
+
+    }
+}
+
+void Mapping::updateOccupancyValues(size_t xIndex, size_t yIndex, bool &occupied) {
+    if (occupied) {
+        map[xIndex][yIndex] = map[xIndex][yIndex] + (LOG_ODDS_OCCUPIED/LOG_ODDS_UNOCCUPIED);
+    }
+    else {
+        map[xIndex][yIndex] = map[xIndex][yIndex] + (LOG_ODDS_UNOCCUPIED/LOG_ODDS_OCCUPIED); 
+    }
+}
+
+/*void MapSegmentation::caclulateQuadOne(double &angle, char &key) {
     if (key == 'u') {
         indexCorners.push_back(ceil(MAX_FILTER_LENGTH * MappingMath::cos(90.0 - angle)));
         indexCorners.push_back(0);
@@ -239,85 +359,4 @@ void MapSegmentation::fillIndexCorners() {
         caclulateQuadFour(heading, 'h');
     }
     }
-}
-
-std::vector<int> MapSegementation::getIndexCorners() {
-    return indexCorners;
-}
-
-Mapping::Mapping() {
-    map();
-    roverXCoordsInOccupancyMap = 4999;
-    roverXCoordsInOccupancyMap = 4999;
-}
-
-void Mapping::updatePositionInOccupancyMap(Odometry &currentOdometry) {
-    double changeInDistanceFromPreviousPosition = 
-            estimateNoneuclid(currentOdometry, previousOdometry);
-        double changeInBearingFromPreviousPosition = 
-            calcBearing(currentOdometry, previousOdometry);
-        
-        while(changeInBearingFromPreviousPosition < 0) {
-            changeInBearingFromPreviousPosition += 360.0;
-        }
-
-        //if the bearing is between 0 and 90
-        if(changeInBearingFromPreviousPosition =< 90.0) {
-            changeInPositionWidth = changeInEuclideanDistanceFromPreviousPosition * 
-                MappingMath::cos(90.0 - changeInBearingFromPreviousPosition);
-            changeInPositionHeight = changeInEuclideanDistanceFromPreviousPosition * 
-                MappingMath::sin(90.0 - changeInBearingFromPreviousPosition);
-        }
-        //if bearing is between 90 - 180 
-        else if(changeInBearingFromPreviousPosition > 90.0 && changeInBearingFromPreviousPosition =< 180.0) {
-            changeInPositionWidth = MappingMath::cos(changeInBearingFromPreviousPosition - 90.0);
-            changeInPositionHeight = MappingMath::sin(changeInBearingFromPreviousPosition - 90.0);
-        }
-        else if(changeInBearingFromPreviousPosition > 180.0 && changeInBearingFromPreviousPosition =< 270.0) {
-            changeInPositionWidth = MappingMath::cos(270.0 - changeInBearingFromPreviousPosition); 
-            changeInPositionHeight = MappingMath::sin(270.0 - changeInBearingFromPreviousPosition);               
-        }
-        else {
-            changeInPositionWidth = MappingMath::cos(changeInBearingFromPreviousPosition - 270.0);
-            changeInPositionHeight = MappingMath::sin(hangeInBearingFromPreviousPosition - 270.0);
-        }
-
-        roverXCoordsInOccupancyMap += ceil(changeInPositionWidth/CELL_DISTANCE);
-        roverYCoordsInOccupancyMap += ceil(changeInPositionHeight/CELL_DISTANCE);
-        
-        //then update odometry
-        previousOdometry = currentOdometry;
-}
-
-void Mapping::updateOrientation(double &currentAngle) {
-    if (currentAngle >= 0.0 && currentAngle < 90.0) {
-        orientationAngle = 90.0 - currentAngle;
-    }
-    else if (currentAngle >= 90.0 && currentAngle < 180.0) {
-        orientationAngle = (90.0 - currentAngle) + 360.0;
-    }
-    else if (currentAngle < 0.0 && currentAngle >= -90.0) {
-        orientationAngle = (-1 * currentAngle) + 90.0;
-    }
-    else if (currentAngle < -90.0 && currentAngle >= -180.0) {
-        orientationAngle = (-1 * currentAngle) + 90.0;
-    }
-}
-
-void Mapping::getMapArea(){
-
-    updatePositionInOccupancyMap(odometry);
-    updateOrientation(odometry.bearing_in);
-
-    MapSegementation segment(orientationAngle);
-    std::vector<int> mapArea = segement.getIndexCorners();
-}
-
-void Mapping::updateOccupancy (size_t xIndex, size_t yIndex) {
-    if (occupied) {
-        map[xIndex][yIndex] = map[xIndex][yIndex] + (0.65/0.35);
-    }
-    else {
-        map[xIndex][yIndex] = map[xIndex][yIndex] + (0.65/0.35); 
-    }
-}
+}*/
