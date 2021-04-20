@@ -15,6 +15,7 @@ class IMU_Manager():
             "PCHRA": self.pchra_handler
         }
         self.sleep = .01
+        self.max_error_count = 20
 
     def __enter__(self):
 
