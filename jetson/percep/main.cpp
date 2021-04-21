@@ -26,14 +26,6 @@ class shell {
     }
 }
 
-Odometry& odometry(
-        const lcm::ReceiveBuffer* recieveBuffer,
-        const string& channel,
-        const Odometry* odometry
-        )
-    {
-        return odometry;
-    }
 
 int main() {
  /* --- Reading in Config File --- */
@@ -144,12 +136,12 @@ int main() {
                 #endif
                 cam.write_curr_frame_to_disk(rgb_copy, depth_copy, pointcloud.pt_cloud_ptr, iterations);
                 outfile << "step\n";
-                outfile << shell.message->latitude_deg << endl;
-                outfile << shell.message->latitude_min << endl;
-                outfile << shell.message->longitude_deg << endl;
-                outfile << shell.message->longitude_min << endl;
-                outfile << shell.message->bearing_deg << endl;
-                outfile << shell.message->speed << endl;
+                outfile << fish.message->latitude_deg << endl;
+                outfile << fish.message->latitude_min << endl;
+                outfile << fish.message->longitude_deg << endl;
+                outfile << fish.message->longitude_min << endl;
+                outfile << fish.message->bearing_deg << endl;
+                outfile << fish.message->speed << endl;
         }
         #endif
 
