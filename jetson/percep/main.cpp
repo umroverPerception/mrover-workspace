@@ -1,13 +1,40 @@
 #include "perception.hpp"
 #include "rover_msgs/Target.hpp"
 #include "rover_msgs/TargetList.hpp"
+#include "rover_msgs/Odometry.hpp"
 #include <unistd.h>
 #include <deque>
 
 using namespace cv;
 using namespace std;
 using namespace std::chrono_literals;
- 
+using namespace rover_msgs;
+
+class shell {
+    
+    public:
+    Odometry* message;
+    shell(Odometry* odom) : message(odom) {}
+
+    Odometry& odometry(
+        const lcm::ReceiveBuffer* recieveBuffer,
+        const string& channel,
+        const Odometry* odometry
+        )
+    {
+        message = odometry;
+    }
+}
+
+Odometry& odometry(
+        const lcm::ReceiveBuffer* recieveBuffer,
+        const string& channel,
+        const Odometry* odometry
+        )
+    {
+        return odometry;
+    }
+
 int main() {
  /* --- Reading in Config File --- */
   rapidjson::Document mRoverConfig;
@@ -83,7 +110,12 @@ int main() {
     //initializing ar tag videostream object
     cam.record_ar_init();
     #endif
+    ofstream outfile;
+    outfile.open("odom.txt");
 
+    Odometry message;
+    shell fish (&message);
+    lcm_.subscribe("/odometry", &shell::odometry, &shell);
 
   /* --- Main Processing Stuff --- */
   while (true) {
@@ -111,6 +143,13 @@ int main() {
                     cout << "Copied correctly" << endl;
                 #endif
                 cam.write_curr_frame_to_disk(rgb_copy, depth_copy, pointcloud.pt_cloud_ptr, iterations);
+                outfile << "step\n";
+                outfile << shell.message->latitude_deg << endl;
+                outfile << shell.message->latitude_min << endl;
+                outfile << shell.message->longitude_deg << endl;
+                outfile << shell.message->longitude_min << endl;
+                outfile << shell.message->bearing_deg << endl;
+                outfile << shell.message->speed << endl;
         }
         #endif
 
@@ -191,6 +230,7 @@ int main() {
     #if AR_RECORD
         cam.record_ar_finish();
     #endif
+    outfile.close();
   
     return 0;
 }
