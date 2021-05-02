@@ -10,6 +10,7 @@ from buildsys.shell import ShellBuilder
 from buildsys.config import ConfigBuilder
 
 from .timer import timerFunc
+from .ar_tag_accuracy import accuracyFunc
 
 from . import third_party
 from .hash import Hasher
@@ -178,6 +179,8 @@ def test(ctx, d, opts, testType):
         l = 'True'
         build_dir(ctx, 'jetson/percep', l, opts)
 
+        if testType == 'arTagAccuracy':
+            accuracyFunc()
         if testType == 'timing': 
             timerFunc()
             #os.system("python timer.py")
