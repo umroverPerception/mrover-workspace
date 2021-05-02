@@ -1,6 +1,6 @@
 import os
 from sklearn.metrics import precision_recall_curve
-from sklearn.metrics import PrecisionRecallDisplay
+#from sklearn.metrics import PrecisionRecallDisplay
 from sklearn.metrics import f1_score
 from sklearn.metrics import auc
 import numpy as np 
@@ -46,7 +46,7 @@ def accuracyFunc():
     precision, recall, threshold = precision_recall_curve(correct, predicted, pos_label=None, sample_weight=None)
     pyplot.plot(recall, precision)
     pyplot.show()
-    pr_display = PrecisionRecallDisplay(precision=precision, recall=recall).plot()
+    #pr_display = PrecisionRecallDisplay(precision=precision, recall=recall).plot()
 
     #f1 score calculation
     f1_score = 2*precision*recall/(precision+recall)
