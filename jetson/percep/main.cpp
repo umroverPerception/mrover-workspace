@@ -13,10 +13,10 @@ using namespace rover_msgs;
 class shell {
     
     public:
-    Odometry* message;
+    const Odometry* message;
     shell(Odometry* odom) : message(odom) {}
 
-    Odometry& odometry(
+    void odometry(
         const lcm::ReceiveBuffer* recieveBuffer,
         const string& channel,
         const Odometry* odometry
@@ -24,7 +24,7 @@ class shell {
     {
         message = odometry;
     }
-}
+};
 
 
 int main() {
@@ -107,7 +107,7 @@ int main() {
 
     Odometry message;
     shell fish (&message);
-    lcm_.subscribe("/odometry", &shell::odometry, &shell);
+    lcm_.subscribe("/odometry", &shell::odometry, &fish);
 
   /* --- Main Processing Stuff --- */
   while (true) {
