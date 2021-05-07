@@ -5,16 +5,14 @@ using namespace std;
 
 
 // Constructor
-Display:: Display(string in_windowName) : windowName(in_windowName) {
+Display::Display(string in_windowName, bool outputSrc_in) 
+    : windowName(in_windowName), outputSrc(outputSrc_in) {
     namedWindow(windowName);
     imshow(windowName, img);
     waitKey(30);
 
+  
     
-    timeLogsFile.open("time_logs.txt");
-    if(!timeLogsFile.is_open()){
-        cout << "Time Log file could not be open." << endl;
-    }
 }
 
 // Private member functions
@@ -77,7 +75,12 @@ void Display::insert(string displayName, InsertType dataType, Timer timerType){
             auto start = it->second;
             double time_diff = std::chrono::duration<double, std::ratio<1,1000>>(end - start).count();
             
-            timeLogsFile << it->first << ": " << time_diff << " ms" << endl;
+            if(outputSrc){
+                //timeLogsFile << it->first << ": " << time_diff << " ms" << endl;
+                cout << it->first << ": " << time_diff << " ms" << endl;
+            }
+          
+            
 
             allData.insert({displayName, time_diff});
         }
@@ -96,6 +99,5 @@ void Display::clear(){
 // Destructor
 Display::~Display(){
     destroyWindow(windowName);
-    timeLogsFile.close();
 }
 

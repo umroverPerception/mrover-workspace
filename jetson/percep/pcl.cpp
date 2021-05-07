@@ -45,7 +45,7 @@ void PCL::DownsampleVoxelFilter() {
 //removes points completely from point cloud
 //Source: https://rb.gy/zx6ojh
 void PCL::RANSACSegmentation(string type) {
-    display->insert("RANSACS", display->time, display->current);
+    //display->insert("RANSACS", display->time, display->current);
 
     #if PERCEPTION_DEBUG
         pcl::ScopeTime t ("RANSACSegmentation");
@@ -86,7 +86,7 @@ void PCL::RANSACSegmentation(string type) {
         extract.filter(*pt_cloud_ptr);
     }
     
-    display->insert("RANSACS", display->time, display->duration);
+    //display->insert("RANSACS", display->time, display->duration);
 }
 
 /* --- Euclidian Cluster Extraction --- */

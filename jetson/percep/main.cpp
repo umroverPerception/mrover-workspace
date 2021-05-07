@@ -46,12 +46,12 @@ int main() {
   int right_tag_buffer = 0;
   
 
-  Display display("Console Display");
+  Display display("Console Display", true);
   /* --- Point Cloud Initializations --- */
   #if OBSTACLE_DETECTION
 
 
-  PCL pointcloud(&display);
+  PCL pointcloud;
 
   #if PERCEPTION_DEBUG
     /* --- Create PCL Visualizer --- */

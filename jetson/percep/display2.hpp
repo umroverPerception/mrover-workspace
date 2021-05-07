@@ -25,6 +25,9 @@ class Display{
   map<string, double> allData;
   unordered_map<string, steady_clock::time_point> timerData;
   fstream timeLogsFile;
+  // true if output to file
+  // false if output to command line
+  bool outputSrc;
 
   void clearDisplay();
 
@@ -34,7 +37,7 @@ class Display{
     Timer current = Timer::Current;
     Timer duration = Timer::Duration;
 
-    Display(string in_windowName);
+    Display(string in_windowName, bool outputSrc_in);
   
     void show();
 
