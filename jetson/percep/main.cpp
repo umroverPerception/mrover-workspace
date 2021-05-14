@@ -126,7 +126,7 @@ int main() {
         pointcloud.update();
         cam.getDataCloud(pointcloud.pt_cloud_ptr);
         #endif
-
+	cout << fish.message->bearing_deg << endl;
         #if WRITE_CURR_FRAME_TO_DISK && AR_DETECTION && OBSTACLE_DETECTION
         int FRAME_WRITE_INTERVAL = mRoverConfig["camera"]["frame_write_interval"].GetInt();
             if (iterations % FRAME_WRITE_INTERVAL == 0) {
