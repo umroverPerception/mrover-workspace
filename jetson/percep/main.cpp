@@ -1,14 +1,12 @@
 #include "perception.hpp"
 #include "rover_msgs/Target.hpp"
 #include "rover_msgs/TargetList.hpp"
-#include "rover_msgs/Odometry.hpp"
 #include <unistd.h>
 #include <deque>
 
 using namespace cv;
 using namespace std;
 using namespace std::chrono_literals;
-using namespace rover_msgs;
 
 class shell {
     
@@ -29,28 +27,26 @@ class shell {
 void update () {
     ofstream outfile;
     outfile.open("odom.txt");
-lcm::LCM lcm_;
+    lcm::LCM lcm_;
     Odometry message;
     shell fish (&message);
     lcm_.subscribe("/odometry", &shell::odometry, &fish);
 
-while(true) {	
-lcm_.handle();	
-	outfile << fish.message.latitude_deg << endl;
+    while(true) {	
+        lcm_.handle();	
+	    outfile << fish.message.latitude_deg << endl;
         outfile << fish.message.latitude_min << endl;
         outfile << fish.message.longitude_deg << endl;
         outfile << fish.message.longitude_min << endl;
         outfile << fish.message.bearing_deg << endl;
         outfile << fish.message.speed << endl;
-    time_t now = time(0);
-    char* ltm = ctime(&now);
-    string timeStamp(ltm);
-outfile << now << endl;
-//outfile << "iter\n";
-}
+        time_t now = time(0);
+        outfile << now << endl;
+    }
 }
 
 int main() {
+  
  /* --- Reading in Config File --- */
   rapidjson::Document mRoverConfig;
   ifstream configFile;
@@ -65,8 +61,7 @@ int main() {
   configFile.close();
   mRoverConfig.Parse( config.c_str() );
 
-  
-    /* --- Camera Initializations --- */
+  /* --- Camera Initializations --- */
     Camera cam(mRoverConfig);
     int iterations = 0;
     cam.grab();
@@ -126,13 +121,11 @@ int main() {
     cam.record_ar_init();
     #endif
 
-ofstream outfile2;
-outfile2.open("record.txt");
-  
-	thread grabOdom (update);
+    ofstream outfile2;
+    outfile2.open("record.txt");
+    thread grabOdom (update);
   /* --- Main Processing Stuff --- */
-  
-while (true) {
+  while (true) {
         //Check to see if we were able to grab the frame
         if (!cam.grab()) break;
 
@@ -153,19 +146,13 @@ while (true) {
         int FRAME_WRITE_INTERVAL = mRoverConfig["camera"]["frame_write_interval"].GetInt();
             if (iterations % FRAME_WRITE_INTERVAL == 0) {
                 Mat rgb_copy = src.clone(), depth_copy = depth_img.clone();
-                #if PERCEPTION_DEBUG
+                //#if PERCEPTION_DEBUG
                     cout << "Copied correctly" << endl;
-                #endif
+                //#endif
                 cam.write_curr_frame_to_disk(rgb_copy, depth_copy, pointcloud.pt_cloud_ptr, iterations);
-                //outfile << "step\n";
-             time_t now = time(0);
-    char* ltm = ctime(&now);
-    string timeStamp(ltm);
-outfile2 << "Copied" << endl;
-outfile2 << now << endl;
-                    cout << "Copied correctly" << endl;
-               
-
+                outfile2 << "Copied correctly" << endl;
+                time_t now = time(0);
+                outfile << now << endl;
         }
         #endif
 
@@ -198,12 +185,12 @@ outfile2 << now << endl;
 
         //Run Obstacle Detection
         pointcloud.pcl_obstacle_detection();  
-        obstacle_return obstacle_detection (pointcloud.bearing, pointcloud.distance);
+        obstacle_return obstacle_detection (pointcloud.leftBearing, pointcloud.rightBearing, pointcloud.distance);
 
         //Outlier Detection Processing
         outliers.pop_back(); //Remove outdated outlier value
 
-        if(pointcloud.bearing > 0.05 || pointcloud.bearing < -0.05)
+        if(pointcloud.leftBearing > 0.05 || pointcloud.leftBearing < -0.05)
             outliers.push_front(true);//if an obstacle is detected in front
         else 
             outliers.push_front(false); //obstacle is not detected
@@ -213,10 +200,13 @@ outfile2 << now << endl;
         else if (outliers == checkFalse) // If our iterations see no obstacles after seeing obstacles
             lastObstacle = obstacle_detection;
 
-        obstacleMessage.distance = lastObstacle.distance; //update LCM distance field
-        obstacleMessage.bearing = lastObstacle.bearing; //update LCM bearing field
+        //Update LCM 
+        obstacleMessage.bearing = lastObstacle.leftBearing; // Update LCM bearing field
+        obstacleMessage.rightBearing = lastObstacle.rightBearing;
+        obstacleMessage.distance = lastObstacle.distance; // Update LCM distance field
         #if PERCEPTION_DEBUG
             cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Path Sent: " << obstacleMessage.bearing << "\n";
+            cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Right Bearing: " << obstacleMessage.rightBearing << "\n";
             cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Distance Sent: " << obstacleMessage.distance << "\n";
         #endif
 
@@ -231,8 +221,8 @@ outfile2 << now << endl;
         #endif
         
         /* --- Publish LCMs --- */
-//        lcm_.publish("/target_list", &arTagsMessage);
-  //      lcm_.publish("/obstacle", &obstacleMessage);
+        lcm_.publish("/target_list", &arTagsMessage);
+        lcm_.publish("/obstacle", &obstacleMessage);
 
         #if !ZED_SDK_PRESENT
             std::this_thread::sleep_for(0.2s); // Iteration speed control not needed when using camera 
@@ -246,8 +236,6 @@ outfile2 << now << endl;
     #if AR_RECORD
         cam.record_ar_finish();
     #endif
-	grabOdom.join();
-    
   
     return 0;
 }
