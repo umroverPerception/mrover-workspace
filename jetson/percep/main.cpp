@@ -1,13 +1,55 @@
 #include "perception.hpp"
 #include "rover_msgs/Target.hpp"
 #include "rover_msgs/TargetList.hpp"
+#include "rover_msgs/Odometry.hpp"
 #include <unistd.h>
 #include <deque>
 
 using namespace cv;
 using namespace std;
 using namespace std::chrono_literals;
- 
+using namespace rover_msgs;
+
+class shell {
+    
+    public:
+    Odometry message;
+    shell(Odometry* odom) {}
+
+    void odometry(
+        const lcm::ReceiveBuffer* recieveBuffer,
+        const string& channel,
+        const Odometry* odometry
+        )
+    {
+        message = *odometry;
+    }
+};
+
+void update () {
+    ofstream outfile;
+    outfile.open("odom.txt");
+lcm::LCM lcm_;
+    Odometry message;
+    shell fish (&message);
+    lcm_.subscribe("/odometry", &shell::odometry, &fish);
+
+while(true) {	
+lcm_.handle();	
+	outfile << fish.message.latitude_deg << endl;
+        outfile << fish.message.latitude_min << endl;
+        outfile << fish.message.longitude_deg << endl;
+        outfile << fish.message.longitude_min << endl;
+        outfile << fish.message.bearing_deg << endl;
+        outfile << fish.message.speed << endl;
+    time_t now = time(0);
+    char* ltm = ctime(&now);
+    string timeStamp(ltm);
+outfile << now << endl;
+//outfile << "iter\n";
+}
+}
+
 int main() {
  /* --- Reading in Config File --- */
   rapidjson::Document mRoverConfig;
@@ -84,9 +126,13 @@ int main() {
     cam.record_ar_init();
     #endif
 
-
+ofstream outfile2;
+outfile2.open("record.txt");
+  
+	thread grabOdom (update);
   /* --- Main Processing Stuff --- */
-  while (true) {
+  
+while (true) {
         //Check to see if we were able to grab the frame
         if (!cam.grab()) break;
 
@@ -111,6 +157,15 @@ int main() {
                     cout << "Copied correctly" << endl;
                 #endif
                 cam.write_curr_frame_to_disk(rgb_copy, depth_copy, pointcloud.pt_cloud_ptr, iterations);
+                //outfile << "step\n";
+             time_t now = time(0);
+    char* ltm = ctime(&now);
+    string timeStamp(ltm);
+outfile2 << "Copied" << endl;
+outfile2 << now << endl;
+                    cout << "Copied correctly" << endl;
+               
+
         }
         #endif
 
@@ -176,8 +231,8 @@ int main() {
         #endif
         
         /* --- Publish LCMs --- */
-        lcm_.publish("/target_list", &arTagsMessage);
-        lcm_.publish("/obstacle", &obstacleMessage);
+//        lcm_.publish("/target_list", &arTagsMessage);
+  //      lcm_.publish("/obstacle", &obstacleMessage);
 
         #if !ZED_SDK_PRESENT
             std::this_thread::sleep_for(0.2s); // Iteration speed control not needed when using camera 
@@ -191,6 +246,8 @@ int main() {
     #if AR_RECORD
         cam.record_ar_finish();
     #endif
+	grabOdom.join();
+    
   
     return 0;
 }
