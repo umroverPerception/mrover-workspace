@@ -69,6 +69,13 @@ public:
 
 };
 
+class MapSegmentationAlternate {
+private:
+    void bresenhamsAlogrithmHelper(int &x0, int &x1, int &y0, int &y1);
+    void bresenhamsAlogrithm(int &x0, int &x1, int &y0, int &y1);
+public:
+};
+
 class Mapping {
 private:
     OccupancyMap map;
