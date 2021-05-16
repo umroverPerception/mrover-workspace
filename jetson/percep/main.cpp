@@ -1,12 +1,14 @@
 #include "perception.hpp"
 #include "rover_msgs/Target.hpp"
 #include "rover_msgs/TargetList.hpp"
+#include "rover_msgs/Odometry.hpp"
 #include <unistd.h>
 #include <deque>
 
 using namespace cv;
 using namespace std;
 using namespace std::chrono_literals;
+using namespace rover_msgs;
 
 class shell {
     
@@ -152,7 +154,7 @@ int main() {
                 cam.write_curr_frame_to_disk(rgb_copy, depth_copy, pointcloud.pt_cloud_ptr, iterations);
                 outfile2 << "Copied correctly" << endl;
                 time_t now = time(0);
-                outfile << now << endl;
+                outfile2 << now << endl;
         }
         #endif
 
