@@ -2,6 +2,7 @@
 #include <vector>
 #include <cmath>
 #include <cassert>
+#include <fstream>
 #include "rover_msgs/Odometry.hpp"
 
 using namespace rover_msgs;
@@ -204,20 +205,37 @@ double Mapping::getHeadingAngle() {
 }
 
 void Mapping::updateOccupancyGrid(std::vector<int> &obstacleData) {
-    /*
-    int rowLowerBound = obstacleData[0];
-    int columnLowerBound = obstacleData[1];
-    int rowUpperBound = obstacleData[2];
-    int columnUpperBound = obstacleData[3];
-    */
-   map.getMapArea();
-    for (std::size_t i = 0; i < obstacleData.size();  i += 4) {
-        for (int k = obstacleData[i]; k < obstacleData[i+2]; ++k) {
-            for (int j = obstacleData[i+1]; j < obstacleData[i+3]; ++j) {
-                updateOccupancyValues(k,j,true);
+    std::ifstream records;
+    std::ifstream odom;
+    records.open ("records.txt");
+    std::string compleleted;
+    int odomTime;
+    std::string odomOther;
+    int time;
+    while (!records.eof && !odom.eof) {
+        getline(records, completed);
+        records >> time;
+
+        odom >> odomOther >> odomOther >> odomOther >> odomOther >> odomOther >> odomOther >> odomTime;
+        /*
+        int rowLowerBound = obstacleData[0];
+        int columnLowerBound = obstacleData[1];
+        int rowUpperBound = obstacleData[2];
+        int columnUpperBound = obstacleData[3];
+        */
+        if (time >= odomTime) {
+            map.getMapArea();
+            for (std::size_t i = 0; i < obstacleData.size();  i += 4) {
+                for (int k = obstacleData[i]; k < obstacleData[i+2]; ++k) {
+                    for (int j = obstacleData[i+1]; j < obstacleData[i+3]; ++j) {
+                        updateOccupancyValues(k,j,true);
+                    }
+                }
             }
         }
-
+        else {
+            odom >> odomOther >> odomOther >> odomOther >> odomOther >> odomOther >> odomOther >> odomTime;
+        }
     }
 }
 
