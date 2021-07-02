@@ -14,7 +14,7 @@ private:
 	std::string rgb_foldername;
 	std::string depth_foldername;
 	std::string pcl_foldername;
-	std::string lcm_foldername;
+	//std::string lcm_foldername;
 
 	cv::VideoWriter vidWrite;
 	

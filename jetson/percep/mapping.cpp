@@ -176,6 +176,16 @@ void Mapping::updatePositionInOccupancyMap(Odometry &currentOdometry) {
         previousOdometry = currentOdometry;
 }
 
+void Mapping::updatePositionWithTXT() {
+    ifstream odom("odom.txt");
+    if (odom.is_open()) {
+        double lat, latMin, lon, lonMin;
+        while (std::getline(odom, lat)) {
+            
+        }
+    }
+}
+
 void Mapping::updateOrientation(double &currentAngle) {
     if (currentAngle >= 0.0 && currentAngle < 90.0) {
         orientationAngle = 90.0 - currentAngle;

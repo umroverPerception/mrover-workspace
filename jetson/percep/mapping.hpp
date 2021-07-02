@@ -87,6 +87,8 @@ private:
     double orientationAngle;
 
     void updatePositionInOccupancyMap(Odometry &currentOdometry);
+
+    void updatePositionWithTXT();
     
     void updateOrientation (double &orientationAngle);
 
